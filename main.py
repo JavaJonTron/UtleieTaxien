@@ -10,15 +10,14 @@ def opprette_bil():
     regn = input("Registrerings nummer: ")
     drivstoff = input("Drivstoff type: ")
     km = input("Kilometerstand: ")
-    bilObjekt = Car(regn, drivstoff, model, make, km, year)
+    bil_Objekt = Car(regn, drivstoff, model, make, km, year)
     kallenavn = year + " " + make + " " + model
-    cars[kallenavn] = [bilObjekt]
+    cars[kallenavn] = [bil_Objekt]
 
 
 opprette_bil()
-opprette_bil()
-opprette_bil()
+#opprette_bil()
+#opprette_bil()
 
 for car in cars:
-    print(car)
-
+    print(car.car_info(car))
