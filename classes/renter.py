@@ -5,3 +5,4 @@ class Renter:
         self.name = name
         self.rented = rented
         self.score = score
+        
