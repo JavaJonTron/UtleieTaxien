@@ -18,9 +18,15 @@ def print_hi(name):
         print_hi('PyCharm')
 
 
+#/*cars = [
+    #    {'make': "Tesla", 'model': "Model Y", 'year': 2022, 'km': 1000, 'reg': car.regnumber}
+#]
+bilObjekt = car(3,"elektrisk", "eks","eksempel")
+
 cars = [
-    {'make': "Tesla", 'model': "Model Y", 'year': 2022, 'km': 1000, 'reg': car.regnumber}
+    {'EksempelBil1': bilObjekt, 'EksempelBil2': bilObjekt, 'EksempelBil3': bilObjekt}
 ]
+
 
 
 for car in cars:
