@@ -1,6 +1,7 @@
 from classes import owner
 from classes import car
 from classes import renter
+from classes.car import Car
 
 
 # This is a sample Python script.
@@ -18,19 +19,25 @@ def print_hi(name):
         print_hi('PyCharm')
 
 
-#/*cars = [
+ownerCar1 = Car("ED12345", "Electric", "Model Y", "Tesla", "2022", "6332")
+
+print(ownerCar1.car_info())
+
+# /*cars = [
     #    {'make': "Tesla", 'model': "Model Y", 'year': 2022, 'km': 1000, 'reg': car.regnumber}
-#]
-bilObjekt = car(3,"elektrisk", "eks","eksempel")
-
-cars = [
-    {'EksempelBil1': bilObjekt, 'EksempelBil2': bilObjekt, 'EksempelBil3': bilObjekt}
-]
+# ]
 
 
+# bilObjekt = car(3,"elektrisk", "eks","eksempel")
 
-for car in cars:
-    print(car)
+
+# cars = [
+ #   {'EksempelBil1': bilObjekt, 'EksempelBil2': bilObjekt, 'EksempelBil3': bilObjekt}
+# ]
+
+
+# for car in cars:
+#   print(car)
 
 
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/
