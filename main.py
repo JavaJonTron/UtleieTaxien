@@ -19,6 +19,7 @@ def print_hi(name):
         print_hi('PyCharm')
 
 
+
 ownerCar1 = Car("ED12345", "Electric", "Model Y", "Tesla", "2022", "6332")
 
 print(ownerCar1.car_info())
