@@ -19,7 +19,6 @@ def print_hi(name):
         print_hi('PyCharm')
 
 
-
 ownerCar1 = Car("ED12345", "Electric", "Model Y", "Tesla", "2022", "6332")
 
 print(ownerCar1.car_info())
@@ -27,14 +26,29 @@ print(ownerCar1.car_info())
 # /*cars = [
     #    {'make': "Tesla", 'model': "Model Y", 'year': 2022, 'km': 1000, 'reg': car.regnumber}
 # ]
+cars = {}
+def opprette_bil():
+    regn = input("SKRIV NOE HER")
+    drivstoff = input("SKRIV NOE HER")
+    mod = input("SKRIV NOE HER")
+    mak = input("SKRIV NOE HER")
+    km = input("SKRIV NOE HER")
+    yea = input("SKRIV NOE HER")
+    bilObjekt = car(regn, drivstoff, mod, mak, km, yea)
+    kallenavn = input("SKRIV NOE HER")
+    cars[kallenavn]=[bilObjekt]
 
 
-# bilObjekt = car(3,"elektrisk", "eks","eksempel")
+
+opprette_bil()
+opprette_bil()
+opprette_bil()
 
 
-# cars = [
- #   {'EksempelBil1': bilObjekt, 'EksempelBil2': bilObjekt, 'EksempelBil3': bilObjekt}
-# ]
+
+
+
+
 
 
 # for car in cars:
