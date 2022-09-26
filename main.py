@@ -1,4 +1,5 @@
-from classes import *
+from classes import*
+
 
 # This is a sample Python script.
 
