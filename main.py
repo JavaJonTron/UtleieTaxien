@@ -31,7 +31,7 @@ cars = {}
 
 def opprette_bil():
     make = input("Bil fabrikant: ")
-    model = input("Model: ")
+    model = input("Modell: ")
     year = input("Års modell: ")
     regn = input("Registrerings nummer: ")
     drivstoff = input("Drivstoff type: ")
