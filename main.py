@@ -19,40 +19,34 @@ def print_hi(name):
         print_hi('PyCharm')
 
 
-ownerCar1 = Car("ED12345", "Electric", "Model Y", "Tesla", "2022", "6332")
+# ownerCar1 = Car("ED12345", "Electric", "Model Y", "Tesla", "2022", "6332")
 
-print(ownerCar1.car_info())
+# print(ownerCar1.car_info())
 
 # /*cars = [
-    #    {'make': "Tesla", 'model': "Model Y", 'year': 2022, 'km': 1000, 'reg': car.regnumber}
+    # {'make': "Tesla", 'model': "Model Y", 'year': 2022, 'km': 1000, 'reg': car.regnumber}
 # ]
 cars = {}
+
+
 def opprette_bil():
-    regn = input("SKRIV NOE HER")
-    drivstoff = input("SKRIV NOE HER")
-    mod = input("SKRIV NOE HER")
-    mak = input("SKRIV NOE HER")
-    km = input("SKRIV NOE HER")
-    yea = input("SKRIV NOE HER")
-    bilObjekt = car(regn, drivstoff, mod, mak, km, yea)
-    kallenavn = input("SKRIV NOE HER")
-    cars[kallenavn]=[bilObjekt]
-
+    make = input("Bil fabrikant: ")
+    model = input("Model:")
+    year = input("Års modell:")
+    regn = input("Registrerings nummer: ")
+    drivstoff = input("Drivstoff type: ")
+    km = input("Kilometerstand: ")
+    bilObjekt = car(regn, drivstoff, model, make, km, year)
+    kallenavn = year + make + model
+    cars[kallenavn] = [bilObjekt]
 
 
 opprette_bil()
-opprette_bil()
-opprette_bil()
+# opprette_bil()
+# opprette_bil()
 
-
-
-
-
-
-
-
-# for car in cars:
-#   print(car)
+for car in cars:
+    print(car)
 
 
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/
