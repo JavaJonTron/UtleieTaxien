@@ -9,10 +9,10 @@ class Car:
 
 
    # def print(self):
-   #     return (self.regn + self.fuel_source + self.model + self.make + self.km + self.year)
+        # return (self.regn + self.fuel_source + self.model + self.make + self.km + self.year)
 
 
-    #def str(self):
-#   return self.regn + self.fuel_source + self.model + self.make + self.km + self.year
+    # def str(self):
+        # return self.regn + self.fuel_source + self.model + self.make + self.km + self.year
 
 

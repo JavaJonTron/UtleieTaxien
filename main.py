@@ -27,7 +27,7 @@ opprette_bil()
 # opprette_bil()
 
 print("REGNR: " + bil_Objekt.regn)
-
+print(vars(bil_Objekt))
 for k, v in cars.items():
     print(k, v)
 # for x in cars.values():
