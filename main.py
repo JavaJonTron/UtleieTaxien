@@ -21,22 +21,26 @@ bil_Objekt = Car(regn, fuel_source, model, make, km, year)
 kallenavn = "TEST"+make
 cars[kallenavn] = [bil_Objekt]
 
+
 opprette_bil()
-#opprette_bil()
-#opprette_bil()
+# opprette_bil()
+# opprette_bil()
 
-print("REGGGGG"+bil_Objekt.regn)
+print("REGNR: " + bil_Objekt.regn)
 
-for x in cars.values():
-    print(x)
+for k, v in cars.items():
+    print(k, v)
+# for x in cars.values():
+    # print(x)
 
+# print(cars)
 
-#for key,values in cars.items():
-  #   for i in values:
-        #  print(key," : ",i)
+# for key,values in cars.items():
+    # for i in values:
+        # print(key," : ",i)
 
-#for x, y in cars.items():
-  #print(x, y)
+# for x, y in cars.items():
+    # print(x, y)
 
-#for car in cars:
-  #  print(cars[car])
+# for car in cars:
+    # print(cars[car])
