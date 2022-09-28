@@ -1,43 +1,60 @@
 from classes.car import Car
 
 cars = {}
-make=""
-model=""
-year = 0
-regn = ""
-fuel_source = ""
-km = 0
+# make = ""
+# model = ""
+# year = 0
+# license_plate = ""
+# fuel_source = ""
+# km = 0
 
-def opprette_bil():
-    make = input("Bil fabrikant: ")
-    model = input("Modell: ")
-    year = input("Års modell: ")
-    regn = input("Registrerings nummer: ")
-    fuel_source = input("Drivstoff type: ")
-    km = input("Kilometerstand: ")
+def create_car():
+    make = input("Make: ").upper()
+    model = input("Model: ").upper()
+    while True:
+        try:
+            year = int(input("Year: "))
+            break
+        except ValueError:
+            print("Please enter the year the cars was manufactured!")
+            continue
+    license_plate = input("License plate: ").upper()
+    fuel_source = input("Fuel source: ").upper()
+    while True:
+        try:
+            km = int(input("Odometer: "))
+            break
+        except ValueError:
+            print("Please enter how far the car has driven!")
+            continue
+    return Car(make, model, year, license_plate, fuel_source, km)
 
 
-bil_Objekt = Car(regn, fuel_source, model, make, km, year)
-kallenavn = "TEST"+make
-cars[kallenavn] = [bil_Objekt]
+car = create_car()
 
 
-opprette_bil()
-# opprette_bil()
-# opprette_bil()
+nickname = str(car.year) + " " + str(car.make) + " " + str(car.model)
+cars[nickname] = car
 
-print("REGNR: " + bil_Objekt.regn)
-print(vars(bil_Objekt))
+print("License plate: " + str(car.license_plate))
+print("Fuel Source: " + str(car.fuel_source))
+print("Model: " + str(car.model))
+print("Make: " + str(car.make))
+print("Odometer: " + str(car.km))
+print("Year: " + str(car.year))
+print("Nickname: " + nickname)
+
+# print(vars(bil))
+
 for k, v in cars.items():
     print(k, v)
+
 # for x in cars.values():
     # print(x)
 
-# print(cars)
-
 # for key,values in cars.items():
     # for i in values:
-        # print(key," : ",i)
+    # print(key," : ",i)
 
 # for x, y in cars.items():
     # print(x, y)
