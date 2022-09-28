@@ -49,6 +49,7 @@ print("Nickname: " + nickname)
 for k, v in cars.items():
     print(k, v)
 
+
 # for x in cars.values():
     # print(x)
 
