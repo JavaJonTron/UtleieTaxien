@@ -32,7 +32,6 @@ def create_car():
 
 car = create_car()
 
-
 nickname = str(car.year) + " " + str(car.make) + " " + str(car.model)
 cars[nickname] = car
 
@@ -44,11 +43,10 @@ print("Odometer: " + str(car.km))
 print("Year: " + str(car.year))
 print("Nickname: " + nickname)
 
-# print(vars(bil))
-
 for k, v in cars.items():
     print(k, v)
 
+# print(vars(bil))
 
 # for x in cars.values():
     # print(x)

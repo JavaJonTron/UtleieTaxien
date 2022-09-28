@@ -9,4 +9,3 @@ class Car:
 
     def __str__(self):
         return self.make + self.model + str(self.year) + self.license_plate + self.fuel_source + str(self.km)
-
