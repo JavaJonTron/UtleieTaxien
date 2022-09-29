@@ -1,4 +1,3 @@
-from classes.car import Car
 from functions import create_car_file
 
 cars = {}
