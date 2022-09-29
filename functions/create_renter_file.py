@@ -11,7 +11,7 @@ def create_renter():
         except ValueError:
             print("Please enter your age!")
             continue
-    rented = []
-    score_list = [5, 10, 100]
-    score = round(functions.get_average_of_list.average_list(score_list))
-    return Renter(name, sex, age, rented, score, score_list)
+    # score_list = [5, 10, 100]
+    # score = round(functions.get_average_of_list.average_list(score_list))
+    score = 10
+    return Renter(name, sex, age, score)  #score_list

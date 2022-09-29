@@ -1,20 +1,19 @@
 from functions import create_car_file
 from functions import create_renter_file
 
+date_from = "01.01.23"
+date_to = "03.01.23"
+
+bookings = []
+
 renter = create_renter_file.create_renter()
+# create_booking(renter, "21.08.23", "23.08.23")
+
 
 print("Score: " + str(renter.score))
 
 
-
-
 cars = {}
-# make = ""
-# model = ""
-# year = 0
-# license_plate = ""
-# fuel_source = ""
-# km = 0
 
 car = create_car_file.create_car()
 
@@ -28,6 +27,38 @@ print("Make: " + str(car.make))
 print("Odometer: " + str(car.km))
 print("Year: " + str(car.year))
 print("Nickname: " + nickname)
+
+
+def booking(renter1, date_from1, date_to1, car1):
+    booking11 = {"renter": renter1, "date from": date_from1, "date to": date_to1, "car": car1}
+    return booking11
+
+
+testobjekt = "test booking"
+bookings[testobjekt] = booking(renter, date_from, date_to, car)
+
+
+# print(renter)
+
+
+for k, v in bookings.items():
+   print(k, v)
+
+#print(bookings[0])
+
+#for x in bookings[0]:
+    #for k, v in booking1.items():
+       # print(k, v)
+
+#for x in bookings:
+    #print(x)
+
+# booking1 = booking(renter, date_from, date_to, car)
+
+
+# booking1 = create_booking_file.create_booking(renter, date_from, date_to, car)
+
+# print(booking1.renter.name)
 
 for k, v in cars.items():
     print(k, v)

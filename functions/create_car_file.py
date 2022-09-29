@@ -2,20 +2,20 @@ from classes.car import Car
 
 
 def create_car():
-    make = input("Make: ").upper()
-    model = input("Model: ").upper()
+    make = "Tesla"  # input("Make: ").upper()
+    model = "Model Y"  # input("Model: ").upper()
     while True:
         try:
-            year = int(input("Year: "))
+            year = 2022  # int(input("Year: "))
             break
         except ValueError:
             print("Please enter the year the cars was manufactured!")
             continue
-    license_plate = input("License plate: ").upper()
-    fuel_source = input("Fuel source: ").upper()
+    license_plate = "ED15421"  # input("License plate: ").upper()
+    fuel_source = "Electric"  # input("Fuel source: ").upper()
     while True:
         try:
-            km = int(input("Odometer: "))
+            km = 20500  # int(input("Odometer: "))
             break
         except ValueError:
             print("Please enter how far the car has driven!")
