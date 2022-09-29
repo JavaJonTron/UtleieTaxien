@@ -1,4 +1,12 @@
 from functions import create_car_file
+from functions import create_renter_file
+
+renter = create_renter_file.create_renter()
+
+print("Score: " + str(renter.score))
+
+
+
 
 cars = {}
 # make = ""
