@@ -5,4 +5,6 @@ class Renter:
         self.name = name
         self.rented = rented
         self.score = score
-        
+
+    def __str__(self):
+        return self.age + self.sex + self.name + self.rented + self.score
