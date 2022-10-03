@@ -40,7 +40,7 @@ def booking(renter1, date_from1, date_to1, car1):
 
 #Kommenterte ut kode vi ikke har fått til å fungere ennå
 testobjekt = "test booking"
-booking_dictionary[testobjekt] = booking(renter, date_from, date_to, car)
+booking_dictionary[testobjekt] = booking(renter.name, date_from, date_to, car.license_plate)
 bookings_list.append(booking_dictionary)
 #booking_dictionary.clear()
 
@@ -49,7 +49,8 @@ for objx in bookings_list:
     print(objx)
 # print(renter)
 
-
+def x():
+    return
 #def print_booked_car():
 #    return
 
