@@ -14,4 +14,5 @@ def create_renter():
     # score_list = [5, 10, 100]
     # score = round(functions.get_average_of_list.average_list(score_list))
     score = 10
-    return Renter(name, sex, age, score)  #score_list
+    return Renter(age, sex, name, score)  #score_list
+

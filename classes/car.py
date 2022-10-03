@@ -8,4 +8,4 @@ class Car:
         self.km = km
 
     def __str__(self):
-        return self.make + self.model + str(self.year) + self.license_plate + self.fuel_source + str(self.km)
+        return str(self.make) + str(self.model) + str(self.year) + str(self.license_plate) + str(self.fuel_source) + str(self.km)
