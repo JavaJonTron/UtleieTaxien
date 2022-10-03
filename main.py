@@ -8,6 +8,7 @@ bookings_list = []
 renter_list = []
 owner_list = []
 renter = create_renter_file.create_renter()
+renter_list.append(renter)
 # create_booking(renter, "21.08.23", "23.08.23")
 
 
@@ -37,13 +38,18 @@ def booking(renter1, date_from1, date_to1, car1):
 
 #Kommenterte ut kode vi ikke har fått til å fungere ennå
 testobjekt = "test booking"
-bookings[testobjekt] = booking(renter, date_from, date_to, car)
+bookings_list[testobjekt] = booking("renter.name", date_from, date_to, "car.license_plate")
 
 
 # print(renter)
+#def print_booking_information():
 
+#    return
 
-for k, v in bookings.items():
+#def print_booked_car():
+#    return
+
+for k, v in bookings_list.items():
    print(k, v)
 
 #print(bookings[0])
