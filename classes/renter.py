@@ -8,4 +8,6 @@ class Renter:
         # self.booked_car = booked_car
 
     def __str__(self):
-        return str(self.age) + self.sex + self.name + str(self.score)
+        str(self.age)
+# str(self.age) + self.sex + self.name + str(self.score)
+        return self.age + self.sex + self.name + self.score

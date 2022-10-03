@@ -10,7 +10,9 @@ owner_list = []
 renter = create_renter_file.create_renter()
 renter_list.append(renter)
 # create_booking(renter, "21.08.23", "23.08.23")
-
+for obj in renter_list:
+    print("HER KOMMER OBJEKTER FRA RENTER_LIST")
+    print(obj)
 
 print("Score: " + str(renter.score))
 
@@ -43,9 +45,9 @@ bookings_list.append(booking_dictionary)
 booking_dictionary.clear()
 
 # print(renter)
-#def print_booking_information():
+def print_booking_information():
 
-#    return
+   return
 
 #def print_booked_car():
 #    return
