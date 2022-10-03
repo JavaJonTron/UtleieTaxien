@@ -50,8 +50,8 @@ booking_dictionary.clear()
 #def print_booked_car():
 #    return
 
-for k, v in bookings_list.items():
-   print(k, v)
+#for k, v in bookings_list.items():
+#   print(k, v)
 
 #print(bookings[0])
 
