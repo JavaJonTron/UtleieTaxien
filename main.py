@@ -4,8 +4,9 @@ from functions import create_renter_file
 date_from = "01.01.23"
 date_to = "03.01.23"
 
-bookings = []
-
+bookings_list = []
+renter_list = []
+owner_list = []
 renter = create_renter_file.create_renter()
 # create_booking(renter, "21.08.23", "23.08.23")
 
@@ -29,13 +30,14 @@ print("Year: " + str(car.year))
 print("Nickname: " + nickname)
 
 #Kommenterte ut kode vi ikke har fått til å fungere ennå
-#def booking(renter1, date_from1, date_to1, car1):
-#   booking11 = {"renter": renter1, "date from": date_from1, "date to": date_to1, "car": car1}
-#    return booking11
+#Koden under har vi ikke fått til å fungere ennå
+def booking(renter1, date_from1, date_to1, car1):
+   booking11 = {"renter": renter1, "date from": date_from1, "date to": date_to1, "car": car1}
+   return booking11
 
 #Kommenterte ut kode vi ikke har fått til å fungere ennå
-#testobjekt = "test booking"
-#bookings[testobjekt] = booking(renter, date_from, date_to, car)
+testobjekt = "test booking"
+bookings[testobjekt] = booking(renter, date_from, date_to, car)
 
 
 # print(renter)
