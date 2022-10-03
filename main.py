@@ -3,7 +3,7 @@ from functions import create_renter_file
 
 date_from = "01.01.23"
 date_to = "03.01.23"
-
+booking_dictionary = {}
 bookings_list = []
 renter_list = []
 owner_list = []
@@ -38,8 +38,9 @@ def booking(renter1, date_from1, date_to1, car1):
 
 #Kommenterte ut kode vi ikke har fått til å fungere ennå
 testobjekt = "test booking"
-bookings_list[testobjekt] = booking("renter.name", date_from, date_to, "car.license_plate")
-
+booking_dictionary[testobjekt] = booking(renter, date_from, date_to, car)
+bookings_list.append(booking_dictionary)
+booking_dictionary.clear()
 
 # print(renter)
 #def print_booking_information():
