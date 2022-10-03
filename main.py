@@ -28,14 +28,14 @@ print("Odometer: " + str(car.km))
 print("Year: " + str(car.year))
 print("Nickname: " + nickname)
 
+#Kommenterte ut kode vi ikke har fått til å fungere ennå
+#def booking(renter1, date_from1, date_to1, car1):
+#   booking11 = {"renter": renter1, "date from": date_from1, "date to": date_to1, "car": car1}
+#    return booking11
 
-def booking(renter1, date_from1, date_to1, car1):
-    booking11 = {"renter": renter1, "date from": date_from1, "date to": date_to1, "car": car1}
-    return booking11
-
-
-testobjekt = "test booking"
-bookings[testobjekt] = booking(renter, date_from, date_to, car)
+#Kommenterte ut kode vi ikke har fått til å fungere ennå
+#testobjekt = "test booking"
+#bookings[testobjekt] = booking(renter, date_from, date_to, car)
 
 
 # print(renter)
