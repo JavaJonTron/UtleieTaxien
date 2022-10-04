@@ -56,8 +56,8 @@ def who_rents_what(renterp):
     print (renterp)
 
 def booking_information():
-    for obs in bookings_list:
-        for k, v in obs.items():
+    for element in bookings_list:
+        for k, v in element.items():
             for o, e in v.items():
                 if (o=='renter'):
                     print("Personen som leier heter følgende")
@@ -80,41 +80,4 @@ booking_information()
 
 
 print (eksempel)
-#def print_booked_car():
-#    return
 
-#for k, v in bookings_list.items():
-#   print(k, v)
-
-#print(bookings[0])
-
-#for x in bookings[0]:
-    #for k, v in booking1.items():
-       # print(k, v)
-
-#for x in bookings:
-    #print(x)
-
-# booking1 = booking(renter, date_from, date_to, car)
-
-
-# booking1 = create_booking_file.create_booking(renter, date_from, date_to, car)
-
-# print(booking1.renter.name)
-
-
-
-# print(vars(bil))
-
-# for x in cars.values():
-    # print(x)
-
-# for key,values in cars.items():
-    # for i in values:
-    # print(key," : ",i)
-
-# for x, y in cars.items():
-    # print(x, y)
-
-# for car in cars:
-    # print(cars[car])
