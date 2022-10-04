@@ -42,16 +42,13 @@ def booking(renter1, date_from1, date_to1, car1):
 testobjekt = "test booking"
 booking_dictionary[testobjekt] = booking(renter, date_from, date_to, car)
 bookings_list.append(booking_dictionary)
-#booking_dictionary.clear()
+
 for k, v in cars.items():
     print(k, v)
 
-print ("HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH")
+
 print (bookings_list[0])
-#for objx in bookings_list:
-    #booking_information
-# print(objx)
-# print(renter)
+
 def who_rents_what(renterp):
     print (renterp)
 
