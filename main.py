@@ -1,6 +1,6 @@
 from functions import create_car_file
 from functions import create_renter_file
-
+eksempel = None
 date_from = "01.01.23"
 date_to = "03.01.23"
 booking_dictionary = {}
@@ -40,17 +40,46 @@ def booking(renter1, date_from1, date_to1, car1):
 
 #Kommenterte ut kode vi ikke har fått til å fungere ennå
 testobjekt = "test booking"
-booking_dictionary[testobjekt] = booking(renter.name, date_from, date_to, car.license_plate)
+booking_dictionary[testobjekt] = booking(renter, date_from, date_to, car)
 bookings_list.append(booking_dictionary)
 #booking_dictionary.clear()
+for k, v in cars.items():
+    print(k, v)
 
-
-for objx in bookings_list:
-    print(objx)
+print ("HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH")
+print (bookings_list[0])
+#for objx in bookings_list:
+    #booking_information
+# print(objx)
 # print(renter)
+def who_rents_what(renterp):
+    print (renterp)
 
-def x():
+def booking_information():
+    for obs in bookings_list:
+        for k, v in obs.items():
+            for o, e in v.items():
+                if (o=='renter'):
+                    print("Personen som leier heter følgende")
+                    print (e.name)
+                    who_rents_what(e)
+                if (o=='car'):
+                    print("Lisensnummeret er følgende")
+                    print (e.make)
+                    who_rents_what(e.license_plate)
+                #print(o)
+                #print(e)
+            #print(v)
+            #print(k=="test booking")
+            #print(v == "car")
     return
+
+booking_information()
+
+
+
+
+print (eksempel)
 #def print_booked_car():
 #    return
 
@@ -73,8 +102,7 @@ def x():
 
 # print(booking1.renter.name)
 
-for k, v in cars.items():
-    print(k, v)
+
 
 # print(vars(bil))
 
