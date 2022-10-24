@@ -10,6 +10,7 @@ with dpg.window(label="Main menu", tag="Main menu"):
     dpg.add_text("Log in")
     dpg.add_button(label="Log in as renter", tag="renterLogin", callback =dpg.delete_item)
     dpg.add_button(label="Log in as owner", tag="ownerLogin", callback=gui_func.UItest)
+    dpg.add_button(label="Log in as admin", tag="adminLogin", callback=gui_func.UItest)
 
 
 
