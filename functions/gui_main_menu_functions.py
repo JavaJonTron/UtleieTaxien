@@ -15,28 +15,28 @@ def UItest():
 def admin_Login():
     with dpg.window(label="Admin Login", tag="Admin Login", width=300, height=200):
         dpg.add_text("Username:")
-        dpg.add_input_text(tag="username")
+        dpg.add_input_text(tag="Admin username")
         dpg.add_text("Password:")
-        dpg.add_input_text(tag="password")
+        dpg.add_input_text(tag="Admin password")
         dpg.add_button(label="Log in", tag="adminLogInButton", callback=gui_admin_func.log_in_accepted)
 
 def owner_Login():
     with dpg.window(label="Owner Login", tag="Owner Login", width=300, height=200):
         dpg.add_text("Username:")
-        dpg.add_input_text(tag="username")
+        dpg.add_input_text(tag="Owner username")
         dpg.add_text("Password:")
-        dpg.add_input_text(tag="password")
-        dpg.add_button(label="Log in", tag="ownerLogInButton", callback=gui_owner_func.log_in_accepted)
-        dpg.add_button(label="Log in with Google", tag="ownerLogInGoogleButton", callback=gui_owner_func.log_in_accepted)
-        dpg.add_button(label="Log in with Vipps", tag="ownerLogInVippsButton", callback=gui_owner_func.log_in_accepted)
+        dpg.add_input_text(tag="Owner password")
+        dpg.add_button(label="Owner Log in", tag="ownerLogInButton", callback=gui_owner_func.log_in_accepted)
+        dpg.add_button(label="Owner Log in with Google", tag="ownerLogInGoogleButton", callback=gui_owner_func.log_in_accepted)
+        dpg.add_button(label="Owner Log in with Vipps", tag="ownerLogInVippsButton", callback=gui_owner_func.log_in_accepted)
 
 def renter_Login():
     with dpg.window(label="Renter Login", tag="Renter Login", width=300, height=200):
         dpg.add_text("Username:")
-        dpg.add_input_text(tag="username")
+        dpg.add_input_text(tag="Renter username")
         dpg.add_text("Password:")
-        dpg.add_input_text(tag="password")
-        dpg.add_button(label="Log in", tag="renterLogInButton", callback=gui_owner_func.log_in_accepted)
-        dpg.add_button(label="Log in with Google", tag="renterLogInGoogleButton", callback=gui_renter_func.log_in_accepted)
-        dpg.add_button(label="Log in with Vipps", tag="renterLogInVippsButton", callback=gui_renter_func.log_in_accepted)
+        dpg.add_input_text(tag="Renter password")
+        dpg.add_button(label="Renter Log in", tag="renterLogInButton", callback=gui_owner_func.log_in_accepted)
+        dpg.add_button(label="Renter Log in with Google", tag="renterLogInGoogleButton", callback=gui_renter_func.log_in_accepted)
+        dpg.add_button(label="Renter Log in with Vipps", tag="renterLogInVippsButton", callback=gui_renter_func.log_in_accepted)
 
