@@ -6,19 +6,19 @@ dpg.create_context()
 dpg.create_viewport(title='Utleie_app', width=600, height=600)
 
 
-with dpg.window(label="RENTER", tag="RENTER"):
-    dpg.add_text("Dette er en test tekst")
+# with dpg.window(label="RENTER", tag="RENTER"):
+    # dpg.add_text("Dette er en test tekst")
 
 with dpg.window(label="Main menu", tag="Main menu"):
     dpg.add_text("Log in")
-    dpg.add_button(label="Log in as renter", tag="renterLogin", callback =dpg.delete_item)
-    dpg.add_button(label="Log in as owner", tag="ownerLogin", callback=gui_func.UItest)
+    dpg.add_button(label="Log in as renter", tag="renterLogin", callback =gui_func.renter_Login)
+    dpg.add_button(label="Log in as owner", tag="ownerLogin", callback=gui_func.owner_Login)
     dpg.add_button(label="Log in as admin", tag="adminLogin", callback=gui_func.admin_Login)
 
 
 
 
-#med render loop vil vi fjerne start_dearpygui
+# med render loop vil vi fjerne start_dearpygui
 dpg.set_primary_window("Main menu", True)
 
 # below replaces, start_dearpygui()
