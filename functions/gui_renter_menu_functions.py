@@ -42,9 +42,12 @@ def rent_new_car():
             dpg.add_menu_item(label="Rented cars", callback=see_rented_cars)
             dpg.add_menu_item(label="Options", callback=options)
         with dpg.table():
-            dpg.add_table_column(label=cars.keys())
-            dpg.add_table_column(label="Header 2")
-            dpg.add_table_column(label="Header 3")
+            first_key = list(cars.keys())[0]
+            second_key = list(cars.keys())[1]
+            third_key = list(cars.keys())[2]
+            dpg.add_table_column(label=first_key)
+            dpg.add_table_column(label=second_key)
+            dpg.add_table_column(label=third_key)
 
         dpg.add_text("Rent new car")
 
