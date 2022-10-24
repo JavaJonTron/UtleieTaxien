@@ -9,7 +9,6 @@ def test():
 
 def UItest():
     dpg.hide_item("RENTER")
-    #hide_item("item")
     print ("TESTEN FUNGERTE")
 
 def admin_Login():
