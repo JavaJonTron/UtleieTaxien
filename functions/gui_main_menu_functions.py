@@ -13,6 +13,7 @@ def UItest():
     print ("TESTEN FUNGERTE")
 
 def admin_Login():
+    dpg.delete_item("Admin Login")
     with dpg.window(label="Admin Login", tag="Admin Login", width=300, height=200):
         dpg.add_text("Username:")
         dpg.add_input_text(tag="Admin username")
@@ -21,6 +22,7 @@ def admin_Login():
         dpg.add_button(label="Log in", tag="adminLogInButton", callback=gui_admin_func.log_in_accepted)
 
 def owner_Login():
+    dpg.delete_item("Owner Login")
     with dpg.window(label="Owner Login", tag="Owner Login", width=300, height=200):
         dpg.add_text("Username:")
         dpg.add_input_text(tag="Owner username")
@@ -31,6 +33,7 @@ def owner_Login():
         dpg.add_button(label="Owner Log in with Vipps", tag="ownerLogInVippsButton", callback=gui_owner_func.log_in_accepted)
 
 def renter_Login():
+    dpg.delete_item("Renter Login")
     with dpg.window(label="Renter Login", tag="Renter Login", width=300, height=200):
         dpg.add_text("Username:")
         dpg.add_input_text(tag="Renter username")
