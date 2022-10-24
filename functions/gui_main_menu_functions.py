@@ -39,7 +39,7 @@ def renter_Login():
         dpg.add_input_text(tag="Renter username")
         dpg.add_text("Password:")
         dpg.add_input_text(tag="Renter password")
-        dpg.add_button(label="Renter Log in", tag="renterLogInButton", callback=gui_owner_func.log_in_accepted)
+        dpg.add_button(label="Renter Log in", tag="renterLogInButton", callback=gui_renter_func.log_in_accepted)
         dpg.add_button(label="Renter Log in with Google", tag="renterLogInGoogleButton", callback=gui_renter_func.log_in_accepted)
         dpg.add_button(label="Renter Log in with Vipps", tag="renterLogInVippsButton", callback=gui_renter_func.log_in_accepted)
 

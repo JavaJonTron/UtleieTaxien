@@ -28,11 +28,9 @@ for obj in renter_list:
 
 
 cars = {}
-
-#car = create_car_file.create_car()
-
-#nickname = str(car.year) + " " + str(car.make) + " " + str(car.model)
-#cars[nickname] = car
+car = create_car_file.create_car()
+nickname = str(car.year) + " " + str(car.make) + " " + str(car.model)
+cars[nickname] = car
 
 #print("License plate: " + str(car.license_plate))
 #print("Fuel Source: " + str(car.fuel_source))
@@ -60,7 +58,7 @@ for k, v in cars.items():
 #print (bookings_list[0])
 
 def who_rents_what(renterp):
-    print (renterp)
+    print(renterp)
 
 def booking_information():
     for element in bookings_list:
