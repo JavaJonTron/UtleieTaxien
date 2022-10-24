@@ -1,10 +1,7 @@
 from functions import create_car_file
 from functions import create_renter_file
-from GUI import MenuMain
+from GUI import MenuMain_gui
 #from GUI import Test1
-
-
-
 
 
 
@@ -25,8 +22,7 @@ for obj in renter_list:
 
 
 
-def UItest():
-    print ("TESTEN FUNGERTE")
+
 
 #print("Score: " + str(renter.score))
 
