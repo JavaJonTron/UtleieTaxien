@@ -6,6 +6,9 @@ dpg.create_context()
 dpg.create_viewport(title='Utleie_app', width=600, height=600)
 
 
+with dpg.window(label="RENTER", tag="RENTER"):
+    dpg.add_text("Dette er en test tekst")
+
 with dpg.window(label="Main menu", tag="Main menu"):
     dpg.add_text("Log in")
     dpg.add_button(label="Log in as renter", tag="renterLogin", callback =dpg.delete_item)

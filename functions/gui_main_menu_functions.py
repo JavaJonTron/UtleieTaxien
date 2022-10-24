@@ -1,9 +1,13 @@
 import dearpygui.dearpygui as dpg
 from functions import gui_admin_menu_functions as gui_admin_func
+
 def test():
     print("TESTER HER")
+    dpg.show_item("RENTER")
 
 def UItest():
+    dpg.hide_item("RENTER")
+    #hide_item("item")
     print ("TESTEN FUNGERTE")
 
 def admin_Login():
