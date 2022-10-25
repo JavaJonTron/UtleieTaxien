@@ -1,7 +1,7 @@
-from classes.renter import Renter
+from classes.owner import Owner
 import functions.get_average_of_list
 
-def create_renter():
+def create_owner():
     name = input("Name: ").upper()
     sex = input("Sex: ").upper()
     while True:
@@ -14,6 +14,6 @@ def create_renter():
     # score_list = [5, 10, 100]
     # score = round(functions.get_average_of_list.average_list(score_list))
     score = 10
-    cars = {}  # dictionary
-    return Renter(age, sex, name, score, cars)  # score_list
+    owned_cars = []
+    return Owner(age, sex, name, score, owned_cars,)  # score_list
 

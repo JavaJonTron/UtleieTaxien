@@ -1,10 +1,10 @@
-from classes.renter import Renter
+from classes.owner import Owner
 from dummyObjects import dummyCar3
 
-def create_renter():
+def create_owner():
     name = "Nils Nordmann"
     sex = "Male"
     age = 26
     score = 50
-    cars = {dummyCar3}
-    return Renter(age, sex, name, score, cars)
+    owned_cars = []
+    return Owner(age, sex, name, score, owned_cars)

@@ -2,6 +2,7 @@ import dearpygui.dearpygui as dpg
 import dummyObjects.dummyCar1
 import dummyObjects.dummyCar2
 import dummyObjects.dummyCar3
+import dummyObjects.dummyOwner1
 
 cars = {}
 carsNickname = []
@@ -9,6 +10,7 @@ carsNickname = []
 def log_in_accepted():
 
     car = dummyObjects.dummyCar1.create_car()
+
     nickname = str(car.year) + " " + str(car.make) + " " + str(car.model)
     cars[nickname] = car
     car = dummyObjects.dummyCar2.create_car()
@@ -50,10 +52,13 @@ def rent_new_car():
         dpg.add_button(label=first_key, callback=car, user_data=(carsNickname[0]))
         dpg.add_button(label=second_key, callback=car, user_data=(carsNickname[1]))
         dpg.add_button(label=third_key, callback=car, user_data=(carsNickname[2]))
-
+        print(carsNickname)
+        print(carsNickname[0])
+        print(carsNickname[1])
+        print(carsNickname[2])
         dpg.add_text("Rent new car")
 
-def car(nickname):
+def car(sender, app_data, user_data):
     dpg.delete_item("Renter Control Panel")
     with dpg.window(label="Renter Control Panel", tag="Renter Control Panel", width=400, height=400):
         with dpg.menu_bar(label="Menu Bar"):
@@ -61,10 +66,10 @@ def car(nickname):
             dpg.add_button(label="Rent a new car", callback=rent_new_car)
             dpg.add_menu_item(label="Rented cars", callback=see_rented_cars)
             dpg.add_menu_item(label="Options", callback=options)
-        dpg.add_text(nickname)
+        dpg.add_text(user_data)
         dpg.add_text("Car info")
         dpg.add_text("SELECT DATE/DATES HERE")
-        dpg.add_button(label="RENT")
+        # dpg.add_button(label="RENT", callback=rentCar, user_data=)
 
 def see_rented_cars():
     dpg.delete_item("Renter Control Panel")
