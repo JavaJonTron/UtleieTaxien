@@ -4,7 +4,7 @@ class Owner:
         self.sex = sex
         self.name = name
         self.score = score
-        self.cars_owned
+        self.cars_owned = cars_owned
         self.is_logged_in = is_logged_in
 
     def __str__(self):

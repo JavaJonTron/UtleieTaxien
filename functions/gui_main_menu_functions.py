@@ -27,10 +27,10 @@ def owner_Login():
         dpg.add_input_text(tag="Owner username")
         dpg.add_text("Password:")
         dpg.add_input_text(tag="Owner password")
-        dpg.add_button(label="Owner 1 Log in", tag="ownerLogInButton", callback=gui_owner_func.log_in_accepted, user_data=0)
-        dpg.add_button(label="Owner 2 Log in", tag="ownerLogInButton", callback=gui_owner_func.log_in_accepted, user_data=1)
-        dpg.add_button(label="Owner Log in with Google", tag="ownerLogInGoogleButton", callback=gui_owner_func.log_in_accepted)
-        dpg.add_button(label="Owner Log in with Vipps", tag="ownerLogInVippsButton", callback=gui_owner_func.log_in_accepted)
+        dpg.add_button(label="Owner 1 Log in", tag="owner1LogInButton", callback=gui_owner_func.log_in_accepted, user_data=0)
+        dpg.add_button(label="Owner 2 Log in", tag="owner2LogInButton", callback=gui_owner_func.log_in_accepted, user_data=1)
+        # dpg.add_button(label="Owner Log in with Google", tag="ownerLogInGoogleButton", callback=gui_owner_func.log_in_accepted)
+        # dpg.add_button(label="Owner Log in with Vipps", tag="ownerLogInVippsButton", callback=gui_owner_func.log_in_accepted)
 
 def renter_Login():
     dpg.delete_item("Renter Login")

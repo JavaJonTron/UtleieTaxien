@@ -6,8 +6,6 @@ from dummyObjects import dummyCar3
 from functions import create_car_file
 from functions import create_renter_file
 
-current_session = 1
-owner1_dictionary = {}
 owner_list = []
 
 def owner_creation():
@@ -22,7 +20,10 @@ def owner_creation():
         print(obj)
     print(owner_list)
 
-def car_creation(eier):
+
+owner_creation()
+
+def car_creation():
     for owner in owner_list:
         if owner.is_logged_in == True:
             print("Test")
@@ -39,7 +40,6 @@ def car_creation(eier):
     nickname = str(car.year) + " " + str(car.make) + " " + str(car.model)
     # car_dictionary[nickname] = car
     # print(f"car dict: {car_dictionary}")
-    eier[nickname] = car
 
 
 

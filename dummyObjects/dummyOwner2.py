@@ -7,4 +7,6 @@ def create_owner():
     age = 26
     score = 50
     cars_owned = {}
-    return Owner(age, sex, name, score, cars_owned)
+    is_logged_in = False
+    return Owner(age, sex, name, score, cars_owned, is_logged_in)
+

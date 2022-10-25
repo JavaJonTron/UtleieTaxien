@@ -1,15 +1,55 @@
 import dearpygui.dearpygui as dpg
 import dummyObjects.dummyOwner1 as dummy1
-import main
+from main import owner_list
 
 def log_in_accepted(sender, app_data, user_data):
-    for owner in main.owner_list:
-
-                .is_logged_in == True:
-            print("Test")
-    main.owner_list[user_data]
+    for owner in owner_list:
+        owner.is_logged_in = False
+    dpg.delete_item("Owner Login")
+    if user_data == 0 or 1:
+        owner_list[user_data].is_logged_in = True
     dpg.delete_item("Owner Control Panel")
     with dpg.window(label="Owner Control Panel", tag="Owner Control Panel", width=400, height=400):
-        #dpg.hide_item("Owner Login")
+        with dpg.menu_bar(label="Menu Bar"):
+            # dpg.add_menu_item(label="Rent a new car")
+            dpg.add_button(label="Home", callback=log_in_accepted)
+            dpg.add_button(label="Add a new car", callback=new_car)
+            dpg.add_menu_item(label="See my cars", callback=see_cars)
+            dpg.add_menu_item(label="Options", callback=options)
         dpg.add_text("TEST")
-        dpg.add_button(label="Create owner", callback=dummy1.create_owner())
+
+def new_car():
+    # owner_list[user_data].is_logged_in = True
+    dpg.delete_item("Owner Control Panel")
+    with dpg.window(label="Owner Control Panel", tag="Owner Control Panel", width=400, height=400):
+        with dpg.menu_bar(label="Menu Bar"):
+            # dpg.add_menu_item(label="Rent a new car")
+            dpg.add_button(label="Home", callback=log_in_accepted)
+            dpg.add_button(label="Add a new car", callback=new_car)
+            dpg.add_menu_item(label="See my cars", callback=see_cars)
+            dpg.add_menu_item(label="Options", callback=options)
+        dpg.add_text("TEST")
+
+def see_cars():
+    # owner_list[user_data].is_logged_in = True
+    dpg.delete_item("Owner Control Panel")
+    with dpg.window(label="Owner Control Panel", tag="Owner Control Panel", width=400, height=400):
+        with dpg.menu_bar(label="Menu Bar"):
+            # dpg.add_menu_item(label="Rent a new car")
+            dpg.add_button(label="Home", callback=log_in_accepted)
+            dpg.add_button(label="Add a new car", callback=new_car)
+            dpg.add_menu_item(label="See my cars", callback=see_cars)
+            dpg.add_menu_item(label="Options", callback=options)
+        dpg.add_text("TEST")
+
+def options():
+    # owner_list[user_data].is_logged_in = True
+    dpg.delete_item("Owner Control Panel")
+    with dpg.window(label="Owner Control Panel", tag="Owner Control Panel", width=400, height=400):
+        with dpg.menu_bar(label="Menu Bar"):
+            # dpg.add_menu_item(label="Rent a new car")
+            dpg.add_button(label="Home", callback=log_in_accepted)
+            dpg.add_button(label="Add a new car", callback=new_car)
+            dpg.add_menu_item(label="See my cars", callback=see_cars)
+            dpg.add_menu_item(label="Options", callback=options)
+        dpg.add_text("TEST")
