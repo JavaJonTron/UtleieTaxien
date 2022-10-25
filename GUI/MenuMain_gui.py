@@ -20,6 +20,7 @@ with dpg.window(label="Main menu", tag="Main menu"):
 
 
 
+
 # med render loop vil vi fjerne start_dearpygui
 dpg.set_primary_window("Main menu", True)
 
