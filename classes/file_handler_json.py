@@ -2,7 +2,7 @@ import json
 import os
 
 class File_handler_json:
-    def __init__(self, filename, information):
+    def __init__(self, filename, information=None):
         self.filename = filename
         self.information=information
 
@@ -12,24 +12,24 @@ class File_handler_json:
         print(current_directory)
         return current_directory
 
-
     def read_method(self):
         filepath = self.find_filepath()+self.filename
-        fil_set = open(filepath, 'r')
         try:
-            with fil_set:
-                read_from_file = json.loads(filepath)
+            with open(filepath) as file:
+                read_from_file = json.load(file)
         except FileNotFoundError:
-            print("File not found.")
+                print("File not found.")
+        except json.decoder.JSONDecodeError:
+            print("File content is not JSON.")
+        else:
             return read_from_file
 
     def write_method(self):
         filepath = self.find_filepath() + self.filename
-        fil_set = open(filepath, 'w')
         try:
-            with fil_set:
-                json.dumps(self.information, indent=4)
+            with open(filepath, "w") as file:
+                tobewritten=json.dumps(self.information.__dict__)
+                print(f"ET ELLER ANNET{tobewritten}")
+                json.dump(tobewritten, file, indent=4)
         except FileNotFoundError:
             print("File not found.")
-        except json.decoder.JSONDecodeError:
-            print("File content is not JSON.")
