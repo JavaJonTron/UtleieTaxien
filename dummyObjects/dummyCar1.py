@@ -8,5 +8,5 @@ def create_car():
     license_plate = "EL12345"
     fuel_source = "Electric"
     km = 1056
-    is_taken = False
-    return Car(make, model, year, license_plate, fuel_source, km, is_taken)
+    is_take = False
+    return Car(make, model, year, license_plate, fuel_source, km, is_take)

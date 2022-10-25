@@ -1,11 +1,10 @@
-import dummyObjects.dummyOwner1
-from functions import create_car_file
-from functions import create_renter_file
 from dummyObjects import dummyOwner1
 from dummyObjects import dummyOwner2
 from dummyObjects import dummyCar1
 from dummyObjects import dummyCar2
 from dummyObjects import dummyCar3
+from functions import create_car_file
+from functions import create_renter_file
 
 def owner_creation():
     owner_list = []

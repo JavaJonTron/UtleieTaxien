@@ -1,11 +1,11 @@
-from classes.owner import Owner
 from dummyObjects import dummyCar1
 from dummyObjects import dummyCar2
+from classes.owner import Owner
 
 def create_owner():
     name = "Eva Nordmann"
     sex = "Female"
     age = 58
     score = 70
-    owned_cars = {}
-    return Owner(age, sex, name, score, owned_cars)
+    cars_owned = {}
+    return Owner(age, sex, name, score, cars_owned)
