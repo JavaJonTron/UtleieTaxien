@@ -7,27 +7,28 @@ from dummyObjects import dummyCar1
 from dummyObjects import dummyCar2
 from dummyObjects import dummyCar3
 
+def owner_creation():
+    owner_list = []
+    owner = dummyOwner1.create_owner()
+    owner_list.append(owner)
+    owner = dummyOwner2.create_owner()
+    owner_list.append(owner)
+    for obj in owner_list:
+        print(obj)
+    print(owner_list)
 
-owner_list = []
-owner = dummyOwner1.create_owner()
-owner_list.append(owner)
-owner = dummyOwner2.create_owner()
-owner_list.append(owner)
-for obj in owner_list:
-    print(obj)
-print(owner_list)
-
-car_dictionary = {}
-car = dummyCar1.create_car()
-nickname = str(car.year) + " " + str(car.make) + " " + str(car.model)
-car_dictionary[nickname] = car
-car = dummyCar2.create_car()
-nickname = str(car.year) + " " + str(car.make) + " " + str(car.model)
-car_dictionary[nickname] = car
-car = dummyCar3.create_car()
-nickname = str(car.year) + " " + str(car.make) + " " + str(car.model)
-car_dictionary[nickname] = car
-print(f"car dict: {car_dictionary}")
+def car_creation():
+    car_dictionary = {}
+    car = dummyCar1.create_car()
+    nickname = str(car.year) + " " + str(car.make) + " " + str(car.model)
+    car_dictionary[nickname] = car
+    car = dummyCar2.create_car()
+    nickname = str(car.year) + " " + str(car.make) + " " + str(car.model)
+    car_dictionary[nickname] = car
+    car = dummyCar3.create_car()
+    nickname = str(car.year) + " " + str(car.make) + " " + str(car.model)
+    car_dictionary[nickname] = car
+    print(f"car dict: {car_dictionary}")
 
 
 

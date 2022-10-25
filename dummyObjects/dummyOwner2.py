@@ -6,5 +6,5 @@ def create_owner():
     sex = "Male"
     age = 26
     score = 50
-    owned_cars = []
+    owned_cars = {}
     return Owner(age, sex, name, score, owned_cars)
