@@ -1,5 +1,7 @@
 import dearpygui.dearpygui as dpg
 import dummyObjects.dummyOwner1 as dummy1
+from functions import writing_to_file as write
+from functions import create_car_file
 from main import owner_list
 
 def log_in_accepted(sender, app_data, user_data):
@@ -29,6 +31,13 @@ def new_car():
             dpg.add_menu_item(label="See my cars", callback=see_cars)
             dpg.add_menu_item(label="Options", callback=options)
         dpg.add_text("TEST")
+    print ("HER SKAL DET EGENTLIG OPPRETTES EN JÆVLA BIL")
+    car = create_car_file.create_car()
+    print(car)
+    write.writing("CAR.json", car)
+
+
+
 
 def see_cars():
     # owner_list[user_data].is_logged_in = True
