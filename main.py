@@ -6,28 +6,43 @@ from dummyObjects import dummyCar3
 from functions import create_car_file
 from functions import create_renter_file
 
+current_session = 1
+owner1_dictionary = {}
+owner_list = []
+
 def owner_creation():
-    owner_list = []
-    owner = dummyOwner1.create_owner()
-    owner_list.append(owner)
-    owner = dummyOwner2.create_owner()
-    owner_list.append(owner)
+    dummyOwnerList = []
+    dummyOwnerList.append(dummyOwner1)
+    dummyOwnerList.append(dummyOwner2)
+
+    for dummy in dummyOwnerList:
+        owner = dummy.create_owner()
+        owner_list.append(owner)
     for obj in owner_list:
         print(obj)
     print(owner_list)
 
-def car_creation():
-    car_dictionary = {}
+def car_creation(eier):
+    for owner in owner_list:
+        if owner.is_logged_in == True:
+            print("Test")
+    #car_dictionary = {}
+    car_list = []
     car = dummyCar1.create_car()
     nickname = str(car.year) + " " + str(car.make) + " " + str(car.model)
-    car_dictionary[nickname] = car
+
+    # car_dictionary[nickname] = car
     car = dummyCar2.create_car()
     nickname = str(car.year) + " " + str(car.make) + " " + str(car.model)
-    car_dictionary[nickname] = car
+    # car_dictionary[nickname] = car
     car = dummyCar3.create_car()
     nickname = str(car.year) + " " + str(car.make) + " " + str(car.model)
-    car_dictionary[nickname] = car
-    print(f"car dict: {car_dictionary}")
+    # car_dictionary[nickname] = car
+    # print(f"car dict: {car_dictionary}")
+    eier[nickname] = car
+
+
+
 
 
 
