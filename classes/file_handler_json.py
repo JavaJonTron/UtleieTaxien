@@ -1,6 +1,6 @@
 import json
 
-class File_handler_jsjon:
+class File_handler_json:
     def __init__(self, filepath, information):
         self.filepath=filepath
         self.information=information

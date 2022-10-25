@@ -66,48 +66,6 @@ def car(nickname):
         dpg.add_text("SELECT DATE/DATES HERE")
         dpg.add_button(label="RENT")
 
-#def first_car():
-#    dpg.delete_item("Renter Control Panel")
-#    with dpg.window(label="Renter Control Panel", tag="Renter Control Panel", width=400, height=400):
-#        with dpg.menu_bar(label="Menu Bar"):
-#            dpg.add_menu_item(label="Rent a new car")
-#            dpg.add_button(label="Home", callback=log_in_accepted)
-#            dpg.add_button(label="Rent a new car", callback=rent_new_car)
-#            dpg.add_menu_item(label="Rented cars", callback=see_rented_cars)
-#            dpg.add_menu_item(label="Options", callback=options)
-#        dpg.add_text(carsNickname[0])
-#        dpg.add_text("Car info")
-#        dpg.add_text("SELECT DATE/DATES HERE")
-#        dpg.add_button(label="RENT")
-
-#def second_car():
-#    dpg.delete_item("Renter Control Panel")
-#    with dpg.window(label="Renter Control Panel", tag="Renter Control Panel", width=400, height=400):
-#        with dpg.menu_bar(label="Menu Bar"):
-            # dpg.add_menu_item(label="Rent a new car")
-#            dpg.add_button(label="Home", callback=log_in_accepted)
-#            dpg.add_button(label="Rent a new car", callback=rent_new_car)
-#            dpg.add_menu_item(label="Rented cars", callback=see_rented_cars)
-#            dpg.add_menu_item(label="Options", callback=options)
-#        dpg.add_text(carsNickname[1])
-#        dpg.add_text("Car info")
-#        dpg.add_text("SELECT DATE/DATES HERE")
-#        dpg.add_button(label="RENT")
-
-#def third_car():
-#    dpg.delete_item("Renter Control Panel")
-#    with dpg.window(label="Renter Control Panel", tag="Renter Control Panel", width=400, height=400):
-#        with dpg.menu_bar(label="Menu Bar"):
-#            # dpg.add_menu_item(label="Rent a new car")
-#            dpg.add_button(label="Home", callback=log_in_accepted)
-#            dpg.add_button(label="Rent a new car", callback=rent_new_car)
-#            dpg.add_menu_item(label="Rented cars", callback=see_rented_cars)
-#            dpg.add_menu_item(label="Options", callback=options)
-#        dpg.add_text(carsNickname[2])
-#        dpg.add_text("Car info")
-#        dpg.add_text("SELECT DATE/DATES HERE")
-#        dpg.add_button(label="RENT")
-
 def see_rented_cars():
     dpg.delete_item("Renter Control Panel")
     with dpg.window(label="Renter Control Panel", tag="Renter Control Panel", width=400, height=400):
