@@ -1,4 +1,4 @@
-import human
+from classes import human
 
 class Renter(human.Human):
     def __init__(self, age, sex, name, score):  # , score_list, , booked_car
