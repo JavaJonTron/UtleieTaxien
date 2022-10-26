@@ -36,6 +36,15 @@ def new_car():
             dpg.add_menu_item(label="See my cars", callback=see_cars)
             dpg.add_menu_item(label="Options", callback=options)
         dpg.add_text("TEST")
+        dpg.add_input_text(hint="Make:", no_spaces=True, uppercase=True)
+        dpg.add_input_text(hint="Model:", no_spaces=True, uppercase=True)
+        dpg.add_input_text(hint="Year:", no_spaces=True, uppercase=True,)
+        dpg.add_input_text(hint="License Plate", no_spaces=True, uppercase=True)
+        dpg.add_input_text(hint="Fuel Source:", no_spaces=True, uppercase=True)
+        dpg.add_input_text(hint="Odometer:", no_spaces=True, uppercase=True)
+        #add price attribute car
+        dpg.add_button(label="Publish")
+
     print ("HER SKAL DET EGENTLIG OPPRETTES EN JÆVLA BIL")
     car = create_car_file.create_car()
     #print(car)
