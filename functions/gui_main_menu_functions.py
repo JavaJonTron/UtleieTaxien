@@ -14,11 +14,14 @@ def UItest():
 #Begynnelse på et forsøk for å se om det er mulig å samle felles kodelogikk i en funksjon
 #Eller kansje vi burde bruke en klasse?
 #Det er mye kode som går igjen flere ganger med GUi og det kan kansje bli litt rotete, uryddig eller uoversiktlig?
-def login(tekst_login, width, height):
-    dpg.delete_item(tekst_login)
-    with dpg.window(label=tekst_login, tag=tekst_login, width=width, height=height):
-        dpg.add_button(label="Log in", tag="adminLogInButton", callback=gui_admin_func.log_in_accepted)
-    pass
+
+#def login(tekst_login, width, height):
+#    dpg.delete_item(tekst_login)
+#    with dpg.window(label=tekst_login, tag=tekst_login, width=width, height=height):
+#        dpg.add_button(label="Log in", tag="adminLogInButton", callback=gui_admin_func.log_in_accepted)
+#    pass
+#objectnavn.dpg.add
+#login()
 
 def admin_Login():
     dpg.delete_item("Admin Login")

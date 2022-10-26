@@ -9,9 +9,8 @@ class File_handler_json:
     def find_filepath(self):
         current_directory = os.getcwd()
         print(current_directory)
-        current_directory -="/GUI"
         print(current_directory)
-        current_directory += "/Storage/"
+        current_directory += "Storage"
         print(current_directory)
         return current_directory
 
@@ -25,6 +24,8 @@ class File_handler_json:
         except json.decoder.JSONDecodeError:
             print("File content is not JSON.")
         else:
+            print("NÅ LESER VI FRA JSON FILA")
+            print(read_from_file)
             return read_from_file
 
     def write_method(self):

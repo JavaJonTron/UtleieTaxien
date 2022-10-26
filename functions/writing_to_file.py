@@ -5,4 +5,3 @@ def writing(filename, information):
     print(f"Dette skal være informasjonen vi prøver å skrive til fil{information}")
     handler.write_method()
     del(handler)
-# DEN SLETTER JO BARE VARIABEL REFERAN SEN IKKE OBJEKTET

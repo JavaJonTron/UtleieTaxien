@@ -38,10 +38,11 @@ def new_car():
         dpg.add_text("TEST")
     print ("HER SKAL DET EGENTLIG OPPRETTES EN JÆVLA BIL")
     car = create_car_file.create_car()
-    print(car)
+    #print(car)
     #Her burde vi heller legge til bilen i en liste over alle biler i hele verden.
     #Så burde vi legge til listen over alle biler under for å skrive listen til Json
     write.writing("CAR.json", car)
+
 
 
 
@@ -57,7 +58,12 @@ def see_cars():
             dpg.add_menu_item(label="See my cars", callback=see_cars)
             dpg.add_menu_item(label="Options", callback=options)
         dpg.add_text("TEST")
-    read.reading("CAR.JSON")
+    importert_fil = read.reading("CAR.JSON")
+    #element.items():
+
+    #for k,v in importert_fil:
+       # print(k,v)
+
 
 
 def options():
