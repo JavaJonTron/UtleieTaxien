@@ -6,3 +6,4 @@ def reading(filename):
     read = handler.read_method()
     print(read)
     del(handler)
+#DEN SLETTER JO BARE VARIABEL REFERAN SEN IKKE OBJEKTET

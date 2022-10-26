@@ -2,13 +2,13 @@ import json
 import os
 
 class File_handler_json:
-    def __init__(self, filename, information=None):
+    def __init__(self, filename, information):
         self.filename = filename
-        self.information=information
+        self.information = information
 
     def find_filepath(self):
         current_directory = os.getcwd()
-        current_directory += "\Storage"
+        current_directory += "/Storage"
         print(current_directory)
         return current_directory
 

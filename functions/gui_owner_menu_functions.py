@@ -36,6 +36,8 @@ def new_car():
     print ("HER SKAL DET EGENTLIG OPPRETTES EN JÆVLA BIL")
     car = create_car_file.create_car()
     print(car)
+    #Her burde vi heller legge til bilen i en liste over alle biler i hele verden.
+    #Så burde vi legge til listen over alle biler under for å skrive listen til Json
     write.writing("CAR.json", car)
 
 
