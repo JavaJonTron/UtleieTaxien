@@ -1,9 +1,8 @@
-class Renter:
+import human
+
+class Renter(human.Human):
     def __init__(self, age, sex, name, score):  # , score_list, , booked_car
-        self.age = age
-        self.sex = sex
-        self.name = name
-        self.score = score
+        super().__init__(age, sex, name, score)
         # self.score_list = score_list
         # self.booked_car = booked_car
 

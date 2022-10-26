@@ -1,9 +1,9 @@
-class Owner:
+import human
+
+
+class Owner(human.Human):
     def __init__(self, age, sex, name, score, cars_owned, is_logged_in):
-        self.age = age
-        self.sex = sex
-        self.name = name
-        self.score = score
+        super().__init__(age, sex, name, score)
         self.cars_owned = cars_owned
         self.is_logged_in = is_logged_in
 
