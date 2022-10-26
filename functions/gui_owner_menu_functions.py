@@ -4,8 +4,11 @@ from functions import writing_to_file as write
 from functions import read_from_file as read
 from functions import create_car_file
 from main import owner_list
+import atexit
 
-
+def avslutt():
+    print("AVSLUTTES")
+atexit.register(avslutt)
 def log_in_accepted(sender, app_data, user_data):
     for owner in owner_list:
         owner.is_logged_in = False

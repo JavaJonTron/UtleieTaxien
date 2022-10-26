@@ -8,7 +8,10 @@ class File_handler_json:
 
     def find_filepath(self):
         current_directory = os.getcwd()
-        current_directory += "/Storage"
+        print(current_directory)
+        current_directory -="/GUI"
+        print(current_directory)
+        current_directory += "/Storage/"
         print(current_directory)
         return current_directory
 
