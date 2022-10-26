@@ -42,7 +42,8 @@ def new_car():
         dpg.add_input_text(hint="License Plate", no_spaces=True, uppercase=True)
         dpg.add_input_text(hint="Fuel Source:", no_spaces=True, uppercase=True)
         dpg.add_input_text(hint="Odometer:", no_spaces=True, uppercase=True)
-        #add price attribute car
+        dpg.add_input_text(hint="Hourly Rate:", no_spaces=True, uppercase=True)
+        dpg.add_input_text(hint="Daily Rate:", no_spaces=True, uppercase=True)
         dpg.add_button(label="Publish")
 
     print ("HER SKAL DET EGENTLIG OPPRETTES EN JÆVLA BIL")

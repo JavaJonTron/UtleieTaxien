@@ -8,5 +8,7 @@ def create_car():
     license_plate = "AA12345"
     fuel_source = "Petrol"
     km = 89507
-    is_taken = False
-    return Car(make, model, year, license_plate, fuel_source, km, is_taken)
+    is_take = False
+    hourly_rate = 80
+    daily_rate = 1500
+    return Car(make, model, year, license_plate, fuel_source, km, is_take, hourly_rate, daily_rate)

@@ -21,4 +21,6 @@ def create_car():
             print("Please enter how far the car has driven!")
             continue
     is_take = False
-    return Car(make, model, year, license_plate, fuel_source, km, is_take)
+    hourly_rate = 150
+    daily_rate = 3000
+    return Car(make, model, year, license_plate, fuel_source, km, is_take,hourly_rate, daily_rate)
