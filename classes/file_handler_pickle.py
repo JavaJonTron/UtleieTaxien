@@ -9,18 +9,13 @@ class File_handler_pickle:
         pass
 
     def read_method(self):
-        read_from_file = open(self.filename, 'r')
+        read_from_file = open(self.filename, 'rb')
         unpickling = pickle.load(read_from_file)
-        unpickling
-        pass
+        read_from_file.close()
+        return unpickling
 
-#import pickle
-#filehandler = open(filename, 'r')
-#object = pickle.load(filehandler)
-#
-#
-#
-#
 
     def write_method(self):
-        pass
+        write_to_file = open(self.filename, 'wb')
+        pickle.dump(self.information, write_to_file)
+        write_to_file.close()
