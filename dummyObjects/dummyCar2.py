@@ -1,4 +1,4 @@
-from classes.car import Car
+from Car.car import Car
 
 
 def create_car():

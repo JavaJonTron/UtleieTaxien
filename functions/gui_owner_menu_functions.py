@@ -1,8 +1,7 @@
 import dearpygui.dearpygui as dpg
-import dummyObjects.dummyOwner1 as dummy1
 from functions import writing_to_file as write
 from functions import read_from_file as read
-from functions import create_car_file
+from Car import create_car_file
 from main import owner_list
 import atexit
 

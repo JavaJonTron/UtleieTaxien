@@ -3,9 +3,6 @@ from dummyObjects import dummyOwner2
 from dummyObjects import dummyCar1
 from dummyObjects import dummyCar2
 from dummyObjects import dummyCar3
-from functions import create_car_file
-from functions import create_renter_file
-from classes import file_handler_json as hs
 
 owner_list = []
 

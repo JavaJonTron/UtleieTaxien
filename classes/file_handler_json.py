@@ -7,10 +7,10 @@ class File_handler_json:
         self.information = information
 
     def find_filepath(self):
+        import os
         current_directory = os.getcwd()
         print(current_directory)
-        print(current_directory)
-        current_directory += "Storage"
+        current_directory += "\Storage"
         print(current_directory)
         return current_directory
 

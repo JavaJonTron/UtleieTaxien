@@ -10,6 +10,7 @@ class Car:
         self.hourly_rate = hourly_rate
         self.daily_rate = daily_rate
 
+
     def __str__(self):
         return str(self.make) + str(self.model) + str(self.year) + str(self.license_plate) + str(self.fuel_source) + \
                str(self.km) + str(self.is_take) + str(self.hourly_rate) + str(self.daily_rate)
