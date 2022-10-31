@@ -1,6 +1,5 @@
 import dearpygui.dearpygui as dpg
-from functions import writing_to_file as write
-from functions import read_from_file as read
+from FileHandling import writing_to_file as write, read_from_file as read
 from Car import create_car_file
 from main import owner_list
 import atexit

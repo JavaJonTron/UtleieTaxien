@@ -1,4 +1,5 @@
-from classes import file_handler_json as fhj
+from FileHandling import file_handler_json as fhj
+
 
 def reading(filename):
     handler = fhj.File_handler_json(filename, information=None)
