@@ -6,6 +6,9 @@ from dummyObjects import dummyCar3
 
 owner_list = []
 
+
+
+
 def owner_creation():
     dummyOwnerList = []
     dummyOwnerList.append(dummyOwner1)
