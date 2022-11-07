@@ -12,7 +12,7 @@ renter_list = []
 bookings_list = []
 
 
-def owner_creation():
+def dummy_owner_creation():
     dummyOwnerList = []
     dummyOwnerList.append(dummyOwner1)
     dummyOwnerList.append(dummyOwner2)
@@ -24,10 +24,10 @@ def owner_creation():
     print(owner_list)
 
 
-owner_creation()
+dummy_owner_creation()
 
 
-def car_creation(owners):
+def dummy_car_creation(owners):
     car = dummyCar1.create_car(owners[0])
     car_list.append(car)
     car = dummyCar2.create_car(owners[0])
@@ -36,7 +36,7 @@ def car_creation(owners):
     car_list.append(car)
 
 
-def renter_creation():
+def dummy_renter_creation():
     dummyRenterList = []
     dummyRenterList.append(dummyRenter1)
     dummyRenterList.append(dummyRenter2)
@@ -48,6 +48,6 @@ def renter_creation():
     print(renter_list)
 
 
-renter_creation()
+dummy_renter_creation()
 
-car_creation(owner_list)
+dummy_car_creation(owner_list)
