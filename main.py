@@ -48,6 +48,6 @@ def renter_creation():
     print(renter_list)
 
 
-owner_creation()
+renter_creation()
 
 car_creation(owner_list)
