@@ -30,7 +30,7 @@ def load_system(file, li):
 load_system("owner_file", owner_list)
 load_system("renter_file", renter_list)
 load_system("car_file", car_list)
-
+load_system("booking_file", bookings_list)
 
 
 save_system("owner_file", owner_list)
@@ -38,3 +38,4 @@ save_system("owner_file", owner_list)
 save_system("renter_file", renter_list)
 # dummy_car_creation(owner_list)
 save_system("car_file", car_list)
+save_system("booking_file", bookings_list)
