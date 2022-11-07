@@ -6,7 +6,9 @@ from main import owner_list
 
 def admin_Login():
     dpg.delete_item("Admin Login")
+    dpg.hide_item("Main menu")
     with dpg.window(label="Admin Login", tag="Admin Login", width=300, height=200):
+        dpg.set_primary_window("Admin Login", True)
         dpg.add_text("Username:")
         dpg.add_input_text(tag="Admin username")
         dpg.add_text("Password:")
@@ -15,7 +17,9 @@ def admin_Login():
 
 def owner_Login():
     dpg.delete_item("Owner Login")
+    dpg.hide_item("Main menu")
     with dpg.window(label="Owner Login", tag="Owner Login", width=300, height=200):
+        dpg.set_primary_window("Owner Login", True)
         dpg.add_text("Username:")
         dpg.add_input_text(tag="Owner username")
         dpg.add_text("Password:")
@@ -27,7 +31,9 @@ def owner_Login():
 
 def renter_Login():
     dpg.delete_item("Renter Login")
+    dpg.hide_item("Main menu")
     with dpg.window(label="Renter Login", tag="Renter Login", width=300, height=200):
+        dpg.set_primary_window("Renter Login", True)
         dpg.add_text("Username:")
         dpg.add_input_text(tag="Renter username")
         dpg.add_text("Password:")

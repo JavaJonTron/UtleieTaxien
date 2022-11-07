@@ -19,8 +19,6 @@ with dpg.window(label="Main menu", tag="Main menu"):
 
 
 
-
-
 dpg.set_primary_window("Main menu", True)
 
 dpg.setup_dearpygui()
