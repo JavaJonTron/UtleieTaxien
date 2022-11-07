@@ -1,5 +1,4 @@
-from dummyObjects import dummyCar3
-from classes.owner import Owner
+from owner.owner import Owner
 
 def create_owner():
     name = "Nils Nordmann"

@@ -1,4 +1,4 @@
-from classes.renter import Renter
+from renter.renter import Renter
 
 def create_renter():
     name = "Kari Nordmann"

@@ -1,5 +1,5 @@
-from classes.owner import Owner
-import functions.get_average_of_list
+from owner.owner import Owner
+
 
 def create_owner():
     name = input("Name: ").upper()

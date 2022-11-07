@@ -1,5 +1,5 @@
-from classes.renter import Renter
-import functions.get_average_of_list
+from renter.renter import Renter
+
 
 def create_renter():
     name = input("Name: ").upper()

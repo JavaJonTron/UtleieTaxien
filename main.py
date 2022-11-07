@@ -21,13 +21,12 @@ def owner_creation():
         print(obj)
     print(owner_list)
 
-
 owner_creation()
 
 def car_creation():
     for owner in owner_list:
         if owner.is_logged_in == True:
-            print("Test")
+            print("Owner is logged in")
     #car_dictionary = {}
     car_list = []
     car = dummyCar1.create_car()
