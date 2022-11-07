@@ -1,7 +1,6 @@
 import dearpygui.dearpygui as dpg
 import main
 
-
 from functions import gui_main_menu_functions as gui_func
 
 

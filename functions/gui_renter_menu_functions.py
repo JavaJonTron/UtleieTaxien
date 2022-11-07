@@ -1,5 +1,6 @@
 import dearpygui.dearpygui as dpg
 from main import car_list
+from functions import get_todays_date as date
 
 
 def log_in_accepted():
@@ -45,7 +46,17 @@ def car(sender, app_data, user_data):
         dpg.add_text(user_data)
         dpg.add_text("Car info")
         dpg.add_text("SELECT DATE/DATES HERE")
+        dpg.add_date_picker(tag="from_date", default_value={'month_day': date.day, 'year': date.year, 'month': date.
+                            month}, callback=fromdate)
+        dpg.add_date_picker(tag="to_date", default_value={'month_day': date.day + 1, 'year': date.year, 'month': date.
+                            month})
+        # dpg.add_button(label="Book")
+
         # dpg.add_button(label="RENT", callback=rentCar, user_data=)
+
+
+def fromdate():
+    from_date = (dpg.get_value("from_date"))
 
 
 def see_rented_cars():
