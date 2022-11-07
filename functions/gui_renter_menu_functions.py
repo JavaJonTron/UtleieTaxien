@@ -25,9 +25,9 @@ def rent_new_car():
             dpg.add_button(label="Rent a new car", callback=rent_new_car)
             dpg.add_menu_item(label="Rented cars", callback=see_rented_cars)
             dpg.add_menu_item(label="Options", callback=options)
-        first_key = car_list[0].nickname
-        second_key = car_list[0].nickname
-        third_key = car_list[0].nickname
+        first_key = car_list[0].nickname()
+        second_key = car_list[1].nickname()
+        third_key = car_list[2].nickname()
         dpg.add_button(label=first_key, callback=car, user_data=first_key)
         dpg.add_button(label=second_key, callback=car, user_data=second_key)
         dpg.add_button(label=third_key, callback=car, user_data=third_key)
