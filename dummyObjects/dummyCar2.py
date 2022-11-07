@@ -1,7 +1,7 @@
 from Car.car import Car
 
 
-def create_car():
+def create_car(owner):
     make = "Volkswagen"
     model = "Golf"
     year = 2012
@@ -11,4 +11,4 @@ def create_car():
     is_take = False
     hourly_rate = 80
     daily_rate = 1500
-    return Car(make, model, year, license_plate, fuel_source, km, is_take, hourly_rate, daily_rate)
+    return Car(make, model, year, license_plate, fuel_source, km, is_take, hourly_rate, daily_rate, owner)
