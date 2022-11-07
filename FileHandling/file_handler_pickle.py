@@ -7,12 +7,12 @@ class File_handler_pickle:
         self.information = information
 
 
-    def find_filepath(self):
-        print('getcwd:      ', os.getcwd())
-        filepath = os.getcwd()
-        print(filepath)
-        filepath
-        return filepath
+    #def find_filepath(self):
+    #    print('getcwd:      ', os.getcwd())
+    #    filepath = os.getcwd()
+    #    print(filepath)
+    #    filepath
+    #    return filepath
 
     def create_directory(self):
         pass
