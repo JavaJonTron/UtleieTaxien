@@ -11,6 +11,8 @@ class Car:
         self.daily_rate = daily_rate
         self.owner = owner
 
+    def nickname(self):
+        return str(self.year) + " " + str(self.make) + " " + str(self.model)
 
     def __str__(self):
         return str(self.make) + str(self.model) + str(self.year) + str(self.license_plate) + str(self.fuel_source) + \

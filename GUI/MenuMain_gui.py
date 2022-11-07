@@ -21,15 +21,9 @@ with dpg.window(label="Main menu", tag="Main menu"):
 
 
 
-# med render loop vil vi fjerne start_dearpygui
+
 dpg.set_primary_window("Main menu", True)
 
-# below replaces, start_dearpygui()
-#while dpg.is_dearpygui_running():
-    # insert here any code you would like to run in the render loop
-    # you can manually stop by using stop_dearpygui()
-#    print("this will run every frame")
-#    dpg.render_dearpygui_frame()
 dpg.setup_dearpygui()
 dpg.show_viewport()
 dpg.start_dearpygui()
