@@ -1,3 +1,5 @@
+from dummyObjects import dummyRenter1
+from dummyObjects import dummyRenter2
 from dummyObjects import dummyOwner1
 from dummyObjects import dummyOwner2
 from dummyObjects import dummyCar1
@@ -14,7 +16,6 @@ def owner_creation():
     dummyOwnerList = []
     dummyOwnerList.append(dummyOwner1)
     dummyOwnerList.append(dummyOwner2)
-
     for dummy in dummyOwnerList:
         owner = dummy.create_owner()
         owner_list.append(owner)
@@ -34,5 +35,19 @@ def car_creation(owners):
     car = dummyCar3.create_car(owners[1])
     car_list.append(car)
 
+
+def renter_creation():
+    dummyRenterList = []
+    dummyRenterList.append(dummyRenter1)
+    dummyRenterList.append(dummyRenter2)
+    for dummy in dummyRenterList:
+        renter = dummy.create_renter()
+        renter_list.append(renter)
+    for obj in renter_list:
+        print(obj)
+    print(renter_list)
+
+
+owner_creation()
 
 car_creation(owner_list)
