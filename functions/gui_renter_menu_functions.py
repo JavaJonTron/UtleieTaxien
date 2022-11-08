@@ -7,7 +7,7 @@ from functions import get_todays_date as date
 from functions import delete_windows
 from Booking import create_booking_file
 
-avail_list = []
+
 
 def log_in_accepted(sender, app_data, user_data):
     for renter in renter_list:
@@ -47,6 +47,7 @@ def rent_new_car():
 
 
 def car(sender, app_data, user_data):
+    avail_list = []
     delete_windows.delete_windows_func()
     with dpg.window(label="Renter Control Panel", tag="Renter Car", width=400, height=400):
         dpg.set_primary_window("Renter Car", True)
@@ -69,19 +70,22 @@ def car(sender, app_data, user_data):
         dpg.add_button(label="Book", callback=create_booking_file.booking_func, user_data=user_data)
         dpg.add_text("Car is not available between:")
         for booking in main.bookings_list:
-            date_from_day = booking.date_from["Day"]
-            date_from_month = booking.date_from["Month"]
-            date_from_year = booking.date_from["Year"]
-            date_to_day = booking.date_to["Day"]
-            date_to_month = booking.date_to["Month"]
-            date_to_year = booking.date_to["Year"]
-            avail_list.append(f"{date_from_day}.{date_from_month}.{date_from_year} - {date_to_day}.{date_to_month}.{date_to_year}")
-        dpg.add_listbox(avail_list)
+            if booking.car.license_plate == user_data.license_plate:
+                date_from_day = booking.date_from["Day"]
+                date_from_month = booking.date_from["Month"]
+                date_from_year = booking.date_from["Year"]
+                date_to_day = booking.date_to["Day"]
+                date_to_month = booking.date_to["Month"]
+                date_to_year = booking.date_to["Year"]
+                avail_list.append(f"{date_from_day}.{date_from_month}.{date_from_year} - {date_to_day}.{date_to_month}.{date_to_year}")
+                print(avail_list)
+        dpg.add_listbox(tag="dates", items=avail_list)
 
         # dpg.add_button(label="RENT", callback=rentCar, user_data=)
 
 
 def see_rented_cars():
+    rented_cars = []
     delete_windows.delete_windows_func()
     with dpg.window(label="Renter Control Panel", tag="Renter See Cars", width=400, height=400):
         dpg.set_primary_window("Renter See Cars", True)
@@ -91,7 +95,9 @@ def see_rented_cars():
             dpg.add_button(label="Rent a new car", callback=rent_new_car)
             dpg.add_menu_item(label="Rented cars", callback=see_rented_cars)
             dpg.add_menu_item(label="Options", callback=options)
+        #for booking in main.bookings_list:
 
+        dpg.add_listbox(tag="rented", items=rented_cars)
         dpg.add_text("See rented cars")
 
 
