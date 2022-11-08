@@ -3,6 +3,7 @@ from functions import gui_admin_menu_functions as gui_admin_func
 from functions import gui_owner_menu_functions as gui_owner_func
 from functions import gui_renter_menu_functions as gui_renter_func
 from main import owner_list
+from main import renter_list
 
 def admin_Login():
     dpg.delete_item("Admin Login")
@@ -24,8 +25,10 @@ def owner_Login():
         dpg.add_input_text(tag="Owner username")
         dpg.add_text("Password:")
         dpg.add_input_text(tag="Owner password")
-        dpg.add_button(label="Owner 1 Log in", tag="owner1LogInButton", callback=gui_owner_func.log_in_accepted, user_data=owner_list[0])
-        dpg.add_button(label="Owner 2 Log in", tag="owner2LogInButton", callback=gui_owner_func.log_in_accepted, user_data=owner_list[1])
+        dpg.add_button(label="Owner 1 Log in", tag="owner1LogInButton", callback=gui_owner_func.log_in_accepted,
+                       user_data=owner_list[0])
+        dpg.add_button(label="Owner 2 Log in", tag="owner2LogInButton", callback=gui_owner_func.log_in_accepted,
+                       user_data=owner_list[1])
         # dpg.add_button(label="Owner Log in with Google", tag="ownerLogInGoogleButton", callback=gui_owner_func.log_in_accepted)
         # dpg.add_button(label="Owner Log in with Vipps", tag="ownerLogInVippsButton", callback=gui_owner_func.log_in_accepted)
 
@@ -38,8 +41,11 @@ def renter_Login():
         dpg.add_input_text(tag="Renter username")
         dpg.add_text("Password:")
         dpg.add_input_text(tag="Renter password")
-        dpg.add_button(label="Renter Log in", tag="renterLogInButton", callback=gui_renter_func.log_in_accepted)
-        dpg.add_button(label="Renter Log in with Google", tag="renterLogInGoogleButton", callback=gui_renter_func.log_in_accepted)
-        dpg.add_button(label="Renter Log in with Vipps", tag="renterLogInVippsButton", callback=gui_renter_func.log_in_accepted)
-        #Se over på owner login og kopier funksjonalitet for å sette hvem som skal være logget inn
+        dpg.add_button(label="Renter 1 Log in", tag="renter1LogInButton", callback=gui_renter_func.log_in_accepted,
+                       user_data=renter_list[0])
+        dpg.add_button(label="Renter 2 Log in", tag="renter2LogInButton", callback=gui_renter_func.log_in_accepted,
+                       user_data=renter_list[1])
+        dpg.add_button(label="Renter Log in", tag="renterLogInButton")
+        dpg.add_button(label="Renter Log in with Google", tag="renterLogInGoogleButton")
+        dpg.add_button(label="Renter Log in with Vipps", tag="renterLogInVippsButton")
 
