@@ -16,9 +16,10 @@ def save_system(file, current_list):
 def load_system(file, li):
     filskriving = file_handler_pickle.File_handler_pickle(file, None)
     listen = filskriving.read_method()
-    for xx in listen:
-        li.append(xx)
-    del filskriving
+    if listen is not None:
+        for xx in listen:
+            li.append(xx)
+        del filskriving
 
 
 load_system("owner_file", owner_list)

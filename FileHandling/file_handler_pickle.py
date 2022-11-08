@@ -25,7 +25,7 @@ class File_handler_pickle:
                 unpickling = pickle.load(read_from_file)
         except FileNotFoundError:
             print("File not found.")
-        finally:
+        else:
             return unpickling
 
     def write_method(self):
