@@ -1,5 +1,5 @@
 class Booking:
-    def __int__(self, renter, year_from, month_from, day_from, year_to, month_to, day_to, date_to, car):
+    def __init__(self, renter, year_from, month_from, day_from, year_to, month_to, day_to, car):
         self.renter = renter
         self.year_from = year_from
         self.month_from = month_from

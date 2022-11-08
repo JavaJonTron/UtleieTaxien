@@ -1,10 +1,3 @@
-from dummyObjects import dummyRenter1
-from dummyObjects import dummyRenter2
-from dummyObjects import dummyOwner1
-from dummyObjects import dummyOwner2
-from dummyObjects import dummyCar1
-from dummyObjects import dummyCar2
-from dummyObjects import dummyCar3
 from FileHandling import file_handler_pickle
 
 owner_list = []
