@@ -3,9 +3,7 @@ import dearpygui.dearpygui as dpg
 from main import car_list
 from functions import get_todays_date as date
 from functions import delete_windows
-from functions import log_out as lg
-from functions import create_booking_file
-
+from Booking import create_booking_file
 
 
 def log_in_accepted():
