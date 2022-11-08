@@ -19,10 +19,14 @@ class File_handler_pickle:
 
 
     def read_method(self):
-        read_from_file = open(self.filename, 'rb')
-        unpickling = pickle.load(read_from_file)
-        read_from_file.close()
-        return unpickling
+        try:
+            with open(self.filename, 'rb') as read_from_file:
+                #read_from_file = open(self.filename, 'rb')
+                unpickling = pickle.load(read_from_file)
+        except FileNotFoundError:
+            print("File not found.")
+        finally:
+            return unpickling
 
     def write_method(self):
         write_to_file = open(self.filename, 'wb')
