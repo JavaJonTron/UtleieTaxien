@@ -39,6 +39,4 @@ def booking_func(sender, app_data, user_data):
             renter_logged_in = renter
 
     car_object = booking.Booking(renter_logged_in, dates_from_dict, dates_to_dict, chosen_car)
-    print(f"Bil objekt: {car_object}")
     bookings_list.append(car_object)
-    print(f"Booking liste: {bookings_list}")
