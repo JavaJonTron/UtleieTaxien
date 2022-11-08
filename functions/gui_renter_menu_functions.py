@@ -8,23 +8,32 @@ from functions import delete_windows
 from Booking import create_booking_file
 
 
-
 def log_in_accepted(sender, app_data, user_data):
+    delete_windows.delete_windows_func()
     for renter in renter_list:
         renter.is_logged_in = False
-    dpg.delete_item("Renter Login")
-    user_data.is_logged_in = True
+    logged_in_user = user_data
+    logged_in_user.is_logged_in = True
+    with dpg.window(label="Renter Control Panel", tag="Renter Login Accepted", width=400, height=400):
+        dpg.set_primary_window("Renter Login Accepted", True)
+        dpg.add_text(f"Successfully logged in as {user_data.name}")
+        dpg.add_button(label="Click me to continue", callback=renter_main_menu, user_data=logged_in_user)
+
+
+def renter_main_menu(sender, app_data, user_data):
     delete_windows.delete_windows_func()
+    logged_in_user = user_data
     with dpg.window(label="Renter Control Panel", tag="Renter Main", width=400, height=400):
         dpg.set_primary_window("Renter Main", True)
         with dpg.menu_bar(label="Menu Bar"):
             dpg.add_button(label="Home", callback=log_in_accepted)
-            dpg.add_button(label="Rent a new car", callback=rent_new_car)
-            dpg.add_menu_item(label="Rented cars", callback=see_rented_cars)
+            dpg.add_button(label="Rent a new car", callback=rent_new_car, user_data=logged_in_user)
+            dpg.add_menu_item(label="Rented cars", callback=see_rented_cars, user_data=logged_in_user)
             dpg.add_menu_item(label="Options", callback=options)
             # dpg.add_button(label="Log Out", callback=lg.log_out)
 
         dpg.add_text("Main menu", tag="renterMainMenuText")
+
 
 
 def rent_new_car():
@@ -33,10 +42,7 @@ def rent_new_car():
         dpg.set_primary_window("Renter New Car", True)
         with dpg.menu_bar(label="Menu Bar"):
             # dpg.add_menu_item(label="Rent a new car")
-            dpg.add_button(label="Home", callback=log_in_accepted)
-            dpg.add_button(label="Rent a new car", callback=rent_new_car)
-            dpg.add_menu_item(label="Rented cars", callback=see_rented_cars)
-            dpg.add_menu_item(label="Options", callback=options)
+            dpg.add_button(label="Home", callback=renter_main_menu)
         first_key = car_list[0]
         second_key = car_list[1]
         third_key = car_list[2]
@@ -52,10 +58,7 @@ def car(sender, app_data, user_data):
     with dpg.window(label="Renter Control Panel", tag="Renter Car", width=400, height=400):
         dpg.set_primary_window("Renter Car", True)
         with dpg.menu_bar(label="Menu Bar"):
-            dpg.add_button(label="Home", callback=log_in_accepted)
-            dpg.add_button(label="Rent a new car", callback=rent_new_car)
-            dpg.add_menu_item(label="Rented cars", callback=see_rented_cars)
-            dpg.add_menu_item(label="Options", callback=options)
+            dpg.add_button(label="Home", callback=renter_main_menu)
         dpg.add_text(user_data.nickname())
         dpg.add_text(f"Owner: {user_data.owner.name}")
         dpg.add_text(f"Fuel Source: {user_data.fuel_source}")
@@ -84,19 +87,22 @@ def car(sender, app_data, user_data):
         # dpg.add_button(label="RENT", callback=rentCar, user_data=)
 
 
-def see_rented_cars():
+def see_rented_cars(sender, app_data, user_data):
+    print(user_data)
     rented_cars = []
     delete_windows.delete_windows_func()
     with dpg.window(label="Renter Control Panel", tag="Renter See Cars", width=400, height=400):
         dpg.set_primary_window("Renter See Cars", True)
         with dpg.menu_bar(label="Menu Bar"):
             # dpg.add_menu_item(label="Rent a new car")
-            dpg.add_button(label="Home", callback=log_in_accepted)
-            dpg.add_button(label="Rent a new car", callback=rent_new_car)
-            dpg.add_menu_item(label="Rented cars", callback=see_rented_cars)
-            dpg.add_menu_item(label="Options", callback=options)
-        #for booking in main.bookings_list:
-
+            dpg.add_button(label="Home", callback=renter_main_menu, user_data=user_data)
+        for booking in main.bookings_list:
+            print(user_data.name)
+            print(booking.renter)
+            if booking.renter.name == user_data.name:
+                rented_cars.append(f"{booking.car.nickname()}, {booking.date_from['Day']}.{booking.date_from['Month']}."
+                                   f"{booking.date_from['Year']}-{booking.date_to['Day']}.{booking.date_to['Month']}."
+                                   f"{booking.date_to['Year']}")
         dpg.add_listbox(tag="rented", items=rented_cars)
         dpg.add_text("See rented cars")
 
@@ -107,9 +113,6 @@ def options():
         dpg.set_primary_window("Renter Options", True)
         with dpg.menu_bar(label="Menu Bar"):
             # dpg.add_menu_item(label="Rent a new car")
-            dpg.add_button(label="Home", callback=log_in_accepted)
-            dpg.add_button(label="Rent a new car", callback=rent_new_car)
-            dpg.add_menu_item(label="Rented cars", callback=see_rented_cars)
-            dpg.add_menu_item(label="Options", callback=options)
+            dpg.add_button(label="Home", callback=renter_main_menu)
 
         dpg.add_text("Options")
