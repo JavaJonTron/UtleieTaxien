@@ -58,9 +58,9 @@ def car(sender, app_data, user_data):
         dpg.add_text(f"Daily Rate: {user_data.daily_rate}kr")
         dpg.add_text("SELECT DATE/DATES HERE")
         dpg.add_date_picker(tag="from_date", default_value={'month_day': date.day, 'year': date.year, 'month': date.
-                            month}, callback=create_booking_file.booking_func)
+                            month}, callback=create_booking_file.dates_from)
         dpg.add_date_picker(tag="to_date", default_value={'month_day': date.day + 1, 'year': date.year, 'month': date.
-                            month}, callback=create_booking_file.booking_func)
+                            month}, callback=create_booking_file.dates_to)
         dpg.add_button(label="Book", callback=create_booking_file.booking_func, user_data=user_data)
 
         # dpg.add_button(label="RENT", callback=rentCar, user_data=)
