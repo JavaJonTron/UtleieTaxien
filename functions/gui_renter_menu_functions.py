@@ -1,9 +1,13 @@
 import dearpygui.dearpygui as dpg
+
+import main
 from main import renter_list
 from main import car_list
 from functions import get_todays_date as date
 from functions import delete_windows
 from Booking import create_booking_file
+
+avail_list = []
 
 def log_in_accepted(sender, app_data, user_data):
     for renter in renter_list:
@@ -56,12 +60,23 @@ def car(sender, app_data, user_data):
         dpg.add_text(f"Fuel Source: {user_data.fuel_source}")
         dpg.add_text(f"Hourly Rate: {user_data.hourly_rate}kr")
         dpg.add_text(f"Daily Rate: {user_data.daily_rate}kr")
-        dpg.add_text("SELECT DATE/DATES HERE")
+        dpg.add_text("FROM DATE:")
         dpg.add_date_picker(tag="from_date", default_value={'month_day': date.day, 'year': date.year, 'month': date.
                             month}, callback=create_booking_file.dates_from)
+        dpg.add_text("TO DATE:")
         dpg.add_date_picker(tag="to_date", default_value={'month_day': date.day + 1, 'year': date.year, 'month': date.
                             month}, callback=create_booking_file.dates_to)
         dpg.add_button(label="Book", callback=create_booking_file.booking_func, user_data=user_data)
+        dpg.add_text("Car is not available between:")
+        for booking in main.bookings_list:
+            date_from_day = booking.date_from["Day"]
+            date_from_month = booking.date_from["Month"]
+            date_from_year = booking.date_from["Year"]
+            date_to_day = booking.date_to["Day"]
+            date_to_month = booking.date_to["Month"]
+            date_to_year = booking.date_to["Year"]
+            avail_list.append(f"{date_from_day}.{date_from_month}.{date_from_year} - {date_to_day}.{date_to_month}.{date_to_year}")
+        dpg.add_listbox(avail_list)
 
         # dpg.add_button(label="RENT", callback=rentCar, user_data=)
 

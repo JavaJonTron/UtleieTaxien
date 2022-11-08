@@ -1,5 +1,6 @@
 import dearpygui.dearpygui as dpg
 
+import main
 from Booking import booking
 from main import renter_list
 from main import bookings_list
@@ -18,7 +19,7 @@ def dates_to():
 
 def dates_from():
     dict_dates_from = {}
-    from_date = (dpg.get_value("to_date"))
+    from_date = (dpg.get_value("from_date"))
     from_day = int(from_date["month_day"])
     from_month = (int(from_date["month"])) + 1
     from_year = (int(from_date["year"])) + 1900
@@ -40,3 +41,4 @@ def booking_func(sender, app_data, user_data):
 
     car_object = booking.Booking(renter_logged_in, dates_from_dict, dates_to_dict, chosen_car)
     bookings_list.append(car_object)
+    main.save_system("booking_file", bookings_list)
