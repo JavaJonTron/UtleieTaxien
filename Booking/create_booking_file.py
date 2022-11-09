@@ -57,6 +57,14 @@ def booking_func(sender, app_data, user_data):
                         main.save_system("booking_file", bookings_list)
                     else:
                         print("BZZZZ; CHOOSE AGAIN DUMBASS!")
+                else:
+                    car_object = booking.Booking(renter_logged_in, dict_new_dates_from, dict_new_dates_to, chosen_car)
+                    bookings_list.append(car_object)
+                    main.save_system("booking_file", bookings_list)
+            else:
+                car_object = booking.Booking(renter_logged_in, dict_new_dates_from, dict_new_dates_to, chosen_car)
+                bookings_list.append(car_object)
+                main.save_system("booking_file", bookings_list)
     elif len(bookings_list) == 0:
         car_object = booking.Booking(renter_logged_in, dict_new_dates_from, dict_new_dates_to, chosen_car)
         bookings_list.append(car_object)
