@@ -11,9 +11,12 @@ def dates_to():
     to_day = int(to_date["month_day"])
     to_month = (int(to_date["month"])) + 1
     to_year = (int(to_date["year"])) + 1900
+    to_yearday = int(to_date["year_day"])
+
     dict_dates_to["Day"] = to_day
     dict_dates_to["Month"] = to_month
     dict_dates_to["Year"] = to_year
+    dict_dates_to["Year_Day"] = to_yearday
     return dict_dates_to
 
 
@@ -23,55 +26,55 @@ def dates_from():
     from_day = int(from_date["month_day"])
     from_month = (int(from_date["month"])) + 1
     from_year = (int(from_date["year"])) + 1900
+    from_yearday = int(from_date["year_day"])
 
     dict_dates_from["Day"] = from_day
     dict_dates_from["Month"] = from_month
     dict_dates_from["Year"] = from_year
+    dict_dates_from["Year_Day"] = from_yearday
     return dict_dates_from
 
 
 def booking_func(sender, app_data, user_data):
+    print("\n--------------------------------------")
+    print("--------------------------------------")
+    print("--------------------------------------\n")
     dict_new_dates_from = dates_from()
     dict_new_dates_to = dates_to()
     chosen_car = user_data
     renter_logged_in = object
+    car_object = object
     for renter in renter_list:
         if renter.is_logged_in is True:
             renter_logged_in = renter
-    if len(bookings_list) > 0:
-        for old_booked in bookings_list:
-            print(f"old_booked:{old_booked}")
-            if chosen_car.license_plate == old_booked.car.license_plate:
-                print(f"chosen_car.license_plate{chosen_car.license_plate}")
-                print(f"old_booked.car.license_plate{old_booked.car.license_plate}")
-                if dict_new_dates_from["Month"] == old_booked.date_from["Month"]:
-                    print("Before previous booking:")
-                    print(dict_new_dates_from["Day"] < old_booked.date_from["Day"])
-                    print(dict_new_dates_to["Day"] < old_booked.date_from["Day"])
-                    print("After previous booking:")
-                    print(dict_new_dates_from["Day"] > old_booked.date_to["Day"])
-                    print(dict_new_dates_to["Day"] > old_booked.date_to["Day"])
-                    if dict_new_dates_from["Day"] < old_booked.date_from["Day"] & dict_new_dates_to["Day"] < old_booked.date_from["Day"] or dict_new_dates_from["Day"] > old_booked.date_to["Day"] & dict_new_dates_to["Day"] > old_booked.date_to["Day"]:
-                        car_object = booking.Booking(renter_logged_in, dict_new_dates_from, dict_new_dates_to, chosen_car)
-                        bookings_list.append(car_object)
-                        main.save_system("booking_file", bookings_list)
-                    else:
-                        print("BZZZZ; CHOOSE AGAIN DUMBASS!")
-                else:
-                    print("Month added booking")
-                    car_object = booking.Booking(renter_logged_in, dict_new_dates_from, dict_new_dates_to, chosen_car)
-                    bookings_list.append(car_object)
-                    main.save_system("booking_file", bookings_list)
-            else:
-                print("Car added booking")
-                car_object = booking.Booking(renter_logged_in, dict_new_dates_from, dict_new_dates_to, chosen_car)
-                bookings_list.append(car_object)
-                main.save_system("booking_file", bookings_list)
-    elif len(bookings_list) == 0:
-        print("booking list == 0 booking")
-        car_object = booking.Booking(renter_logged_in, dict_new_dates_from, dict_new_dates_to, chosen_car)
-        bookings_list.append(car_object)
-        main.save_system("booking_file", bookings_list)
+
+    car_licenseplates = []
+    car_from_dates = []
+    car_to_dates = []
+
+    car_object = booking.Booking(renter_logged_in, dict_new_dates_from, dict_new_dates_to, chosen_car)
+    bookings_list.append(car_object)
+    main.save_system("booking_file", bookings_list)
+
+    for old_booked_cars in bookings_list:
+        car_licenseplates.append(old_booked_cars.car.license_plate)
+
+    for old_booked_dates_from in bookings_list:
+        car_from_dates.append(old_booked_dates_from.date_from["Year_Day"])
+        print(car_from_dates)
+
+    for old_booked_dates_to in bookings_list:
+        car_to_dates.append(old_booked_dates_to.date_to["Year_Day"])
+        print(car_to_dates)
+
+
+
+    #if chosen_car.license_plate in car_licenseplates:
+        #if dict_new_dates_from["Year_Day"]:
+
+
+
+
 
 
 #date_from_day = booking.date_from["Day"]
