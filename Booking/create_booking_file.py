@@ -34,44 +34,19 @@ def booking_func(sender, app_data, user_data):
     dict_new_dates_from = dates_from()
     dict_new_dates_to = dates_to()
     chosen_car = user_data
-    renter_logged_in = object
+    renter_logged_in = None
     for renter in renter_list:
         if renter.is_logged_in is True:
             renter_logged_in = renter
-    if len(bookings_list) > 0:
-        for old_booked in bookings_list:
-            print(f"old_booked:{old_booked}")
-            if chosen_car.license_plate == old_booked.car.license_plate:
-                print(f"chosen_car.license_plate{chosen_car.license_plate}")
-                print(f"old_booked.car.license_plate{old_booked.car.license_plate}")
-                if dict_new_dates_from["Month"] == old_booked.date_from["Month"]:
-                    print("Before previous booking:")
-                    print(dict_new_dates_from["Day"] < old_booked.date_from["Day"])
-                    print(dict_new_dates_to["Day"] < old_booked.date_from["Day"])
-                    print("After previous booking:")
-                    print(dict_new_dates_from["Day"] > old_booked.date_to["Day"])
-                    print(dict_new_dates_to["Day"] > old_booked.date_to["Day"])
-                    if dict_new_dates_from["Day"] < old_booked.date_from["Day"] & dict_new_dates_to["Day"] < old_booked.date_from["Day"] or dict_new_dates_from["Day"] > old_booked.date_to["Day"] & dict_new_dates_to["Day"] > old_booked.date_to["Day"]:
-                        car_object = booking.Booking(renter_logged_in, dict_new_dates_from, dict_new_dates_to, chosen_car)
-                        bookings_list.append(car_object)
-                        main.save_system("booking_file", bookings_list)
-                    else:
-                        print("BZZZZ; CHOOSE AGAIN DUMBASS!")
-                else:
-                    print("Month added booking")
-                    car_object = booking.Booking(renter_logged_in, dict_new_dates_from, dict_new_dates_to, chosen_car)
-                    bookings_list.append(car_object)
-                    main.save_system("booking_file", bookings_list)
-            else:
-                print("Car added booking")
-                car_object = booking.Booking(renter_logged_in, dict_new_dates_from, dict_new_dates_to, chosen_car)
-                bookings_list.append(car_object)
-                main.save_system("booking_file", bookings_list)
-    elif len(bookings_list) == 0:
-        print("booking list == 0 booking")
-        car_object = booking.Booking(renter_logged_in, dict_new_dates_from, dict_new_dates_to, chosen_car)
-        bookings_list.append(car_object)
-        main.save_system("booking_file", bookings_list)
+    for old_bookings in bookings_list:
+        if chosen_car.license_plate == old_bookings.car.license_plate:
+            if dict_new_dates_from["Year"] ==
+            print("choosen car license equals old booking license")
+
+        else:
+            print("choosen car license does not equal old booking license")
+
+
 
 
 #date_from_day = booking.date_from["Day"]
