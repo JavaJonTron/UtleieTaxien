@@ -5,6 +5,7 @@ from functions import gui_main_menu_functions as gui_func
 
 
 dpg.create_context()
+
 dpg.create_viewport(title='Utleie_app', width=600, height=600)
 
 # with dpg.window(label="RENTER", tag="RENTER"):

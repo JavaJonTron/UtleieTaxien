@@ -25,6 +25,10 @@ class File_handler_pickle:
                 unpickling = pickle.load(read_from_file)
         except FileNotFoundError:
             print("File not found.")
+        except FileExistsError:
+            print("FileExistsError")
+        except EOFError:
+            print("EOFError")
         else:
             return unpickling
 

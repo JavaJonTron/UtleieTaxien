@@ -49,3 +49,8 @@ def renter_Login():
         dpg.add_button(label="Renter Log in with Google", tag="renterLogInGoogleButton")
         dpg.add_button(label="Renter Log in with Vipps", tag="renterLogInVippsButton")
 
+
+
+
+
+
