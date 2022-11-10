@@ -56,8 +56,8 @@ def booking_func(sender, app_data, user_data):
     bookings_list.append(car_object)
     main.save_system("booking_file", bookings_list)
 
-    for old_booked_cars in bookings_list:
-        car_licenseplates.append(old_booked_cars.car.license_plate)
+    #    for old_booked_cars in bookings_list:
+    #        car_licenseplates.append(old_booked_cars.car.license_plate)
 
     for old_booked_dates_from in bookings_list:
         car_from_dates.append(old_booked_dates_from.date_from["Year_Day"])
