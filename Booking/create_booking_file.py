@@ -34,6 +34,11 @@ def dates_from():
     dict_dates_from["Year_Day"] = from_yearday
     return dict_dates_from
 
+def create_book(true_or_false):
+    if true_or_false is True:
+        print("WOW IT IS TRUE")
+    elif true_or_false is False:
+        print("WOW IT IS False")
 
 def booking_func(sender, app_data, user_data):
     print("\n--------------------------------------")
@@ -59,13 +64,35 @@ def booking_func(sender, app_data, user_data):
     #    for old_booked_cars in bookings_list:
     #        car_licenseplates.append(old_booked_cars.car.license_plate)
 
-    for old_booked_dates_from in bookings_list:
-        car_from_dates.append(old_booked_dates_from.date_from["Year_Day"])
-        print(car_from_dates)
+    #    for old_booked_dates_from in bookings_list:
+    #        car_from_dates.append(old_booked_dates_from.date_from["Year_Day"])
+        #        print(car_from_dates)
 
-    for old_booked_dates_to in bookings_list:
-        car_to_dates.append(old_booked_dates_to.date_to["Year_Day"])
-        print(car_to_dates)
+        #    for old_booked_dates_to in bookings_list:
+        #        car_to_dates.append(old_booked_dates_to.date_to["Year_Day"])
+#        print(car_to_dates)
+    temp_liste = [1,2,3,4,5,6,7,8,9,10]
+    has_reached_end = True
+    temp_tall = 0
+
+    for tall in temp_liste:
+        temp_tall+=1
+        if temp_tall == len(temp_liste):
+            create_book(False)
+push = 5
+    # Start with to different booleans from the top,
+    # theese two booleans will be to store wether or not the conditions have been matched
+    # The two booleans should check for something like the below
+    # dict_new_dates_from["Day"] < old_booked.date_from["Day"] &
+    # dict_new_dates_to["Day"] < old_booked.date_from["Day"] or
+    # dict_new_dates_from["Day"] > old_booked.date_to["Day"] &
+    # dict_new_dates_to["Day"] > old_booked.date_to["Day"]
+    # Run several for loops checking the above conditions, if they match new and old bookings.
+    # Then lastly be completely sure that the for loop has reached the end and then call a function to create a booking object
+    # in this function to create a booking object check first wether or not the aforementioned booleans are true or false.
+    # If the afore mentioned booleans here are true then create a booking object
+    # if the afore mentioned booleans are false then don't create a booking object
+    # Then call a functions that creates the object booking
 
 
 
