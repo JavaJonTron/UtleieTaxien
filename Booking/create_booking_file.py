@@ -79,6 +79,7 @@ def booking_func(sender, app_data, user_data):
     if len(bookings_list) > 0:
         print(len(bookings_list))
         times_dates_crash = 0
+        temp_number = 0
         for old_booked in bookings_list:
             booking_list_number += 1
 
@@ -95,32 +96,32 @@ def booking_func(sender, app_data, user_data):
                     print("After previous booking:")
                     print(dict_new_dates_from["Year_Day"] > old_booked.date_to["Year_Day"])
                     print(dict_new_dates_to["Year_Day"] > old_booked.date_to["Year_Day"])
-                    if dict_new_dates_from["Year_Day"] < old_booked.date_from["Year_Day"] & dict_new_dates_to[
-                        "Year_Day"] < \
-                            old_booked.date_from["Year_Day"] or dict_new_dates_from["Year_Day"] > old_booked.date_to[
-                        "Year_Day"] & \
-                            dict_new_dates_to["Year_Day"] > old_booked.date_to["Year_Day"]:
+                    if dict_new_dates_from["Year_Day"] < old_booked.date_from["Year_Day"] and dict_new_dates_to["Year_Day"] < old_booked.date_from["Year_Day"] or dict_new_dates_from["Year_Day"] > old_booked.date_to["Year_Day"] and dict_new_dates_to["Year_Day"] > old_booked.date_to["Year_Day"]:
                         if booking_list_number == len(bookings_list):
                             create_book(dict_new_dates_from, dict_new_dates_to, renter_logged_in, chosen_car,
                                         times_dates_crash)
+                            return
                     else:
                         times_dates_crash += 1
                         print("BZZZZ; CHOOSE AGAIN DUMBASS!")
                         if booking_list_number == len(bookings_list):
                             create_book(dict_new_dates_from, dict_new_dates_to, renter_logged_in, chosen_car,
                                         times_dates_crash)
+                            return
 
                 else:
                     print("Month added booking")
                     if booking_list_number == len(bookings_list):
                         create_book(dict_new_dates_from, dict_new_dates_to, renter_logged_in, chosen_car,
                                     times_dates_crash)
+                        return
 
             else:
                 if booking_list_number == len(bookings_list):
                     print("Car added booking")
                     create_book(dict_new_dates_from, dict_new_dates_to, renter_logged_in, chosen_car,
                                 times_dates_crash)
+                    return
 
     elif len(bookings_list) == 0:
         print("booking list == 0 booking")
