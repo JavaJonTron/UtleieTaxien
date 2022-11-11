@@ -60,42 +60,15 @@ def booking_func(sender, app_data, user_data):
         if renter.is_logged_in is True:
             renter_logged_in = renter
 
-    car_licenseplates = []
-    car_from_dates = []
-    car_to_dates = []
-
-    #    for old_booked_cars in bookings_list:
-    #        car_licenseplates.append(old_booked_cars.car.license_plate)
-
-    #    for old_booked_dates_from in bookings_list:
-    #        car_from_dates.append(old_booked_dates_from.date_from["Year_Day"])
-    #        print(car_from_dates)
-
-    #    for old_booked_dates_to in bookings_list:
-    #        car_to_dates.append(old_booked_dates_to.date_to["Year_Day"])
-    #        print(car_to_dates
 
     booking_list_number = 0
     if len(bookings_list) > 0:
         print(len(bookings_list))
         times_dates_crash = 0
-        temp_number = 0
         for old_booked in bookings_list:
             booking_list_number += 1
-
-            print(f"old_booked:{old_booked}")
             if chosen_car.license_plate == old_booked.car.license_plate:
-                print(f"chosen_car.license_plate{chosen_car.license_plate}")
-                print(f"old_booked.car.license_plate{old_booked.car.license_plate}")
                 if dict_new_dates_from["Month"] == old_booked.date_from["Month"]:
-                    print(f'dict_new_dates_from{dict_new_dates_from["Month"]}')
-                    print(f'old_booked.date_from{old_booked.date_from["Month"]}')
-                    print("Before previous booking:")
-                    print(dict_new_dates_from["Year_Day"] < old_booked.date_from["Year_Day"])
-                    print(dict_new_dates_to["Year_Day"] < old_booked.date_from["Year_Day"])
-                    print("After previous booking:")
-                    print(dict_new_dates_from["Year_Day"] > old_booked.date_to["Year_Day"])
-                    print(dict_new_dates_to["Year_Day"] > old_booked.date_to["Year_Day"])
                     if dict_new_dates_from["Year_Day"] < old_booked.date_from["Year_Day"] and dict_new_dates_to["Year_Day"] < old_booked.date_from["Year_Day"] or dict_new_dates_from["Year_Day"] > old_booked.date_to["Year_Day"] and dict_new_dates_to["Year_Day"] > old_booked.date_to["Year_Day"]:
                         if booking_list_number == len(bookings_list):
                             create_book(dict_new_dates_from, dict_new_dates_to, renter_logged_in, chosen_car,
@@ -103,51 +76,21 @@ def booking_func(sender, app_data, user_data):
                             return
                     else:
                         times_dates_crash += 1
-                        print("BZZZZ; CHOOSE AGAIN DUMBASS!")
                         if booking_list_number == len(bookings_list):
                             create_book(dict_new_dates_from, dict_new_dates_to, renter_logged_in, chosen_car,
                                         times_dates_crash)
                             return
-
                 else:
-                    print("Month added booking")
                     if booking_list_number == len(bookings_list):
                         create_book(dict_new_dates_from, dict_new_dates_to, renter_logged_in, chosen_car,
                                     times_dates_crash)
                         return
-
             else:
                 if booking_list_number == len(bookings_list):
-                    print("Car added booking")
                     create_book(dict_new_dates_from, dict_new_dates_to, renter_logged_in, chosen_car,
                                 times_dates_crash)
                     return
-
     elif len(bookings_list) == 0:
-        print("booking list == 0 booking")
         print(len(bookings_list))
         create_book(dict_new_dates_from, dict_new_dates_to, renter_logged_in, chosen_car,
                     0)
-    # Start with to different booleans from the top,
-    # theese two booleans will be to store wether or not the conditions have been matched
-    # The two booleans should check for something like the below
-    # dict_new_dates_from["Day"] < old_booked.date_from["Day"] &
-    # dict_new_dates_to["Day"] < old_booked.date_from["Day"] or
-    # dict_new_dates_from["Day"] > old_booked.date_to["Day"] &
-    # dict_new_dates_to["Day"] > old_booked.date_to["Day"]
-    # Run several for loops checking the above conditions, if they match new and old bookings.
-    # Then lastly be completely sure that the for loop has reached the end and then call a function to create a booking object
-    # in this function to create a booking object check first wether or not the aforementioned booleans are true or false.
-    # If the afore mentioned booleans here are true then create a booking object
-    # if the afore mentioned booleans are false then don't create a booking object
-    # Then call a functions that creates the object booking
-
-    # if chosen_car.license_plate in car_licenseplates:
-    # if dict_new_dates_from["Year_Day"]:
-
-# date_from_day = booking.date_from["Day"]
-# date_from_month = booking.date_from["Month"]
-
-# SÅ lenge man booker bil på samme måned som en tidligere booking har  SÅ:
-# NY FRA DAG kan ikke være lik eller større en GAMMEL FRA DAG og samtidig ikke mindre eller lik GAMMEL TIL DAG
-# NY TIL DAG kan ikke være lik eller større en GAMMEL FRA DAG og samtidig ikke mindre eller lik GAMMEL TIL DAG
