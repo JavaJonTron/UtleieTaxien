@@ -37,15 +37,28 @@ def dates_from():
 
 
 def create_book(from_date, to_date, renter_logged, car, no_day_crash):
-    if no_day_crash == 0:
-        car_object = booking.Booking(renter_logged, from_date, to_date,
-                                     car)
-        bookings_list.append(car_object)
-        main.save_system("booking_file", bookings_list)
-        print("Now we are creating bookings")
+    if from_date["Year_Day"] < to_date["Year_Day"]:
+        if no_day_crash == 0:
+            car_object = booking.Booking(renter_logged, from_date, to_date, car)
+            bookings_list.append(car_object)
+            main.save_system("booking_file", bookings_list)
+            print("Now we are creating bookings")
+        else:
+            print("DATES DID CRASH")
     else:
-        print("DATES DID CRASH")
+        print("Choose again. from day is bigger then to day ")
 
+def check_if_renter_is_logged_in():
+    for renter in renter_list:
+        if renter.is_logged_in is True:
+            return renter
+
+def check_if_booking_on_a_previously_booked_date():
+    pass
+
+#def check_if_booking_on_previously_booked_month():
+#    if dates_from()["Month"] == dates_to()["Month"]:
+#        return True
 
 def booking_func(sender, app_data, user_data):
     print("\n--------------------------------------")
@@ -54,43 +67,29 @@ def booking_func(sender, app_data, user_data):
     dict_new_dates_from = dates_from()
     dict_new_dates_to = dates_to()
     chosen_car = user_data
-    renter_logged_in = object
 
-    for renter in renter_list:
-        if renter.is_logged_in is True:
-            renter_logged_in = renter
-
+    renter_logged_in = check_if_renter_is_logged_in()
 
     booking_list_number = 0
+
     if len(bookings_list) > 0:
-        print(len(bookings_list))
         times_dates_crash = 0
         for old_booked in bookings_list:
             booking_list_number += 1
             if chosen_car.license_plate == old_booked.car.license_plate:
-                if dict_new_dates_from["Month"] == old_booked.date_from["Month"]:
-                    if dict_new_dates_from["Year_Day"] < old_booked.date_from["Year_Day"] and dict_new_dates_to["Year_Day"] < old_booked.date_from["Year_Day"] or dict_new_dates_from["Year_Day"] > old_booked.date_to["Year_Day"] and dict_new_dates_to["Year_Day"] > old_booked.date_to["Year_Day"]:
-                        if booking_list_number == len(bookings_list):
-                            create_book(dict_new_dates_from, dict_new_dates_to, renter_logged_in, chosen_car,
-                                        times_dates_crash)
-                            return
-                    else:
-                        times_dates_crash += 1
-                        if booking_list_number == len(bookings_list):
-                            create_book(dict_new_dates_from, dict_new_dates_to, renter_logged_in, chosen_car,
-                                        times_dates_crash)
-                            return
-                else:
+                if dict_new_dates_from["Year_Day"] < old_booked.date_from["Year_Day"] and dict_new_dates_to["Year_Day"] < old_booked.date_from["Year_Day"] or dict_new_dates_from["Year_Day"] > old_booked.date_to["Year_Day"] and dict_new_dates_to["Year_Day"] > old_booked.date_to["Year_Day"]:
                     if booking_list_number == len(bookings_list):
-                        create_book(dict_new_dates_from, dict_new_dates_to, renter_logged_in, chosen_car,
-                                    times_dates_crash)
+                        create_book(dict_new_dates_from, dict_new_dates_to, renter_logged_in, chosen_car, times_dates_crash)
+                        return
+                else:
+                    times_dates_crash += 1
+                    if booking_list_number == len(bookings_list):
+                        create_book(dict_new_dates_from, dict_new_dates_to, renter_logged_in, chosen_car, times_dates_crash)
                         return
             else:
                 if booking_list_number == len(bookings_list):
-                    create_book(dict_new_dates_from, dict_new_dates_to, renter_logged_in, chosen_car,
-                                times_dates_crash)
+                    create_book(dict_new_dates_from, dict_new_dates_to, renter_logged_in, chosen_car, times_dates_crash)
                     return
     elif len(bookings_list) == 0:
         print(len(bookings_list))
-        create_book(dict_new_dates_from, dict_new_dates_to, renter_logged_in, chosen_car,
-                    0)
+        create_book(dict_new_dates_from, dict_new_dates_to, renter_logged_in, chosen_car, 0)
