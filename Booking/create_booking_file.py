@@ -48,12 +48,12 @@ def create_book(from_date, to_date, renter_logged, car, no_day_crash):
     else:
         print("Choose again. from day is bigger then to day ")
 
-def check_if_booking_on_a_previously_booked_date():
-    pass
 
-#def check_if_booking_on_previously_booked_month():
-#    if dates_from()["Month"] == dates_to()["Month"]:
-#        return True
+def check_if_booking_date_crashes_with_previous_booking_date(new_to_date, new_from_date, old_to_date, old_from_date):
+    if new_from_date < old_from_date and new_to_date < old_from_date or new_from_date > old_to_date and new_to_date > old_to_date:
+        return True
+
+
 
 def booking_func(sender, app_data, user_data):
     print("\n--------------------------------------")
@@ -63,7 +63,7 @@ def booking_func(sender, app_data, user_data):
     dict_new_dates_to = dates_to()
     chosen_car = user_data
 
-    renter_logged_in = logged_in_status_file.logged_in_status()
+    renter_logged_in = logged_in_status_file.logged_in_status(renter_list)
 
     booking_list_number = 0
 
@@ -72,7 +72,8 @@ def booking_func(sender, app_data, user_data):
         for old_booked in bookings_list:
             booking_list_number += 1
             if chosen_car.license_plate == old_booked.car.license_plate:
-                if dict_new_dates_from["Year_Day"] < old_booked.date_from["Year_Day"] and dict_new_dates_to["Year_Day"] < old_booked.date_from["Year_Day"] or dict_new_dates_from["Year_Day"] > old_booked.date_to["Year_Day"] and dict_new_dates_to["Year_Day"] > old_booked.date_to["Year_Day"]:
+                if check_if_booking_date_crashes_with_previous_booking_date(dict_new_dates_to["Year_Day"], dict_new_dates_from["Year_Day"], old_booked.date_to["Year_Day"], old_booked.date_from["Year_Day"]):
+                #if dict_new_dates_from["Year_Day"] < old_booked.date_from["Year_Day"] and dict_new_dates_to["Year_Day"] < old_booked.date_from["Year_Day"] or dict_new_dates_from["Year_Day"] > old_booked.date_to["Year_Day"] and dict_new_dates_to["Year_Day"] > old_booked.date_to["Year_Day"]:
                     if booking_list_number == len(bookings_list):
                         create_book(dict_new_dates_from, dict_new_dates_to, renter_logged_in, chosen_car, times_dates_crash)
                         return

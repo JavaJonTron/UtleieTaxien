@@ -54,7 +54,7 @@ def rent_new_car(sender, app_data, user_data):
 
 
 def car(sender, app_data, user_data):
-    logged_in_user = logged_in_status_file.logged_in_status()
+    logged_in_user = logged_in_status_file.logged_in_status(renter_list)
     avail_list = []
     delete_windows.delete_windows_func()
     with dpg.window(label="Renter Control Panel", tag="Renter Car", width=400, height=400):
