@@ -15,5 +15,5 @@ def create_owner():
     # score = round(functions.get_average_of_list.average_list(score_list))
     score = 10
     owned_cars = []
-    return Owner(age, sex, name, score, owned_cars)  # score_list
+    return Owner(age, sex, name, score, owned_cars, is_logged_in=False)  # score_list
 
