@@ -4,7 +4,7 @@ import main
 from Booking import booking
 from main import renter_list
 from main import bookings_list
-
+from functions import logged_in_status_file
 
 def dates_to():
     dict_dates_to = {}
@@ -48,11 +48,6 @@ def create_book(from_date, to_date, renter_logged, car, no_day_crash):
     else:
         print("Choose again. from day is bigger then to day ")
 
-def check_if_renter_is_logged_in():
-    for renter in renter_list:
-        if renter.is_logged_in is True:
-            return renter
-
 def check_if_booking_on_a_previously_booked_date():
     pass
 
@@ -68,7 +63,7 @@ def booking_func(sender, app_data, user_data):
     dict_new_dates_to = dates_to()
     chosen_car = user_data
 
-    renter_logged_in = check_if_renter_is_logged_in()
+    renter_logged_in = logged_in_status_file.logged_in_status()
 
     booking_list_number = 0
 
