@@ -1,5 +1,5 @@
 class Car:
-    def __init__(self, make, model, year, license_plate, fuel_source, km, is_take, hourly_rate, daily_rate, owner):
+    def __init__(self, make, model, year, license_plate, fuel_source, km, is_take, hourly_rate, daily_rate, owner, earned_total):
         self.make = make
         self.model = model
         self.year = year
@@ -10,6 +10,23 @@ class Car:
         self.hourly_rate = hourly_rate
         self.daily_rate = daily_rate
         self.owner = owner
+        self.earned_total = earned_total
+
+    def price_calculation(self, rate):
+        taxes = 0.25
+        rate = rate - (rate * taxes)
+        easy_car = 0.2
+        rate = rate-(rate * easy_car)
+        self.earned_total += rate
+        return rate
+
+
+
+
+    # For å regne ut skatt til staten, hvor mye penger selskapet skal få av leia.
+    # og hvor mye bilen tjener
+
+    # Dermed kan man også vise hvor mye penger en bil har tjent
 
     def nickname(self):
         return str(self.year) + " " + str(self.make) + " " + str(self.model)

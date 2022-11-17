@@ -28,11 +28,6 @@ load_system("car_file", car_list)
 load_system("booking_file", bookings_list)
 
 
-
-
-
-
-
 save_system("owner_file", owner_list)
 save_system("renter_file", renter_list)
 save_system("car_file", car_list)
