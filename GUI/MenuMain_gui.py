@@ -184,10 +184,47 @@ def approve_deny_bookings(sender, app_data, user_data):
             dpg.add_menu_item(label="Log Out", callback=log_out, user_data=owner_list)
             dpg.add_button(label="Log Out", callback=log_out, user_data=owner_list)
         for bookings in bookings_list:
-            if bookings.approved == False:
-                unaprooved_booking.append(bookings)
-            dpg.add_listbox(tag="owned", items=unaprooved_booking)
-            dpg.add_text("See owned cars")
+            if bookings.car.owner.name == user_data.name:
+                if bookings.approved == False:
+                    label_text = "Car: " + bookings.car.nickname() + " From: " + str(bookings.date_from['Day']) + "." + \
+                                 str(bookings.date_from['Month']) + "." + str(bookings.date_from['Year']) + " To: " + \
+                                 str(bookings.date_to['Day']) + "." + str(bookings.date_to['Month']) + "." + \
+                                 str(bookings.date_to['Year'])
+                    dpg.add_button(label=label_text, callback=approve_car, user_data=bookings)
+
+def approve_car(sender, app_data, user_data):
+    booking = user_data
+    delete_windows.delete_windows_func()
+    logged_in_user = logged_in_status_file.logged_in_status(owner_list)
+    with dpg.window(label="Owner Control Panel", tag="Approve Car", width=400, height=400):
+        dpg.set_primary_window("Approve Car", True)
+        with dpg.menu_bar(label="Menu Bar"):
+            dpg.add_button(label="Home", callback=owner_main_menu, user_data=logged_in_user)
+        dpg.add_text(booking.renter.name + " wants to rent your " + booking.car.nickname() + " with license plate " +
+                     booking.car.license_plate)
+        dpg.add_text(booking.renter.name + " wants to rent it from " + str(booking.date_from['Day']) + "." + \
+                             str(booking.date_from['Month']) + "." + str(booking.date_from['Year']) + " to: " + \
+                             str(booking.date_to['Day']) + "." + str(booking.date_to['Month']) + "." + \
+                             str(booking.date_to['Year']))
+        dpg.add_text(booking.renter.name + "s score is " + str(booking.renter.score) + " out of X")
+        dpg.add_button(label="Approve", callback=approved_booking, user_data=booking)
+        dpg.add_button(label="Deny", callback=denied_booking, user_data=booking)
+
+
+def approved_booking(sender, app_data, user_data):
+    booking = user_data
+    for bookings in bookings_list:
+        if booking == bookings:
+            booking.approved = True
+
+def denied_booking(sender, app_data, user_data):
+    booking = user_data
+    for bookings in bookings_list:
+        if booking == bookings:
+            booking.approved = False
+
+
+
 
 def new_car(sender, app_data, user_data):
     delete_windows.delete_windows_func()
@@ -235,12 +272,10 @@ def see_cars(sender, app_data, user_data):
         dpg.add_text("See owned cars")
 
 
-
 def render_cars():
     # DENNE FUNKSJONEN SKAL FLYTTES
     for bil in car_list:
         dpg.add_button(label=bil.nickname(), callback=car, user_data=bil)
-
 
 
 def rent_new_car(sender, app_data, user_data):
