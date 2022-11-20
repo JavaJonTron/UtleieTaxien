@@ -235,6 +235,14 @@ def see_cars(sender, app_data, user_data):
         dpg.add_text("See owned cars")
 
 
+
+def render_cars():
+    # DENNE FUNKSJONEN SKAL FLYTTES
+    for bil in car_list:
+        dpg.add_button(label=bil.nickname(), callback=car, user_data=bil)
+
+
+
 def rent_new_car(sender, app_data, user_data):
     delete_windows.delete_windows_func()
     with dpg.window(label="Renter Control Panel", tag="Renter New Car", width=400, height=400):
@@ -242,12 +250,7 @@ def rent_new_car(sender, app_data, user_data):
         with dpg.menu_bar(label="Menu Bar"):
             # dpg.add_menu_item(label="Rent a new car")
             dpg.add_button(label="Home", callback=renter_main_menu, user_data=user_data)
-        first_key = car_list[0]
-        second_key = car_list[1]
-        third_key = car_list[2]
-        dpg.add_button(label=first_key.nickname(), callback=car, user_data=first_key)
-        dpg.add_button(label=second_key.nickname(), callback=car, user_data=second_key)
-        dpg.add_button(label=third_key.nickname(), callback=car, user_data=third_key)
+        render_cars()
         dpg.add_text("Rent new car")
 
 
