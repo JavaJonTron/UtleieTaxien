@@ -33,6 +33,10 @@ def dates_from():
     dict_dates_from["Month"] = from_month
     dict_dates_from["Year"] = from_year
     dict_dates_from["Year_Day"] = from_yearday
+    print(f"This is year_day: {from_yearday}")
+    print(f"This is year_day: {from_day}")
+    print(f"This is year_day: {from_month}")
+    print(f"This is year_day: {from_year}")
     return dict_dates_from
 
 
