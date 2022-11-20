@@ -221,7 +221,9 @@ def denied_booking(sender, app_data, user_data):
     booking = user_data
     for bookings in bookings_list:
         if booking == bookings:
+            print(f"{bookings_list.remove(booking)}")
             booking.approved = False
+
 
 
 
