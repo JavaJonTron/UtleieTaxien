@@ -1,8 +1,8 @@
 from classes import human
 
 class Renter(human.Human):
-    def __init__(self, age, sex, name, score, is_logged_in):  # , score_list, , booked_car
-        super().__init__(age, sex, name, score, is_logged_in)
+    def __init__(self, age, sex, name, score, is_logged_in, money):  # , score_list, , booked_car
+        super().__init__(age, sex, name, score, is_logged_in, money)
         # self.score_list = score_list
         # self.booked_car = booked_car
 

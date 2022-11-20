@@ -39,8 +39,8 @@ def dates_from():
 def create_book(from_date, to_date, renter_logged, car, no_day_crash):
     if from_date["Year_Day"] < to_date["Year_Day"]:
         if no_day_crash == 0:
-            car_object = booking.Booking(renter_logged, from_date, to_date, car)
-            bookings_list.append(car_object)
+            booking_object = booking.Booking(renter_logged, from_date, to_date, car, False)
+            bookings_list.append(booking_object)
             main.save_system("booking_file", bookings_list)
             print("Now we are creating bookings")
         else:
