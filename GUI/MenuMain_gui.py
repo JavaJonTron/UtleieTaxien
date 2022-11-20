@@ -166,7 +166,7 @@ def renter_main_menu(sender, app_data, user_data):
         dpg.add_text("Main menu", tag="renterMainMenuText")
 
 
-def approve_deny_bookings(sender, app_data, user_data=None):
+def approve_deny_bookings(sender=None, app_data=None, user_data=None):
     logged_in_user = logged_in_status_file.logged_in_status(owner_list)
     unaprooved_booking = []
     delete_windows.delete_windows_func()
