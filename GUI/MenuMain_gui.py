@@ -204,6 +204,7 @@ def approve_car(sender, app_data, user_data=None):
         dpg.add_button(label="Deny", callback=denied_booking, user_data=booking)
 
 
+
 def approved_booking(sender, app_data, user_data):
     logged_in_user = logged_in_status_file.logged_in_status(owner_list)
     booking = user_data
@@ -215,11 +216,14 @@ def approved_booking(sender, app_data, user_data):
 
 
 def denied_booking(sender, app_data, user_data):
+    logged_in_user = logged_in_status_file.logged_in_status(owner_list)
     booking = user_data
     for bookings in bookings_list:
         if booking == bookings:
             print(f"{bookings_list.remove(booking)}")
             booking.approved = False
+    delete_windows.delete_windows_func()
+    approve_deny_bookings(user_data=logged_in_user)
 
 
 
