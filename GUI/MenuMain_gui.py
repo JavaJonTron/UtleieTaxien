@@ -143,8 +143,6 @@ def owner_main_menu(sender, app_data, user_data):
         dpg.set_primary_window("Owner Main", True)
         with dpg.menu_bar(label="Menu Bar"):
             dpg.add_button(label="Home", callback=owner_main_menu, user_data=logged_in_user)
-            # dpg.add_button(label="Rent a new car", callback=rent_new_car, user_data=logged_in_user)
-            # dpg.add_menu_item(label="Rented cars", callback=see_rented_cars, user_data=logged_in_user)
             dpg.add_button(label="Add a new car", callback=new_car, user_data=logged_in_user)
             dpg.add_menu_item(label="See my cars", callback=see_cars, user_data=logged_in_user)
             dpg.add_menu_item(label="Options", callback=owner_options, user_data=logged_in_user)
@@ -159,7 +157,7 @@ def renter_main_menu(sender, app_data, user_data):
     with dpg.window(label="Renter Control Panel", tag="Renter Main", width=400, height=400):
         dpg.set_primary_window("Renter Main", True)
         with dpg.menu_bar(label="Menu Bar"):
-            dpg.add_button(label="Home", callback=log_in_accepted, user_data=logged_in_user)
+            dpg.add_button(label="Home", callback=renter_main_menu, user_data=logged_in_user)
             dpg.add_button(label="Rent a new car", callback=rent_new_car, user_data=logged_in_user)
             dpg.add_menu_item(label="Rented cars", callback=see_rented_cars, user_data=logged_in_user)
             dpg.add_menu_item(label="Options", callback=renter_options, user_data=logged_in_user)
@@ -168,7 +166,7 @@ def renter_main_menu(sender, app_data, user_data):
         dpg.add_text("Main menu", tag="renterMainMenuText")
 
 
-def approve_deny_bookings(sender, app_data, user_data):
+def approve_deny_bookings(sender, app_data, user_data=None):
     logged_in_user = logged_in_status_file.logged_in_status(owner_list)
     unaprooved_booking = []
     delete_windows.delete_windows_func()
@@ -186,7 +184,7 @@ def approve_deny_bookings(sender, app_data, user_data):
                                  str(bookings.date_to['Year'])
                     dpg.add_button(label=label_text, callback=approve_car, user_data=bookings)
 
-def approve_car(sender, app_data, user_data):
+def approve_car(sender, app_data, user_data=None):
     booking = user_data
     delete_windows.delete_windows_func()
     logged_in_user = logged_in_status_file.logged_in_status(owner_list)
@@ -207,13 +205,13 @@ def approve_car(sender, app_data, user_data):
 
 
 def approved_booking(sender, app_data, user_data):
+    logged_in_user = logged_in_status_file.logged_in_status(owner_list)
     booking = user_data
     for bookings in bookings_list:
         if booking == bookings:
             booking.approved = True
     delete_windows.delete_windows_func()
-    with dpg.window(label="Renter Control Panel", tag="Approve Or Deny", width=400, height=400):
-        dpg.set_primary_window("Approve Or Deny", True)
+    approve_deny_bookings(user_data=logged_in_user)
 
 
 def denied_booking(sender, app_data, user_data):
