@@ -24,6 +24,10 @@ dpg.create_viewport(title='Utleie_app', width=600, height=600)
 # dpg.add_text("Dette er en test tekst")
 
 def admin_Login():
+    '''
+    Denne kodenblokken tar for seg Admin innlogging og sender brukeren vidre til admin control panel
+    :return:
+    '''
     dpg.delete_item("Admin Login")
     dpg.delete_item("Main menu")
     with dpg.window(label="Admin Login", tag="Admin Login", width=300, height=200):
@@ -35,8 +39,12 @@ def admin_Login():
         dpg.add_button(label="Log in", tag="adminLogInButton", callback=log_in_accepted)
 
 
-
 def owner_Login():
+    '''
+    Denne kodenblokken tar for seg Owner innlogging og sender brukeren vidre til owner control panel.
+    For prototypen har vi hardprogrammert inn to forskjellige eiere som man kan velge å logge seg inn som
+    :return:
+    '''
     dpg.delete_item("Owner Login")
     dpg.delete_item("Main menu")
     with dpg.window(label="Owner Login", tag="Owner Login", width=300, height=200):
@@ -54,6 +62,12 @@ def owner_Login():
 
 
 def renter_Login():
+    '''
+    Denne kodenblokken tar for seg Renter innlogging og sender brukeren vidre til renter control panel.
+    For prototypen har vi hardprogrammert inn to forskjellige leiere som man kan velge å logge seg inn som.
+    Man kan også logge seg inn med Google eller Vipps (ikke reel innlogging og er deaktivert for prototypen)
+    :return:
+    '''
     dpg.delete_item("Renter Login")
     dpg.delete_item("Main menu")
     # dpg.hide_item("Main menu")
@@ -73,6 +87,10 @@ def renter_Login():
 
 
 def main_menu():
+    '''
+    Dette er vinduet som møter deg ved programstart og lar bruker velge hvilken rolle man skal logge seg inn som
+    :return:
+    '''
     with dpg.window(label="Main menu", tag="Main menu"):
         dpg.add_text("Log in")
         dpg.add_button(label="Log in as renter", tag="renterLogin", callback=renter_Login)
@@ -85,6 +103,11 @@ main_menu()
 
 
 def log_out(human_list):
+    '''
+    Denne funksjonen tar for seg utlogging av brukere, den sletter alle vinduer og setter brukere til avlogget.
+    Så kaller den på starten av programmet
+    :return:
+    '''
     delete_windows.delete_windows_func()
     log_off_func.log_off_human(human_list)
     #NÅ LOOPER DEN IGJENNOM LISTA, OG LOGGER AV ALLE.
@@ -94,6 +117,13 @@ def log_out(human_list):
 
 
 def log_in_accepted(sender, app_data, user_data):
+    '''
+    Denne tar for seg innlogging av brukere og
+    :param sender: ikke i bruk
+    :param app_data: ikke i bruk
+    :param user_data: Bruker data, altså hvilken bruker som er logget inn
+    :return:
+    '''
     delete_windows.delete_windows_func()
     ########################################
     log_off_func.log_off_human(renter_list)
@@ -111,8 +141,7 @@ def log_in_accepted(sender, app_data, user_data):
         welcome_screen_Owner(user_data=logged_in_user)
         print("YOU ARE LOGGED IN AS AN OWNER")
 
-
-# Forslag til ekstrahering av kode til funksjonen under,
+#Forslag til ekstrahering av kode til funksjonen under,
 # dett er jo kanskje mulig og teste også?
 def checking_object_instance(object_type, class_type):
     if isinstance(object_type, class_type):
