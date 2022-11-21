@@ -197,6 +197,8 @@ def approve_car(sender, app_data, user_data=None):
             dpg.add_button(label="Log Out", callback=log_out, user_data=owner_list)
         dpg.add_text(booking.renter.name + " wants to rent your " + booking.car.nickname() + " with license plate " +
                      booking.car.license_plate)
+        #SE OVER EN GANG VI HAR TID OM DETTE ER NOE VI KAN LEGGE I EN EGEN FUNKSJON.
+        #DET SER VELDIG LIKT UT SOM I APPROVE_DENY_BOOKINGS
         dpg.add_text(booking.renter.name + " wants to rent it from " + str(booking.date_from['Day']) + "." + \
                              str(booking.date_from['Month']) + "." + str(booking.date_from['Year']) + " to: " + \
                              str(booking.date_to['Day']) + "." + str(booking.date_to['Month']) + "." + \
