@@ -56,6 +56,8 @@ def create_book(from_date, to_date, renter_logged, car, no_day_crash):
 def check_if_booking_date_crashes_with_previous_booking_date(new_to_date, new_from_date, old_to_date, old_from_date):
     if new_from_date < old_from_date and new_to_date < old_from_date or new_from_date > old_to_date and new_to_date > old_to_date:
         return True
+    else:
+        return False
 
 
 
