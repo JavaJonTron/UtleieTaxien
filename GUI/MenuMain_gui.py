@@ -100,13 +100,9 @@ def log_in_accepted(sender, app_data, user_data):
 
     print(f'The type of <number> is: {type(logged_in_user)}')
     if checking_object_instance(logged_in_user, renter.renter.Renter):
-    #if isinstance(logged_in_user, renter.renter.Renter): #DETTE BLE EKSTRAHERT TIL
-    # FUNKSJONEN checking_object_instance
         welcome_screen_Renter(user_data=logged_in_user)
         print("YOU ARE LOGGED IN AS A RENTER")
 
-    #if isinstance(logged_in_user, owner.owner.Owner): #DETTE BLE EKSTRAHERT TIL
-    # FUNKSJONEN checking_object_instance
     if checking_object_instance(logged_in_user, owner.owner.Owner):
         welcome_screen_Owner(user_data=logged_in_user)
         print("YOU ARE LOGGED IN AS AN OWNER")
@@ -319,8 +315,8 @@ def car(sender, app_data, user_data):
         #JEg ser at dette er noe som gjentar seg flere ganger.
         # I tillegg kan vi kanskje teste spesifikke ting? slik som license plate?
         for booking in bookings_list:
-            if booking.approved:
-                if booking.car.license_plate == user_data.license_plate:
+            if booking.car.license_plate == user_data.license_plate:
+                if booking.approved:
                     date_from_day = booking.date_from["Day"]
                     date_from_month = booking.date_from["Month"]
                     date_from_year = booking.date_from["Year"]
@@ -330,6 +326,7 @@ def car(sender, app_data, user_data):
                     avail_list.append(
                         f"{date_from_day}.{date_from_month}.{date_from_year} - {date_to_day}.{date_to_month}.{date_to_year}")
         dpg.add_listbox(tag="dates", items=avail_list)
+
 
 
 def see_rented_cars(sender, app_data, user_data):
