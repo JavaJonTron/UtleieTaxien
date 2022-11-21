@@ -382,6 +382,7 @@ def see_rented_cars(sender, app_data, user_data):
     '''
     Her så vil user_data tilsvare et renter objekt
     Det funksjonen tar for seg er Leiers mulighet til å se biler han/hun har leid.
+    Denne funksjonen kan bli kalt fra renter_main_menu
 
     :param sender:
     :param app_data:
@@ -410,6 +411,7 @@ def see_rented_cars(sender, app_data, user_data):
 def renter_options():
     '''
     Denne funksjonen skal ta for seg det som er Leiers alternativer på kontosiden.
+    Denne funksjonen kan bli kalt fra renter_main_menu
     :return:
     '''
     logged_in_user = logged_in_status_file.logged_in_status(renter_list)
@@ -426,6 +428,7 @@ def renter_options():
 def owner_options():
     '''
     Denne funksjonen skal ta for seg det som er Utleiers alternativer på kontosiden.
+    Denne kan bli kalt fra [owner_main_menu]
 
     :return:
     '''
