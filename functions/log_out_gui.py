@@ -10,5 +10,5 @@ def log_out(human_list):
     #for renter in log_off_func(renter_list):
     #   renter.is_logged_in = False
     #dpg.hide_item("Main menu", False)
-
+#DENNE BLIR IKKE BRUKT FORELØPIG
 

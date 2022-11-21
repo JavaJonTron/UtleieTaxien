@@ -35,6 +35,7 @@ def admin_Login():
         dpg.add_button(label="Log in", tag="adminLogInButton", callback=log_in_accepted)
 
 
+
 def owner_Login():
     dpg.delete_item("Owner Login")
     dpg.delete_item("Main menu")
@@ -83,9 +84,12 @@ def main_menu():
 main_menu()
 
 
-def log_out():
+def log_out(human_list):
     delete_windows.delete_windows_func()
-    log_off_func.log_off_human(renter_list)
+    log_off_func.log_off_human(human_list)
+    #NÅ LOOPER DEN IGJENNOM LISTA, OG LOGGER AV ALLE.
+    #KANSJE LEGGE INN OBEJKTET SOM SKAL LOGGES UT I PARAMETER FELTET
+    #ISTEDENFOR Å LOGGE AV ALLE I EN BESTEMT LISTE?
     main_menu()
 
 
@@ -107,7 +111,8 @@ def log_in_accepted(sender, app_data, user_data):
         welcome_screen_Owner(user_data=logged_in_user)
         print("YOU ARE LOGGED IN AS AN OWNER")
 
-#Forslag til ekstrahering av kode til funksjonen under,
+
+# Forslag til ekstrahering av kode til funksjonen under,
 # dett er jo kanskje mulig og teste også?
 def checking_object_instance(object_type, class_type):
     if isinstance(object_type, class_type):
@@ -176,7 +181,7 @@ def approve_deny_bookings(sender=None, app_data=None, user_data=None):
         with dpg.menu_bar(label="Menu Bar"):
             dpg.add_button(label="Home", callback=owner_main_menu, user_data=logged_in_user)
             dpg.add_button(label="Log Out", callback=log_out, user_data=owner_list)
-            #ER DET MULIG Å EKSTRAHERE KODELOGIKKEN UNDER?
+            # ER DET MULIG Å EKSTRAHERE KODELOGIKKEN UNDER?
         for bookings in bookings_list:
             if bookings.car.owner.name == user_data.name:
                 if bookings.approved == False:
@@ -185,6 +190,7 @@ def approve_deny_bookings(sender=None, app_data=None, user_data=None):
                                  str(bookings.date_to['Day']) + "." + str(bookings.date_to['Month']) + "." + \
                                  str(bookings.date_to['Year'])
                     dpg.add_button(label=label_text, callback=approve_car, user_data=bookings)
+
 
 def approve_car(sender, app_data, user_data=None):
     booking = user_data
@@ -197,22 +203,21 @@ def approve_car(sender, app_data, user_data=None):
             dpg.add_button(label="Log Out", callback=log_out, user_data=owner_list)
         dpg.add_text(booking.renter.name + " wants to rent your " + booking.car.nickname() + " with license plate " +
                      booking.car.license_plate)
-        #SE OVER EN GANG VI HAR TID OM DETTE ER NOE VI KAN LEGGE I EN EGEN FUNKSJON.
-        #DET SER VELDIG LIKT UT SOM I APPROVE_DENY_BOOKINGS
+        # SE OVER EN GANG VI HAR TID OM DETTE ER NOE VI KAN LEGGE I EN EGEN FUNKSJON.
+        # DET SER VELDIG LIKT UT SOM I APPROVE_DENY_BOOKINGS
         dpg.add_text(booking.renter.name + " wants to rent it from " + str(booking.date_from['Day']) + "." + \
-                             str(booking.date_from['Month']) + "." + str(booking.date_from['Year']) + " to: " + \
-                             str(booking.date_to['Day']) + "." + str(booking.date_to['Month']) + "." + \
-                             str(booking.date_to['Year']))
+                     str(booking.date_from['Month']) + "." + str(booking.date_from['Year']) + " to: " + \
+                     str(booking.date_to['Day']) + "." + str(booking.date_to['Month']) + "." + \
+                     str(booking.date_to['Year']))
         dpg.add_text(booking.renter.name + "s score is " + str(booking.renter.score) + " out of X")
         dpg.add_button(label="Approve", callback=approved_booking, user_data=booking)
         dpg.add_button(label="Deny", callback=denied_booking, user_data=booking)
 
 
-
 def approved_booking(sender, app_data, user_data):
     logged_in_user = logged_in_status_file.logged_in_status(owner_list)
     booking = user_data
-    #KAN DETTE EKSTRAHERES PÅ NOEN MÅTE?
+    # KAN DETTE EKSTRAHERES PÅ NOEN MÅTE?
     for bookings in bookings_list:
         if booking == bookings:
             booking.approved = True
@@ -229,9 +234,6 @@ def denied_booking(sender, app_data, user_data):
             booking.approved = False
     delete_windows.delete_windows_func()
     approve_deny_bookings(user_data=logged_in_user)
-
-
-
 
 
 def new_car(sender, app_data, user_data):
@@ -279,6 +281,13 @@ def render_cars():
 
 
 def rent_new_car(sender, app_data, user_data):
+    '''
+    Her
+    :param sender:
+    :param app_data:
+    :param user_data:
+    :return:
+    '''
     logged_in_user = logged_in_status_file.logged_in_status(renter_list)
     delete_windows.delete_windows_func()
     with dpg.window(label="Renter Control Panel", tag="Renter New Car", width=400, height=400):
@@ -292,6 +301,16 @@ def rent_new_car(sender, app_data, user_data):
 
 
 def car(sender, app_data, user_data):
+    '''
+    Her vil user_data ta for seg et renter objekt.
+    Her vil funksjonen ta for seg leiers mulighet til å leie en bil.
+    Det vil også være et eget view som opprettes her for å kunne
+    se biler som ikke er tilgjengelige
+    :param sender:
+    :param app_data:
+    :param user_data:
+    :return:
+    '''
     logged_in_user = logged_in_status_file.logged_in_status(renter_list)
     avail_list = []
     delete_windows.delete_windows_func()
@@ -313,8 +332,8 @@ def car(sender, app_data, user_data):
                             month}, callback=create_booking_file.dates_to)
         dpg.add_button(label="Book", callback=create_booking_file.booking_func, user_data=user_data)
         dpg.add_text("Car is not available between:")
-        #Jeg ser at vi looper gjennom bookings listen flere ganger.
-        #JEg ser at dette er noe som gjentar seg flere ganger.
+        # Jeg ser at vi looper gjennom bookings listen flere ganger.
+        # JEg ser at dette er noe som gjentar seg flere ganger.
         # I tillegg kan vi kanskje teste spesifikke ting? slik som license plate?
         for booking in bookings_list:
             if booking.car.license_plate == user_data.license_plate:
@@ -330,8 +349,16 @@ def car(sender, app_data, user_data):
         dpg.add_listbox(tag="dates", items=avail_list)
 
 
-
 def see_rented_cars(sender, app_data, user_data):
+    '''
+    Her så vil user_data tilsvare et renter objekt
+    Det funksjonen tar for seg er Leiers mulighet til å se biler han/hun har leid.
+
+    :param sender:
+    :param app_data:
+    :param user_data:
+    :return:
+    '''
     logged_in_user = logged_in_status_file.logged_in_status(owner_list)
     rented_cars = []
     delete_windows.delete_windows_func()
@@ -352,6 +379,10 @@ def see_rented_cars(sender, app_data, user_data):
 
 
 def renter_options():
+    '''
+    Denne funksjonen skal ta for seg det som er Leiers alternativer på kontosiden.
+    :return:
+    '''
     logged_in_user = logged_in_status_file.logged_in_status(renter_list)
     delete_windows.delete_windows_func()
     with dpg.window(label="Renter Control Panel", tag="Renter Options", width=400, height=400):
@@ -364,6 +395,11 @@ def renter_options():
 
 
 def owner_options():
+    '''
+    Denne funksjonen skal ta for seg det som er Utleiers alternativer på kontosiden.
+
+    :return:
+    '''
     logged_in_user = logged_in_status_file.logged_in_status(owner_list)
     delete_windows.delete_windows_func()
     with dpg.window(label="Owner Control Panel", tag="Owner Options", width=400, height=400):
