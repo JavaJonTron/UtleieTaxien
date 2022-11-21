@@ -318,6 +318,13 @@ def approved_booking(sender, app_data, user_data):
 
 
 def denied_booking(sender, app_data, user_data):
+    '''
+    Funksjonen setter bookingen til ikke godkjent og sletter den når eieren klikker på deny i tidligere funksjon
+    :param sender: Ikke i bruk
+    :param app_data: Ikke i bruk
+    :param user_data: Booking
+    :return:
+    '''
     logged_in_user = logged_in_status_file.logged_in_status(owner_list)
     booking = user_data
     for bookings in bookings_list:
@@ -329,6 +336,13 @@ def denied_booking(sender, app_data, user_data):
 
 
 def new_car(sender, app_data, user_data):
+    '''
+    Denne tar for seg opprettelse av nye biler når eieren ønsker å legge til ny. Ikke i bruk nå.
+    :param sender: Ikke i bruk
+    :param app_data: Ikke i bruk
+    :param user_data: Ikke i bruk
+    :return:
+    '''
     logged_in_user = logged_in_status_file.logged_in_status(owner_list)
     delete_windows.delete_windows_func()
     with dpg.window(label="Owner Control Panel", tag="Owner New Car", width=400, height=400):
@@ -350,6 +364,13 @@ def new_car(sender, app_data, user_data):
 
 
 def see_cars(sender, app_data, user_data):
+    '''
+    Viser eieren bilene h*n har til utleie og info om disse
+    :param sender: Ikke i bruk
+    :param app_data: Ikke i bruk
+    :param user_data: Logged in user
+    :return:
+    '''
     logged_in_user = logged_in_status_file.logged_in_status(owner_list)
     owned_cars = []
     delete_windows.delete_windows_func()
@@ -367,6 +388,10 @@ def see_cars(sender, app_data, user_data):
 
 
 def render_cars():
+    '''
+    Denne funksjonen legger bilene i knapper for brukeren å klikke på
+    :return:
+    '''
     # DENNE FUNKSJONEN SKAL FLYTTES
     for bil in car_list:
         dpg.add_button(label=bil.nickname(), callback=car, user_data=bil)
