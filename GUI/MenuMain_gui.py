@@ -118,7 +118,7 @@ def log_out(human_list):
 
 def log_in_accepted(sender, app_data, user_data):
     '''
-    Denne tar for seg innlogging av brukere og
+    Denne tar for seg innlogging av brukere og sjekker hvilken innlogging som gjelder
     :param sender: ikke i bruk
     :param app_data: ikke i bruk
     :param user_data: Bruker data, altså hvilken bruker som er logget inn
@@ -144,6 +144,12 @@ def log_in_accepted(sender, app_data, user_data):
 #Forslag til ekstrahering av kode til funksjonen under,
 # dett er jo kanskje mulig og teste også?
 def checking_object_instance(object_type, class_type):
+    '''
+    Sjekker om et object er av en type klasse.
+    :param object_type: Bruker som er innolgget
+    :param class_type: Klassen som er i bruk
+    :return: True eller False om et object er en klasse
+    '''
     if isinstance(object_type, class_type):
         return True
     else:
@@ -151,6 +157,13 @@ def checking_object_instance(object_type, class_type):
 
 
 def welcome_screen_Renter(sender=None, app_data=None, user_data=None):
+    '''
+    Bekreftelse til bruker på at h*n er innlogget som en renter
+    :param sender: Ikke i bruk
+    :param app_data: Ikke i bruk
+    :param user_data: Innlogget bruker
+    :return:
+    '''
     with dpg.window(label="Renter Control Panel", tag="Renter Login Accepted", width=400, height=400):
         dpg.set_primary_window("Renter Login Accepted", True)
         dpg.add_text(f"Successfully logged in as {user_data.name}")
@@ -158,6 +171,13 @@ def welcome_screen_Renter(sender=None, app_data=None, user_data=None):
 
 
 def welcome_screen_Owner(sender=None, app_data=None, user_data=None):
+    '''
+    Bekreftelse til bruker på at h*n er innlogget som en owner
+    :param sender: Ikke i bruk
+    :param app_data: Ikke i bruk
+    :param user_data: Innlogget bruker
+    :return:
+    '''
     with dpg.window(label="Owner Control Panel", tag="Owner Login Accepted", width=400, height=400):
         dpg.set_primary_window("Owner Login Accepted", True)
         dpg.add_text(f"Successfully logged in as {user_data.name}")
@@ -165,6 +185,13 @@ def welcome_screen_Owner(sender=None, app_data=None, user_data=None):
 
 
 def welcome_screen_Admin(sender=None, app_data=None, user_data=None):
+    '''
+    Bekreftelse til bruker på at h*n er innlogget som en admin
+    :param sender: Ikke i bruk
+    :param app_data: Ikke i bruk
+    :param user_data: Innlogget bruker
+    :return:
+    '''
     with dpg.window(label="Admin Control Panel", tag="Admin Login Accepted", width=400, height=400):
         dpg.set_primary_window("Admin Login Accepted", True)
         dpg.add_text(f"Successfully logged in as {user_data.name}")
@@ -173,6 +200,13 @@ def welcome_screen_Admin(sender=None, app_data=None, user_data=None):
 
 
 def owner_main_menu(sender, app_data, user_data):
+    '''
+    Main menu for eiere, her kan man navigere til forskjellige sider og velge hva man ønsker å gjøre
+    :param sender: Ikke i bruk
+    :param app_data: Ikke i bruk
+    :param user_data: Innlogget bruker
+    :return:
+    '''
     delete_windows.delete_windows_func()
     logged_in_user = user_data
     with dpg.window(label="Owner Control Panel", tag="Owner Main", width=400, height=400):
@@ -188,6 +222,13 @@ def owner_main_menu(sender, app_data, user_data):
 
 
 def renter_main_menu(sender, app_data, user_data):
+    '''
+    Main menu for renter, her kan man navigere til forskjellige sider og velge hva man ønsker å gjøre
+    :param sender: Ikke i bruk
+    :param app_data: Ikke i bruk
+    :param user_data: Innlogget bruker
+    :return:
+    '''
     delete_windows.delete_windows_func()
     logged_in_user = user_data
     with dpg.window(label="Renter Control Panel", tag="Renter Main", width=400, height=400):
@@ -203,6 +244,14 @@ def renter_main_menu(sender, app_data, user_data):
 
 
 def approve_deny_bookings(sender=None, app_data=None, user_data=None):
+    '''
+    Denne funksjonen gir eiere en oversikt over bookinger som leiere ønsker å gjøre. Eiere kan klikke seg inn på
+    bookingene
+    :param sender: Ikke i bruk
+    :param app_data: Ikke i bruk
+    :param user_data: Innlogget bruker
+    :return:
+    '''
     logged_in_user = logged_in_status_file.logged_in_status(owner_list)
     delete_windows.delete_windows_func()
     with dpg.window(label="Renter Control Panel", tag="Approve Or Deny", width=400, height=400):
@@ -222,6 +271,13 @@ def approve_deny_bookings(sender=None, app_data=None, user_data=None):
 
 
 def approve_car(sender, app_data, user_data=None):
+    '''
+    Lar eieren godkjenne bookingen eieren klikket seg inn på i en tidligere funksjon
+    :param sender: Ikke i bruk
+    :param app_data: Ikke i bruk
+    :param user_data: Booking
+    :return:
+    '''
     booking = user_data
     delete_windows.delete_windows_func()
     logged_in_user = logged_in_status_file.logged_in_status(owner_list)
@@ -244,6 +300,13 @@ def approve_car(sender, app_data, user_data=None):
 
 
 def approved_booking(sender, app_data, user_data):
+    '''
+    FUnkjsonen setter bookingen til godkjent når eieren klikker på approve i tidligere funksjon
+    :param sender: Ikke i bruk
+    :param app_data: Ikke i bruk
+    :param user_data: Booking
+    :return:
+    '''
     logged_in_user = logged_in_status_file.logged_in_status(owner_list)
     booking = user_data
     # KAN DETTE EKSTRAHERES PÅ NOEN MÅTE?
