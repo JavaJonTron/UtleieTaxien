@@ -26,7 +26,6 @@ dpg.create_viewport(title='Utleie_app', width=600, height=600)
 def admin_Login():
     dpg.delete_item("Admin Login")
     dpg.delete_item("Main menu")
-    # dpg.hide_item("Main menu")
     with dpg.window(label="Admin Login", tag="Admin Login", width=300, height=200):
         dpg.set_primary_window("Admin Login", True)
         dpg.add_text("Username:")
@@ -39,7 +38,6 @@ def admin_Login():
 def owner_Login():
     dpg.delete_item("Owner Login")
     dpg.delete_item("Main menu")
-    # dpg.hide_item("Main menu")
     with dpg.window(label="Owner Login", tag="Owner Login", width=300, height=200):
         dpg.set_primary_window("Owner Login", True)
         dpg.add_text("Username:")
@@ -90,10 +88,6 @@ def log_out():
     log_off_func.log_off_human(renter_list)
     main_menu()
 
-    # for renter in log_off_func(renter_list):
-    #   renter.is_logged_in = False
-    # dpg.hide_item("Main menu", False)
-
 
 def log_in_accepted(sender, app_data, user_data):
     delete_windows.delete_windows_func()
@@ -105,13 +99,25 @@ def log_in_accepted(sender, app_data, user_data):
     logged_in_user.is_logged_in = True
 
     print(f'The type of <number> is: {type(logged_in_user)}')
-    if isinstance(logged_in_user, renter.renter.Renter):
+    if checking_object_instance(logged_in_user, renter.renter.Renter):
+    #if isinstance(logged_in_user, renter.renter.Renter): #DETTE BLE EKSTRAHERT TIL
+    # FUNKSJONEN checking_object_instance
         welcome_screen_Renter(user_data=logged_in_user)
         print("YOU ARE LOGGED IN AS A RENTER")
 
-    if isinstance(logged_in_user, owner.owner.Owner):
+    #if isinstance(logged_in_user, owner.owner.Owner): #DETTE BLE EKSTRAHERT TIL
+    # FUNKSJONEN checking_object_instance
+    if checking_object_instance(logged_in_user, owner.owner.Owner):
         welcome_screen_Owner(user_data=logged_in_user)
         print("YOU ARE LOGGED IN AS AN OWNER")
+
+#Forslag til ekstrahering av kode til funksjonen under,
+# dett er jo kanskje mulig og teste også?
+def checking_object_instance(object_type, class_type):
+    if isinstance(object_type, class_type):
+        return True
+    else:
+        return False
 
 
 def welcome_screen_Renter(sender=None, app_data=None, user_data=None):
@@ -168,13 +174,13 @@ def renter_main_menu(sender, app_data, user_data):
 
 def approve_deny_bookings(sender=None, app_data=None, user_data=None):
     logged_in_user = logged_in_status_file.logged_in_status(owner_list)
-    unaprooved_booking = []
     delete_windows.delete_windows_func()
     with dpg.window(label="Renter Control Panel", tag="Approve Or Deny", width=400, height=400):
         dpg.set_primary_window("Approve Or Deny", True)
         with dpg.menu_bar(label="Menu Bar"):
             dpg.add_button(label="Home", callback=owner_main_menu, user_data=logged_in_user)
             dpg.add_button(label="Log Out", callback=log_out, user_data=owner_list)
+            #ER DET MULIG Å EKSTRAHERE KODELOGIKKEN UNDER?
         for bookings in bookings_list:
             if bookings.car.owner.name == user_data.name:
                 if bookings.approved == False:
@@ -208,6 +214,7 @@ def approve_car(sender, app_data, user_data=None):
 def approved_booking(sender, app_data, user_data):
     logged_in_user = logged_in_status_file.logged_in_status(owner_list)
     booking = user_data
+    #KAN DETTE EKSTRAHERES PÅ NOEN MÅTE?
     for bookings in bookings_list:
         if booking == bookings:
             booking.approved = True
@@ -308,6 +315,9 @@ def car(sender, app_data, user_data):
                             month}, callback=create_booking_file.dates_to)
         dpg.add_button(label="Book", callback=create_booking_file.booking_func, user_data=user_data)
         dpg.add_text("Car is not available between:")
+        #Jeg ser at vi looper gjennom bookings listen flere ganger.
+        #JEg ser at dette er noe som gjentar seg flere ganger.
+        # I tillegg kan vi kanskje teste spesifikke ting? slik som license plate?
         for booking in bookings_list:
             if booking.approved:
                 if booking.car.license_plate == user_data.license_plate:

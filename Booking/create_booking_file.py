@@ -6,6 +6,7 @@ from main import renter_list
 from main import bookings_list
 from functions import logged_in_status_file
 
+
 def dates_to():
     dict_dates_to = {}
     to_date = (dpg.get_value("to_date"))
@@ -41,7 +42,8 @@ def dates_from():
 
 
 def create_book(from_date, to_date, renter_logged, car, no_day_crash):
-    if from_date["Year_Day"] < to_date["Year_Day"]:
+    if check_if_from_day_is_lesser_than_to_day(from_date, to_date):
+        # if from_date["Year_Day"] < to_date["Year_Day"]:
         if no_day_crash == 0:
             booking_object = booking.Booking(renter_logged, from_date, to_date, car, False)
             bookings_list.append(booking_object)
@@ -53,12 +55,18 @@ def create_book(from_date, to_date, renter_logged, car, no_day_crash):
         print("Choose again. from day is bigger then to day ")
 
 
+def check_if_from_day_is_lesser_than_to_day(from_date, to_date):
+    if from_date["Year_Day"] < to_date["Year_Day"]:
+        return True
+    else:
+        return False
+
+
 def check_if_booking_date_crashes_with_previous_booking_date(new_to_date, new_from_date, old_to_date, old_from_date):
     if new_from_date < old_from_date and new_to_date < old_from_date or new_from_date > old_to_date and new_to_date > old_to_date:
         return True
     else:
         return False
-
 
 
 def booking_func(sender, app_data, user_data):
@@ -78,15 +86,20 @@ def booking_func(sender, app_data, user_data):
         for old_booked in bookings_list:
             booking_list_number += 1
             if chosen_car.license_plate == old_booked.car.license_plate:
-                if check_if_booking_date_crashes_with_previous_booking_date(dict_new_dates_to["Year_Day"], dict_new_dates_from["Year_Day"], old_booked.date_to["Year_Day"], old_booked.date_from["Year_Day"]):
-                #if dict_new_dates_from["Year_Day"] < old_booked.date_from["Year_Day"] and dict_new_dates_to["Year_Day"] < old_booked.date_from["Year_Day"] or dict_new_dates_from["Year_Day"] > old_booked.date_to["Year_Day"] and dict_new_dates_to["Year_Day"] > old_booked.date_to["Year_Day"]:
+                if check_if_booking_date_crashes_with_previous_booking_date(dict_new_dates_to["Year_Day"],
+                                                                            dict_new_dates_from["Year_Day"],
+                                                                            old_booked.date_to["Year_Day"],
+                                                                            old_booked.date_from["Year_Day"]):
+                    # if dict_new_dates_from["Year_Day"] < old_booked.date_from["Year_Day"] and dict_new_dates_to["Year_Day"] < old_booked.date_from["Year_Day"] or dict_new_dates_from["Year_Day"] > old_booked.date_to["Year_Day"] and dict_new_dates_to["Year_Day"] > old_booked.date_to["Year_Day"]:
                     if booking_list_number == len(bookings_list):
-                        create_book(dict_new_dates_from, dict_new_dates_to, renter_logged_in, chosen_car, times_dates_crash)
+                        create_book(dict_new_dates_from, dict_new_dates_to, renter_logged_in, chosen_car,
+                                    times_dates_crash)
                         return
                 else:
                     times_dates_crash += 1
                     if booking_list_number == len(bookings_list):
-                        create_book(dict_new_dates_from, dict_new_dates_to, renter_logged_in, chosen_car, times_dates_crash)
+                        create_book(dict_new_dates_from, dict_new_dates_to, renter_logged_in, chosen_car,
+                                    times_dates_crash)
                         return
             else:
                 if booking_list_number == len(bookings_list):
