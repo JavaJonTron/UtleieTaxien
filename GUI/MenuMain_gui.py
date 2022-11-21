@@ -335,6 +335,7 @@ def car(sender, app_data, user_data):
     Her vil funksjonen ta for seg leiers mulighet til å leie en bil.
     Det vil også være et eget view som opprettes her for å kunne
     se biler som ikke er tilgjengelige
+    Denne funksjonen kan bli kalt fra funksjonen render_cars
     :param sender:
     :param app_data:
     :param user_data:
