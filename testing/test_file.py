@@ -1,6 +1,6 @@
 from Booking import create_booking_file
 from FileHandling import file_handler_pickle
-from Car import car
+from Car.car import Car
 
 
 def test_dates_dont_crash():
@@ -47,16 +47,22 @@ def test_read_and_write_to_and_from_file():
 
 
 def test_car_nickname():
-    pass
+    make = "Tesla"  # input("Make: ").upper()
+    model = "Model Y"  # input("Model: ").upper()
+    year = 2022  # int(input("Year: "))
+    license_plate = "ED15421"  # input("License plate: ").upper()
+    fuel_source = "Electric" # input("Fuel source: ").upper()
+    km = 20500  # int(input("Odometer: "))
+    is_take = False
+    hourly_rate = 150
+    daily_rate = 3000
+    car_object = Car(make, model, year, license_plate, fuel_source, km, is_take, hourly_rate, daily_rate, None, None)
+    assert car_object.nickname() == f'{year} {make} {model}'
 
-#
+# self, make, model, year, license_plate, fuel_source, km, is_take, hourly_rate, daily_rate, owner, earned_total
 # Må lage en owner først fordi car objektet bruker en referanse til Owner
 # Undersøk på mulig Integrasjons test?
-# make = "Tesla"  # input("Make: ").upper() model = "Model Y"  # input("Model: ").upper() year = 2022  # int(input(
-# "Year: ")) license_plate = "ED15421"  # input("License plate: ").upper() fuel_source = "Electric"  # input("Fuel
-# source: ").upper() km = 20500  # int(input("Odometer: ")) is_take = False hourly_rate = 150 daily_rate = 3000
-# car_object = car(make, model, year, license_plate, fuel_source, km, is_take, hourly_rate, daily_rate, owner,
-# earned_total)
+
 
 
 # def test_write_to_file():
