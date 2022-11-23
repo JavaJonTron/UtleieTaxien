@@ -1,3 +1,6 @@
+import pytest
+from pytest_mock import mocker
+
 from Booking import create_booking_file
 from FileHandling import file_handler_pickle
 from Car.car import Car
@@ -58,6 +61,11 @@ def test_car_nickname():
     daily_rate = 3000
     car_object = Car(make, model, year, license_plate, fuel_source, km, is_take, hourly_rate, daily_rate, None, None)
     assert car_object.nickname() == f'{year} {make} {model}'
+
+def test_booking_created_succesfully():
+    mocker.patch("")
+
+
 
 # self, make, model, year, license_plate, fuel_source, km, is_take, hourly_rate, daily_rate, owner, earned_total
 # Må lage en owner først fordi car objektet bruker en referanse til Owner
