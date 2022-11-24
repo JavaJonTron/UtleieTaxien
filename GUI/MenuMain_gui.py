@@ -320,14 +320,14 @@ def new_car(sender, app_data, user_data):
         dpg.add_text("TEST")
         dpg.add_input_text(hint="Make:", tag="make", no_spaces=True, uppercase=True)
         dpg.add_input_text(hint="Model:", tag="model", uppercase=True)
-        dpg.add_input_text(hint="Year:", tag="year", no_spaces=True, uppercase=True, )
+        dpg.add_input_text(hint="Year:", tag="year", no_spaces=True, uppercase=True)
         dpg.add_input_text(hint="License Plate", tag="license_plate", no_spaces=True, uppercase=True)
         dpg.add_input_text(hint="Fuel Source:", tag="fuel_source", no_spaces=True, uppercase=True)
         dpg.add_input_text(hint="Odometer:", tag="odometer", no_spaces=True, uppercase=True)
         dpg.add_input_text(hint="Hourly Rate:", tag="hourly", no_spaces=True, uppercase=True)
         dpg.add_input_text(hint="Daily Rate:", tag="daily", no_spaces=True, uppercase=True)
-        dpg.add_button(label="Publish", callback=Car.create_car_file.create_car())
-        print(car_list[3])
+        dpg.add_button(label="Publish", callback=Car.create_car_file.create_car)
+        print(car_list)
 
 def see_cars(sender, app_data, user_data):
     '''
