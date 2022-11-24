@@ -6,3 +6,4 @@ class Booking:
         self.car = car
         self.approved = approved
 
+#Test
