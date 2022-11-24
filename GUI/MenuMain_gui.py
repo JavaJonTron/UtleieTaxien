@@ -1,4 +1,6 @@
 from dearpygui import dearpygui as dpg
+
+import Car.create_car_file
 import owner.owner
 import renter.renter
 from functions import delete_windows
@@ -316,15 +318,16 @@ def new_car(sender, app_data, user_data):
             dpg.add_button(label="Home", callback=owner_main_menu, user_data=logged_in_user)
             dpg.add_button(label="Log Out", callback=log_out, user_data=owner_list)
         dpg.add_text("TEST")
-        dpg.add_input_text(hint="Make:", no_spaces=True, uppercase=True)
-        dpg.add_input_text(hint="Model:", no_spaces=True, uppercase=True)
-        dpg.add_input_text(hint="Year:", no_spaces=True, uppercase=True, )
-        dpg.add_input_text(hint="License Plate", no_spaces=True, uppercase=True)
-        dpg.add_input_text(hint="Fuel Source:", no_spaces=True, uppercase=True)
-        dpg.add_input_text(hint="Odometer:", no_spaces=True, uppercase=True)
-        dpg.add_input_text(hint="Hourly Rate:", no_spaces=True, uppercase=True)
-        dpg.add_input_text(hint="Daily Rate:", no_spaces=True, uppercase=True)
-        dpg.add_button(label="Publish")
+        dpg.add_input_text(hint="Make:", tag="make", no_spaces=True, uppercase=True)
+        dpg.add_input_text(hint="Model:", tag="model", uppercase=True)
+        dpg.add_input_text(hint="Year:", tag="year", no_spaces=True, uppercase=True, )
+        dpg.add_input_text(hint="License Plate", tag="license_plate", no_spaces=True, uppercase=True)
+        dpg.add_input_text(hint="Fuel Source:", tag="fuel_source", no_spaces=True, uppercase=True)
+        dpg.add_input_text(hint="Odometer:", tag="odometer", no_spaces=True, uppercase=True)
+        dpg.add_input_text(hint="Hourly Rate:", tag="hourly", no_spaces=True, uppercase=True)
+        dpg.add_input_text(hint="Daily Rate:", tag="daily", no_spaces=True, uppercase=True)
+        dpg.add_button(label="Publish", callback=Car.create_car_file.create_car())
+        print(car_list[3])
 
 def see_cars(sender, app_data, user_data):
     '''
