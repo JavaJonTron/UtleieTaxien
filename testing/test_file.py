@@ -1,11 +1,13 @@
 import pytest
 from pytest_mock import mocker
+from functions import log_off_func
+import functions.get_average_of_list
 from renter.renter import Renter
 from owner.owner import Owner
 from Booking import create_booking_file
 from FileHandling import file_handler_pickle
 from Car.car import Car
-
+from functions import logged_in_status_file
 
 def test_dates_dont_crash():
     from_day = {"Day": 1, "Month": 11, "Year": 2022, "Year_Day": 304}
@@ -63,49 +65,73 @@ def test_car_nickname():
     car_object = Car(make, model, year, license_plate, fuel_source, km, is_take, hourly_rate, daily_rate, None, None)
     assert car_object.nickname() == f'{year} {make} {model}'
 
+
 @pytest.fixture
 def dates_from():
     dict_dates_from = {"Day": 1, "Month": 1, "Year": 2022, "Year_Day": 0}
     return dict_dates_from
+
 
 @pytest.fixture
 def dates_to():
     dict_dates_to = {"Day": 2, "Month": 1, "Year": 2022, "Year_Day": 1}
     return dict_dates_to
 
+
 @pytest.fixture
 def renter():
     renter1 = Renter(20, "Male", "Nils Nilselsen", 10, True, 100)
     return renter1
+
+
 @pytest.fixture
-def owner():
-    owner1 = Owner(30, "Female", "Nora Norasen", 10, True, 200)
+def owners():
+    owner1 = Owner(30, "Female", "Nora Norasen", 10, True, 200,)
     return owner1
+
+
 @pytest.fixture
-def car():
-    car1 = Car("Tesla", "Model X", 2022, "EE12345", "Electric", 150, False, 300, 6000, owner, 0)
+def car(owners):
+    car1 = Car("Tesla", "Model X", 2022, "EE12345", "Electric", 150, False, 300, 6000, owners, 0)
     return car1
 
 
-def test_booking_created_succesfully(dates_from, dates_to, renter, car):
+def test_booking_created_with_correct_information(dates_from, dates_to, renter, car):
     no_day_crash = False
     booking_object = create_booking_file.create_book(dates_from, dates_to, renter, car, no_day_crash)
     assert booking_object.car.license_plate == "EE12345"
-    #mocker.patch("src.Booking.create_booking_file.create_book", return_value=X)
+    assert booking_object.car.owner.age == 30
+    assert booking_object.renter.name == "Nils Nilselsen"
+    assert booking_object.date_from["Day"] == 1
 
 
-
-# self, make, model, year, license_plate, fuel_source, km, is_take, hourly_rate, daily_rate, owner, earned_total
-# Må lage en owner først fordi car objektet bruker en referanse til Owner
-# Undersøk på mulig Integrasjons test?
-
-
-
-# def test_write_to_file():
-# FileHandling.file_handler_pickle.write_method("","")
-
-# pass
+def test_booking_created_not_with_correct_information(dates_from, dates_to, renter, car):
+    no_day_crash = False
+    booking_object = create_booking_file.create_book(dates_from, dates_to, renter, car, no_day_crash)
+    assert booking_object.car.license_plate != "EE12346"
+    assert booking_object.car.owner.age == 30
+    assert booking_object.renter.name != "Nil Nilselsen"
+    assert booking_object.date_from["Day"] != 0
 
 
-# def read_from_file(
-#    pass
+def test_calculates_the_correct_average():
+    list_of_numbers = [1, 2, 3, 4, 5]
+    average = functions.get_average_of_list.average_list(list_of_numbers)
+    assert average == 3
+
+
+def test_calculates_the_wrong_average():
+    list_of_numbers = [1, 2, 3, 4, 5]
+    average = functions.get_average_of_list.average_list(list_of_numbers)
+    assert average != 6
+
+
+def test_logging_off_all_humans_successfully(owners, renter):
+    list_of_humans = [owners, renter]
+    log_off_func.log_off_human(list_of_humans)
+    assert list_of_humans[0].is_logged_in == False
+    assert list_of_humans[1].is_logged_in == False
+
+def test_correct_person_logged_in(owners):
+    list_of_owners = [owners]
+    assert logged_in_status_file.logged_in_status(list_of_owners) == owners

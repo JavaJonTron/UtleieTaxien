@@ -20,14 +20,6 @@ class Car:
         self.earned_total += rate
         return rate
 
-
-
-
-    # For å regne ut skatt til staten, hvor mye penger selskapet skal få av leia.
-    # og hvor mye bilen tjener
-
-    # Dermed kan man også vise hvor mye penger en bil har tjent
-
     def nickname(self):
         return str(self.year) + " " + str(self.make) + " " + str(self.model)
 

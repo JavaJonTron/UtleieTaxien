@@ -8,8 +8,6 @@ class Human:
         self.money = money
         #self.id = id
 
-
-
     def wallet(self, income):
         self.money += income
 

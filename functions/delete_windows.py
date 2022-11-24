@@ -1,4 +1,5 @@
 import dearpygui.dearpygui as dpg
+# Not testable due to GUI
 
 renter_window_list = ["Renter Login Accepted", "Renter Login", "Renter Main", "Renter New Car", "Renter Car",
                       "Renter See Cars", "Renter Options"]
