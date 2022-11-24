@@ -117,7 +117,7 @@ def test_booking_created_not_with_correct_information(dates_from, dates_to, rent
 def test_calculates_the_correct_average():
     list_of_numbers = [1, 2, 3, 4, 5]
     average = functions.get_average_of_list.average_list(list_of_numbers)
-    assert average != 3
+    assert average == 3
 
 
 def test_calculates_the_wrong_average():
