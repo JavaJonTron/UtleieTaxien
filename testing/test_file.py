@@ -1,6 +1,7 @@
 import pytest
 from pytest_mock import mocker
-
+from renter.renter import Renter
+from owner.owner import Owner
 from Booking import create_booking_file
 from FileHandling import file_handler_pickle
 from Car.car import Car
@@ -54,7 +55,7 @@ def test_car_nickname():
     model = "Model Y"  # input("Model: ").upper()
     year = 2022  # int(input("Year: "))
     license_plate = "ED15421"  # input("License plate: ").upper()
-    fuel_source = "Electric" # input("Fuel source: ").upper()
+    fuel_source = "Electric"  # input("Fuel source: ").upper()
     km = 20500  # int(input("Odometer: "))
     is_take = False
     hourly_rate = 150
@@ -62,8 +63,35 @@ def test_car_nickname():
     car_object = Car(make, model, year, license_plate, fuel_source, km, is_take, hourly_rate, daily_rate, None, None)
     assert car_object.nickname() == f'{year} {make} {model}'
 
-def test_booking_created_succesfully():
-    mocker.patch("")
+@pytest.fixture
+def dates_from():
+    dict_dates_from = {"Day": 1, "Month": 1, "Year": 2022, "Year_Day": 0}
+    return dict_dates_from
+
+@pytest.fixture
+def dates_to():
+    dict_dates_to = {"Day": 2, "Month": 1, "Year": 2022, "Year_Day": 1}
+    return dict_dates_to
+
+@pytest.fixture
+def renter():
+    renter1 = Renter(20, "Male", "Nils Nilselsen", 10, True, 100)
+    return renter1
+@pytest.fixture
+def owner():
+    owner1 = Owner(30, "Female", "Nora Norasen", 10, True, 200)
+    return owner1
+@pytest.fixture
+def car():
+    car1 = Car("Tesla", "Model X", 2022, "EE12345", "Electric", 150, False, 300, 6000, owner, 0)
+    return car1
+
+
+def test_booking_created_succesfully(dates_from, dates_to, renter, car):
+    no_day_crash = False
+    booking_object = create_booking_file.create_book(dates_from, dates_to, renter, car, no_day_crash)
+    assert booking_object.car.license_plate == "EE12345"
+    #mocker.patch("src.Booking.create_booking_file.create_book", return_value=X)
 
 
 
