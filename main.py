@@ -7,10 +7,6 @@ renter_list = []
 bookings_list = []
 
 
-
-
-
-
 def save_system(file, current_list):
     filskriving = file_handler_pickle.File_handler_pickle(file, current_list)
     filskriving.write_method()
@@ -19,8 +15,6 @@ def save_system(file, current_list):
 
 def load_system(file, li):
     filskriving = file_handler_pickle.File_handler_pickle(file, None)
-    if Exception == filskriving.read_method():
-        print("Exc")
     listen = filskriving.read_method()
     if listen is not None:
         for xx in listen:
