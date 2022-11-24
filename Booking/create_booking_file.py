@@ -35,9 +35,9 @@ def dates_from():
     dict_dates_from["Year"] = from_year
     dict_dates_from["Year_Day"] = from_yearday
     print(f"This is year_day: {from_yearday}")
-    print(f"This is day: {from_day}")
-    print(f"This is month {from_month}")
-    print(f"This is year: {from_year}")
+    print(f"This is year_day: {from_day}")
+    print(f"This is year_day: {from_month}")
+    print(f"This is year_day: {from_year}")
     return dict_dates_from
 
 
@@ -49,12 +49,10 @@ def create_book(from_date, to_date, renter_logged, car, no_day_crash):
             bookings_list.append(booking_object)
             main.save_system('booking_file', bookings_list)
             print("Now we are creating bookings")
-            return booking_object
         else:
             print("DATES DID CRASH")
     else:
         print("Choose again. from day is bigger then to day ")
-
 
 
 def check_if_from_day_is_lesser_than_to_day(from_date, to_date):
