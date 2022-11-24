@@ -1,6 +1,6 @@
 import dearpygui.dearpygui as dpg
 
-import main
+from main import save_system
 from Booking import booking
 from main import renter_list
 from main import bookings_list
@@ -47,7 +47,7 @@ def create_book(from_date, to_date, renter_logged, car, no_day_crash):
         if no_day_crash == 0:
             booking_object = booking.Booking(renter_logged, from_date, to_date, car, False)
             bookings_list.append(booking_object)
-            main.save_system('booking_file', bookings_list)
+            save_system('booking_file', bookings_list)
             print("Now we are creating bookings")
             return booking_object
         else:
