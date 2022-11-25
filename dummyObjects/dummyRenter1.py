@@ -6,4 +6,5 @@ def create_renter():
     age = 38
     score = 10
     is_logged_in = False
-    return Renter(age, sex, name, score, is_logged_in)
+    money = 500
+    return Renter(age, sex, name, score, is_logged_in, money)

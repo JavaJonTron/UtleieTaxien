@@ -5,6 +5,7 @@ from main import car_list
 from main import save_system
 import dearpygui.dearpygui as dpg
 
+
 def create_car():
     '''
     Creat car
@@ -21,7 +22,8 @@ def create_car():
     is_take = False
     owner = functions.logged_in_status_file.logged_in_status(owner_list)
     earned_total = 0
-    car_object = car.Car(make, model, year, license_plate, fuel_source, km, is_take, hourly_rate, daily_rate, owner, earned_total)
+    car_object = car.Car(make, model, year, license_plate, fuel_source, km, is_take, hourly_rate, daily_rate, owner,
+                         earned_total)
     car_list.append(car_object)
     save_system('car_file', car_list)
     return car_object
