@@ -80,7 +80,7 @@ def dates_to():
 
 @pytest.fixture
 def renter():
-    renter1 = Renter(20, "Male", "Nils Nilselsen", 10, True, 100)
+    renter1 = Renter(20, "Male", "Nils Nilselsen", 10, True, 100000)
     return renter1
 
 
