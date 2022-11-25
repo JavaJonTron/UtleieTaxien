@@ -372,13 +372,13 @@ def approve_car(sender, app_data, user_data=None):
         with dpg.menu_bar(label="Menu Bar"):
             dpg.add_button(label="Home", callback=owner_main_menu, user_data=logged_in_user)
             dpg.add_button(label="Log Out", callback=log_out, user_data=owner_list)
-        dpg.add_text(booking.renters.name + " wants to rent your " + booking.car.nickname() + " with license plate " +
+        dpg.add_text(booking.renter.name + " wants to rent your " + booking.car.nickname() + " with license plate " +
                      booking.car.license_plate)
-        dpg.add_text(booking.renters.name + " wants to rent it from " + str(booking.date_from['Day']) + "." + \
+        dpg.add_text(booking.renter.name + " wants to rent it from " + str(booking.date_from['Day']) + "." + \
                      str(booking.date_from['Month']) + "." + str(booking.date_from['Year']) + " to: " + \
                      str(booking.date_to['Day']) + "." + str(booking.date_to['Month']) + "." + \
                      str(booking.date_to['Year']))
-        dpg.add_text(booking.renters.name + "s score is " + str(booking.renters.score) + " out of X")
+        dpg.add_text(booking.renter.name + "s score is " + str(booking.renter.score) + " out of X")
         dpg.add_button(label="Approve", callback=gui_approved_booking, user_data=booking)
         dpg.add_button(label="Deny", callback=gui_denied_booking, user_data=booking)
 
@@ -400,7 +400,7 @@ def gui_approved_booking(sender, app_data, user_data):
     logged_in_user = logged_in_status_file.logged_in_status(owner_list)
     booking = user_data
 
-    if approved_or_deny_booking(booking, True, logged_in_user):
+    if approved_or_deny_booking(booking, False, bookings_list):
         delete_windows.delete_windows_func()
         approve_deny_bookings(user_data=logged_in_user)
 
@@ -416,7 +416,7 @@ def gui_denied_booking(sender, app_data, user_data):
     logged_in_user = logged_in_status_file.logged_in_status(owner_list)
     booking = user_data
 
-    if not approved_or_deny_booking(booking, False, logged_in_user):
+    if not approved_or_deny_booking(booking, False, bookings_list):
         approve_deny_bookings(user_data=logged_in_user)
         delete_windows.delete_windows_func()
 
@@ -603,7 +603,7 @@ def see_rented_cars(sender, app_data, user_data):
             dpg.add_button(label="Log Out", callback=log_out, user_data=renter_list)
         for booking in bookings_list:
             if booking.approved:
-                if booking.renters.name == user_data.name:
+                if booking.renter.name == user_data.name:
                     rented_cars.append(
                         f"{booking.car.nickname()}, {booking.date_from['Day']}.{booking.date_from['Month']}."
                         f"{booking.date_from['Year']}-{booking.date_to['Day']}.{booking.date_to['Month']}."
