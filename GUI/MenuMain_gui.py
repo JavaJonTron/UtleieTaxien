@@ -393,8 +393,8 @@ def approve_car(sender, app_data, user_data=None):
         dpg.add_button(label="Deny", callback=gui_denied_booking, user_data=booking)
 
 
-def approved_or_deny_booking(booking, decision, logged_in_user):
-    for bookings in bookings_list:
+def approved_or_deny_booking(booking, decision, list_of_bookings):
+    for bookings in list_of_bookings:
         if booking == bookings:
             if not decision:
                 print("YES NÅ BLIR DENNE FUNKSJONEN KALT PÅ FALSE")
@@ -424,7 +424,7 @@ def gui_approved_booking(sender, app_data, user_data):
     logged_in_user = logged_in_status_file.logged_in_status(owner_list)
     booking = user_data
 
-    if approved_or_deny_booking(booking, True, logged_in_user):
+    if approved_or_deny_booking(booking, False, bookings_list):
         delete_windows.delete_windows_func()
         approve_deny_bookings(user_data=logged_in_user)
 
@@ -441,7 +441,7 @@ def gui_denied_booking(sender, app_data, user_data):
     logged_in_user = logged_in_status_file.logged_in_status(owner_list)
     booking = user_data
 
-    if not approved_or_deny_booking(booking, False, logged_in_user):
+    if not approved_or_deny_booking(booking, False, bookings_list):
         approve_deny_bookings(user_data=logged_in_user)
         delete_windows.delete_windows_func()
 
