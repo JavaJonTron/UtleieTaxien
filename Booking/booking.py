@@ -5,5 +5,3 @@ class Booking:
         self.date_to = date_to
         self.car = car
         self.approved = approved
-
-#Test

@@ -1,10 +1,12 @@
 import dearpygui.dearpygui as dpg
 
+import payment.paymentorder
 from main import save_system
 from Booking import booking
 from main import renter_list
 from main import bookings_list
 from functions import logged_in_status_file
+
 
 # Not testable
 def dates_to():
@@ -21,6 +23,7 @@ def dates_to():
     dict_dates_to["Year_Day"] = to_yearday
     return dict_dates_to
 
+
 # Not testable
 def dates_from():
     dict_dates_from = {}
@@ -36,7 +39,9 @@ def dates_from():
     dict_dates_from["Year_Day"] = from_yearday
     return dict_dates_from
 
+
 def check_if_renter_can_afford(car, renter_logged):
+
     rental_price = car.price_calculation(2, hours=None)
     print(f'før betaling{renter_logged.money}')
     if renter_logged.money >= rental_price:
@@ -50,12 +55,12 @@ def check_if_renter_can_afford(car, renter_logged):
         return False
 
 
-
 def create_book(from_date, to_date, renter_logged, car, no_day_crash):
     if check_if_from_day_is_lesser_than_to_day(from_date, to_date):
         if no_day_crash == 0:
             if check_if_renter_can_afford(car, renter_logged):
                 booking_object = booking.Booking(renter_logged, from_date, to_date, car, False)
+
                 bookings_list.append(booking_object)
                 save_system('booking_file', bookings_list)
                 return booking_object
@@ -75,10 +80,18 @@ def check_if_booking_date_crashes_with_previous_booking_date(new_to_date, new_fr
         return False
 
 
-
 def booking_func(sender, app_data, user_data):
     dict_new_dates_from = dates_from()
     dict_new_dates_to = dates_to()
+    #dagen_fra = dict_new_dates_from["Year_Day"]
+    #dagen_til =
+    booked_days = dict_new_dates_to["Year_Day"] - dict_new_dates_from["Year_Day"]
+    booked_days += 1
+    print(f'DETTE ER FRA DAGEN {dict_new_dates_from["Year_Day"]}')
+    print(f'DETTE ER TYPE {type(dict_new_dates_from["Year_Day"])}')
+    print(f'DETTE ER ANTALL DAGER DET ER BOOKET {booked_days}')
+    #booked_days = int(dict_new_dates_from["Year_Day"]) - int(dict_new_dates_to[["Year_Day"]])
+    #print(f'Dette er antall dager bilen er booket {booked_days}')
     chosen_car = user_data
     renter_logged_in = logged_in_status_file.logged_in_status(renter_list)
     booking_list_number = 0
