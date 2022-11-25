@@ -11,4 +11,5 @@ def create_car(owner):
     is_take = False
     hourly_rate = 80
     daily_rate = 1500
-    return Car(make, model, year, license_plate, fuel_source, km, is_take, hourly_rate, daily_rate, owner)
+    earned_total = 0
+    return Car(make, model, year, license_plate, fuel_source, km, is_take, hourly_rate, daily_rate, owner, earned_total)
