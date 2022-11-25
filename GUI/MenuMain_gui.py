@@ -10,6 +10,8 @@ from Booking import create_booking_file
 from functions import get_todays_date as date
 from functions import log_off_func
 from functions import logged_in_status_file
+from functions.approved_or_deny_booking import approved_or_deny_booking
+from functions.checking_object_instance import checking_object_instance
 from main import bookings_list
 from main import renter_list
 from main import car_list
@@ -135,18 +137,6 @@ def log_in_accepted(sender, app_data, user_data):
     if checking_object_instance(logged_in_user, admin.admin.Admin):
         welcome_screen_admin(user_data=logged_in_user)
         print("YOU ARE LOGGED IN AS AN ADMIN")
-
-def checking_object_instance(object_type, class_type):
-    '''
-    Sjekker om et object er av en type klasse.
-    :param object_type: Bruker som er innolgget
-    :param class_type: Klassen som er i bruk
-    :return: True eller False om et object er en klasse
-    '''
-    if isinstance(object_type, class_type):
-        return True
-    else:
-        return False
 
 
 def welcome_screen_renter(sender=None, app_data=None, user_data=None):
@@ -382,29 +372,15 @@ def approve_car(sender, app_data, user_data=None):
         with dpg.menu_bar(label="Menu Bar"):
             dpg.add_button(label="Home", callback=owner_main_menu, user_data=logged_in_user)
             dpg.add_button(label="Log Out", callback=log_out, user_data=owner_list)
-        dpg.add_text(booking.renter.name + " wants to rent your " + booking.car.nickname() + " with license plate " +
+        dpg.add_text(booking.renters.name + " wants to rent your " + booking.car.nickname() + " with license plate " +
                      booking.car.license_plate)
-        dpg.add_text(booking.renter.name + " wants to rent it from " + str(booking.date_from['Day']) + "." + \
+        dpg.add_text(booking.renters.name + " wants to rent it from " + str(booking.date_from['Day']) + "." + \
                      str(booking.date_from['Month']) + "." + str(booking.date_from['Year']) + " to: " + \
                      str(booking.date_to['Day']) + "." + str(booking.date_to['Month']) + "." + \
                      str(booking.date_to['Year']))
-        dpg.add_text(booking.renter.name + "s score is " + str(booking.renter.score) + " out of X")
+        dpg.add_text(booking.renters.name + "s score is " + str(booking.renters.score) + " out of X")
         dpg.add_button(label="Approve", callback=gui_approved_booking, user_data=booking)
         dpg.add_button(label="Deny", callback=gui_denied_booking, user_data=booking)
-
-
-def approved_or_deny_booking(booking, decision, logged_in_user):
-    for bookings in bookings_list:
-        if booking == bookings:
-            if not decision:
-                print("YES NÅ BLIR DENNE FUNKSJONEN KALT PÅ FALSE")
-                booking.approved = decision
-                print(f"{bookings_list.remove(booking)}")
-                return decision
-            elif decision:
-                print("YES NÅ BLIR DENNE FUNKSJONEN KALT PÅ TRUE")
-                booking.approved = decision
-                return decision
 
 
 # def denied_booking(booking):
@@ -427,7 +403,6 @@ def gui_approved_booking(sender, app_data, user_data):
     if approved_or_deny_booking(booking, True, logged_in_user):
         delete_windows.delete_windows_func()
         approve_deny_bookings(user_data=logged_in_user)
-
 
 
 def gui_denied_booking(sender, app_data, user_data):
@@ -628,7 +603,7 @@ def see_rented_cars(sender, app_data, user_data):
             dpg.add_button(label="Log Out", callback=log_out, user_data=renter_list)
         for booking in bookings_list:
             if booking.approved:
-                if booking.renter.name == user_data.name:
+                if booking.renters.name == user_data.name:
                     rented_cars.append(
                         f"{booking.car.nickname()}, {booking.date_from['Day']}.{booking.date_from['Month']}."
                         f"{booking.date_from['Year']}-{booking.date_to['Day']}.{booking.date_to['Month']}."
