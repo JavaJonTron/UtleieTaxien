@@ -36,15 +36,24 @@ def dates_from():
     dict_dates_from["Year_Day"] = from_yearday
     return dict_dates_from
 
+def check_if_renter_can_afford(car, renter_logged):
+    rental_price = car.price_calculation(2, hours=None)
+    if renter_logged.money >= rental_price:
+        renter_logged.wallet()
+        print("JA DETTE HAR VI RÅD TIL")
+        return True
+    else:
+        print("TAPER DETTE HADDE DU IKKE RÅD TIL")
+
 
 def create_book(from_date, to_date, renter_logged, car, no_day_crash):
     if check_if_from_day_is_lesser_than_to_day(from_date, to_date):
-        # if from_date["Year_Day"] < to_date["Year_Day"]:
         if no_day_crash == 0:
-            booking_object = booking.Booking(renter_logged, from_date, to_date, car, False)
-            bookings_list.append(booking_object)
-            save_system('booking_file', bookings_list)
-            return booking_object
+            if check_if_renter_can_afford(car, renter_logged):
+                booking_object = booking.Booking(renter_logged, from_date, to_date, car, False)
+                bookings_list.append(booking_object)
+                save_system('booking_file', bookings_list)
+                return booking_object
 
 
 def check_if_from_day_is_lesser_than_to_day(from_date, to_date):
@@ -59,6 +68,7 @@ def check_if_booking_date_crashes_with_previous_booking_date(new_to_date, new_fr
         return True
     else:
         return False
+
 
 
 def booking_func(sender, app_data, user_data):

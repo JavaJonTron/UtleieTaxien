@@ -12,13 +12,25 @@ class Car:
         self.owner = owner
         self.earned_total = earned_total
 
-    def price_calculation(self, rate):
-        taxes = 0.25
-        rate = rate - (rate * taxes)
-        easy_car = 0.2
-        rate = rate-(rate * easy_car)
-        self.earned_total += rate
-        return rate
+    def price_calculation(self, days, hours):
+        if days:
+            rate = self.daily_rate * days
+            taxes = 0.25
+            rate = rate - (rate * taxes)
+            easy_car = 0.2
+            rate = rate - (rate * easy_car)
+            self.earned_total += rate
+            print(rate)
+            return rate
+        elif hours:
+            rate = self.hourly_rate * hours
+            taxes = 0.25
+            rate = rate - (rate * taxes)
+            easy_car = 0.2
+            rate = rate - (rate * easy_car)
+            self.earned_total += rate
+            print(rate)
+            return rate
 
     def nickname(self):
         return str(self.year) + " " + str(self.make) + " " + str(self.model)
