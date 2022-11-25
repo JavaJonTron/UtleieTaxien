@@ -1,6 +1,7 @@
 from dearpygui import dearpygui as dpg
 
 import Car.create_car_file
+import main
 import owner.owner
 import renter.renter
 from functions import delete_windows
@@ -185,8 +186,8 @@ def owner_main_menu(sender, app_data, user_data):
     :param user_data: Innlogget bruker
     :return:
     '''
+    logged_in_user = logged_in_status_file.logged_in_status(owner_list)
     delete_windows.delete_windows_func()
-    logged_in_user = user_data
     with dpg.window(label="Owner Control Panel", tag="Owner Main", width=400, height=400):
         dpg.set_primary_window("Owner Main", True)
         with dpg.menu_bar(label="Menu Bar"):
@@ -326,30 +327,59 @@ def new_car(sender, app_data, user_data):
         dpg.add_input_text(hint="Odometer:", tag="odometer", no_spaces=True, uppercase=True)
         dpg.add_input_text(hint="Hourly Rate:", tag="hourly", no_spaces=True, uppercase=True)
         dpg.add_input_text(hint="Daily Rate:", tag="daily", no_spaces=True, uppercase=True)
-        dpg.add_button(label="Publish", callback=Car.create_car_file.create_car)
-        print(car_list)
+        dpg.add_button(label="Publish", callback=create_car)
+
+def create_car(sender, app_data, user_data):
+    logged_in_user = logged_in_status_file.logged_in_status(owner_list)
+    Car.create_car_file.create_car()
+    owner_main_menu(sender=None, app_data=None, user_data=logged_in_user)
+
 
 def see_cars(sender, app_data, user_data):
     '''
-    Viser eieren bilene h*n har til utleie og info om disse
+    Viser eieren bilene h*n har til utleie
     :param sender: Ikke i bruk
     :param app_data: Ikke i bruk
     :param user_data: Logged in user
     :return:
     '''
     logged_in_user = logged_in_status_file.logged_in_status(owner_list)
-    owned_cars = []
     delete_windows.delete_windows_func()
     with dpg.window(label="Owner Control Panel", tag="Owner See Cars", width=400, height=400):
         dpg.set_primary_window("Owner See Cars", True)
         with dpg.menu_bar(label="Menu Bar"):
             dpg.add_button(label="Home", callback=owner_main_menu, user_data=logged_in_user)
             dpg.add_button(label="Log Out", callback=log_out, user_data=owner_list)
-        for cars in car_list:
-            if cars.owner.name == user_data.name:
-                owned_cars.append(cars.nickname())
-        dpg.add_listbox(tag="owned", items=owned_cars)
+        for car in car_list:
+            if car.owner.name == user_data.name:
+                dpg.add_button(label=car.nickname(), callback=see_detailed_car_info, user_data=car)
         dpg.add_text("See owned cars")
+
+def see_detailed_car_info(sender, app_data, user_data):
+    logged_in_user = logged_in_status_file.logged_in_status(owner_list)
+    delete_windows.delete_windows_func()
+    with dpg.window(label="Owner Control Panel", tag="Owner See Detailed Cars", width=400, height=400):
+        dpg.set_primary_window("Owner See Detailed Cars", True)
+        with dpg.menu_bar(label="Menu Bar"):
+            dpg.add_button(label="Home", callback=owner_main_menu, user_data=logged_in_user)
+            dpg.add_button(label="Log Out", callback=log_out, user_data=owner_list)
+        dpg.add_text(user_data.nickname())
+        dpg.add_text(f"Make: {user_data.make}")
+        dpg.add_text(f"Model: {user_data.model}")
+        dpg.add_text(f"Year: {user_data.year}")
+        dpg.add_text(f"License plate: {user_data.license_plate}")
+        dpg.add_text(f"Fuel Source: {user_data.fuel_source}")
+        dpg.add_text(f"Odometer: {user_data.km}")
+        dpg.add_text(f"Hourly Rate: {user_data.hourly_rate}kr")
+        dpg.add_text(f"Daily Rate: {user_data.daily_rate}kr")
+        dpg.add_text(f"Earned total: {user_data.earned_total}kr")
+        dpg.add_button(label="Delete car", callback=delete_car, user_data=user_data)
+
+def delete_car(sender, app_data, user_data):
+    logged_in_user = logged_in_status_file.logged_in_status(owner_list)
+    car_list.remove(user_data)
+    main.save_system('car_file', car_list)
+    owner_main_menu(sender=None, app_data=None, user_data=logged_in_user)
 
 def render_cars():
     '''

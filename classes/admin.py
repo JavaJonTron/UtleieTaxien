@@ -1,6 +1,5 @@
 from classes.human import Human
 
-
 class Admin(Human):
     def __init__(self, age, sex, name, is_logged_in):
         super().__init__(age, sex, name, is_logged_in)

@@ -25,18 +25,28 @@ def create_car():
     while True:
         try:
             km = int(dpg.get_value("odometer"))
-            print(km)
             break
         except ValueError:
             print("Please enter how far the car has driven!")
             continue
+    while True:
+        try:
+            hourly_rate = int(dpg.get_value("hourly"))
+            break
+        except ValueError:
+            print("Please enter hourly rate!")
+            continue
+    while True:
+        try:
+            daily_rate = int(dpg.get_value("daily"))
+            break
+        except ValueError:
+            print("Please enter daily rate!")
+            continue
     is_take = False
-    hourly_rate = 150
-    daily_rate = 3000
     owner = functions.logged_in_status_file.logged_in_status(owner_list)
     earned_total = 0
     car_object = car.Car(make, model, year, license_plate, fuel_source, km, is_take, hourly_rate, daily_rate, owner, earned_total)
     car_list.append(car_object)
     save_system('car_file', car_list)
-    print(car_object)
     return car_object
