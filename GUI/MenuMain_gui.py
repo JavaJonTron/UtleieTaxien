@@ -17,6 +17,7 @@ from main import owner_list
 dpg.create_context()
 dpg.create_viewport(title='Utleie_app', width=600, height=600)
 
+
 def admin_login():
     '''
     Denne kodenblokken tar for seg Admin innlogging og sender brukeren vidre til admin control panel
@@ -31,6 +32,7 @@ def admin_login():
         dpg.add_text("Password:")
         dpg.add_input_text(tag="Admin password")
         dpg.add_button(label="Log in", tag="adminLogInButton", callback=log_in_accepted)
+
 
 def owner_login():
     '''
@@ -52,6 +54,7 @@ def owner_login():
                        user_data=owner_list[1])
         dpg.add_button(label="Owner Log in with Google", tag="ownerLogInGoogleButton")
         dpg.add_button(label="Owner Log in with Vipps", tag="ownerLogInVippsButton")
+
 
 def renter_login():
     '''
@@ -76,6 +79,7 @@ def renter_login():
         dpg.add_button(label="Renter Log in with Google", tag="renterLogInGoogleButton")
         dpg.add_button(label="Renter Log in with Vipps", tag="renterLogInVippsButton")
 
+
 def main_menu():
     '''
     Dette er vinduet som møter deg ved programstart og lar bruker velge hvilken rolle man skal logge seg inn som
@@ -91,6 +95,7 @@ def main_menu():
 
 main_menu()
 
+
 def log_out(sender=None, app_data=None, user_data=None):
     '''
     Denne funksjonen tar for seg utlogging av brukere, den sletter alle vinduer og setter brukere til avlogget.
@@ -99,10 +104,11 @@ def log_out(sender=None, app_data=None, user_data=None):
     '''
     delete_windows.delete_windows_func()
     log_off_func.log_off_human(user_data)
-    #NÅ LOOPER DEN IGJENNOM LISTA, OG LOGGER AV ALLE.
-    #KANSJE LEGGE INN OBEJKTET SOM SKAL LOGGES UT I PARAMETER FELTET
-    #ISTEDENFOR Å LOGGE AV ALLE I EN BESTEMT LISTE?
+    # NÅ LOOPER DEN IGJENNOM LISTA, OG LOGGER AV ALLE.
+    # KANSJE LEGGE INN OBEJKTET SOM SKAL LOGGES UT I PARAMETER FELTET
+    # ISTEDENFOR Å LOGGE AV ALLE I EN BESTEMT LISTE?
     main_menu()
+
 
 def log_in_accepted(sender, app_data, user_data):
     '''
@@ -126,6 +132,7 @@ def log_in_accepted(sender, app_data, user_data):
         welcome_screen_owner(user_data=logged_in_user)
         print("YOU ARE LOGGED IN AS AN OWNER")
 
+
 def checking_object_instance(object_type, class_type):
     '''
     Sjekker om et object er av en type klasse.
@@ -137,6 +144,7 @@ def checking_object_instance(object_type, class_type):
         return True
     else:
         return False
+
 
 def welcome_screen_renter(sender=None, app_data=None, user_data=None):
     '''
@@ -151,6 +159,7 @@ def welcome_screen_renter(sender=None, app_data=None, user_data=None):
         dpg.add_text(f"Successfully logged in as {user_data.name}")
         dpg.add_button(label="Click me to continue", callback=renter_main_menu, user_data=user_data)
 
+
 def welcome_screen_owner(sender=None, app_data=None, user_data=None):
     '''
     Bekreftelse til bruker på at h*n er innlogget som en owner
@@ -163,6 +172,7 @@ def welcome_screen_owner(sender=None, app_data=None, user_data=None):
         dpg.set_primary_window("Owner Login Accepted", True)
         dpg.add_text(f"Successfully logged in as {user_data.name}")
         dpg.add_button(label="Click me to continue", callback=owner_main_menu, user_data=user_data)
+
 
 def welcome_screen_admin(sender=None, app_data=None, user_data=None):
     '''
@@ -177,6 +187,7 @@ def welcome_screen_admin(sender=None, app_data=None, user_data=None):
         dpg.add_text(f"Successfully logged in as {user_data.name}")
     # dpg.add_button(label="Click me to continue", callback=admin_main_menu, user_data=user_data)
     # DEN OVER MÅ JEG LEGGE TIL IGJEN NÅR JEG HAR OPPRETTET admin_main_menu,
+
 
 def owner_main_menu(sender, app_data, user_data):
     '''
@@ -199,6 +210,7 @@ def owner_main_menu(sender, app_data, user_data):
             dpg.add_button(label="Log Out", callback=log_out, user_data=owner_list)
         dpg.add_text("Main menu", tag="renterMainMenuText")
 
+
 def renter_main_menu(sender, app_data, user_data):
     '''
     Main menu for renter, her kan man navigere til forskjellige sider og velge hva man ønsker å gjøre
@@ -218,6 +230,7 @@ def renter_main_menu(sender, app_data, user_data):
             dpg.add_menu_item(label="Options", callback=renter_options, user_data=logged_in_user)
             dpg.add_button(label="Log Out", callback=log_out, user_data=renter_list)
         dpg.add_text("Main menu", tag="renterMainMenuText")
+
 
 def approve_deny_bookings(sender=None, app_data=None, user_data=None):
     '''
@@ -244,6 +257,7 @@ def approve_deny_bookings(sender=None, app_data=None, user_data=None):
                                  str(bookings.date_to['Year'])
                     dpg.add_button(label=label_text, callback=approve_car, user_data=bookings)
 
+
 def approve_car(sender, app_data, user_data=None):
     '''
     Lar eieren godkjenne bookingen eieren klikket seg inn på i en tidligere funksjon
@@ -267,26 +281,48 @@ def approve_car(sender, app_data, user_data=None):
                      str(booking.date_to['Day']) + "." + str(booking.date_to['Month']) + "." + \
                      str(booking.date_to['Year']))
         dpg.add_text(booking.renter.name + "s score is " + str(booking.renter.score) + " out of X")
-        dpg.add_button(label="Approve", callback=approved_booking, user_data=booking)
-        dpg.add_button(label="Deny", callback=denied_booking, user_data=booking)
+        dpg.add_button(label="Approve", callback=gui_approved_booking, user_data=booking)
+        dpg.add_button(label="Deny", callback=gui_denied_booking, user_data=booking)
 
-def approved_booking(sender, app_data, user_data):
+
+def approved_or_deny_booking(booking, decision, logged_in_user):
+    for bookings in bookings_list:
+        if booking == bookings:
+            if not decision:
+                print("YES NÅ BLIR DENNE FUNKSJONEN KALT PÅ FALSE")
+                booking.approved = decision
+                print(f"{bookings_list.remove(booking)}")
+                return decision
+            elif decision:
+                print("YES NÅ BLIR DENNE FUNKSJONEN KALT PÅ TRUE")
+                booking.approved = decision
+                return decision
+
+
+# def denied_booking(booking):
+#    for bookings in bookings_list:
+#        if booking == bookings:
+#            print(f"{bookings_list.remove(booking)}")
+#            booking.approved = False
+#approve_deny_bookings
+def gui_approved_booking(sender, app_data, user_data):
     '''
     FUnkjsonen setter bookingen til godkjent når eieren klikker på approve i tidligere funksjon
     :param sender: Ikke i bruk
     :param app_data: Ikke i bruk
-    :param user_data: Booking
+    :param user_data: Booking objekt
     :return:
     '''
     logged_in_user = logged_in_status_file.logged_in_status(owner_list)
     booking = user_data
-    for bookings in bookings_list:
-        if booking == bookings:
-            booking.approved = True
-    delete_windows.delete_windows_func()
-    approve_deny_bookings(user_data=logged_in_user)
 
-def denied_booking(sender, app_data, user_data):
+    if approved_or_deny_booking(booking, True, logged_in_user):
+        delete_windows.delete_windows_func()
+        approve_deny_bookings(user_data=logged_in_user)
+
+
+
+def gui_denied_booking(sender, app_data, user_data):
     '''
     Funksjonen setter bookingen til ikke godkjent og sletter den når eieren klikker på deny i tidligere funksjon
     :param sender: Ikke i bruk
@@ -296,12 +332,11 @@ def denied_booking(sender, app_data, user_data):
     '''
     logged_in_user = logged_in_status_file.logged_in_status(owner_list)
     booking = user_data
-    for bookings in bookings_list:
-        if booking == bookings:
-            print(f"{bookings_list.remove(booking)}")
-            booking.approved = False
-    delete_windows.delete_windows_func()
-    approve_deny_bookings(user_data=logged_in_user)
+
+    if not approved_or_deny_booking(booking, False, logged_in_user):
+        approve_deny_bookings(user_data=logged_in_user)
+        delete_windows.delete_windows_func()
+
 
 def new_car(sender, app_data, user_data):
     '''
@@ -322,12 +357,14 @@ def new_car(sender, app_data, user_data):
         dpg.add_input_text(hint="Make:", tag="make", no_spaces=True, uppercase=True, label="Make")
         dpg.add_input_text(hint="Model:", tag="model", uppercase=True, label="Model")
         dpg.add_input_int(min_value=2000, max_value=date.year, default_value=2016, tag="year", label="Year")
-        dpg.add_input_text(hint="License Plate", tag="license_plate", no_spaces=True, uppercase=True, label="License Plate")
+        dpg.add_input_text(hint="License Plate", tag="license_plate", no_spaces=True, uppercase=True,
+                           label="License Plate")
         dpg.add_input_text(hint="Fuel Source:", tag="fuel_source", no_spaces=True, uppercase=True, label="Fuel Source")
         dpg.add_input_int(min_value=0, label="Odometer", tag="odometer")
         dpg.add_input_int(min_value=0, label="Hourly Rate", tag="hourly")
         dpg.add_input_int(min_value=0, label="Daily rate", tag="daily")
         dpg.add_button(label="Publish", callback=create_car_redirect)
+
 
 def create_car_redirect(sender, app_data, user_data):
     Car.create_car_file.create_car()
@@ -354,6 +391,7 @@ def see_cars(sender, app_data, user_data):
                 dpg.add_button(label=car.nickname(), callback=see_detailed_car_info, user_data=car)
         dpg.add_text("See owned cars")
 
+
 def see_detailed_car_info(sender, app_data, user_data):
     logged_in_user = logged_in_status_file.logged_in_status(owner_list)
     delete_windows.delete_windows_func()
@@ -374,11 +412,13 @@ def see_detailed_car_info(sender, app_data, user_data):
         dpg.add_text(f"Earned total: {user_data.earned_total}kr")
         dpg.add_button(label="Delete car", callback=delete_car, user_data=user_data)
 
+
 def delete_car(sender, app_data, user_data):
     logged_in_user = logged_in_status_file.logged_in_status(owner_list)
     car_list.remove(user_data)
     main.save_system('car_file', car_list)
     owner_main_menu(sender=None, app_data=None, user_data=logged_in_user)
+
 
 def render_cars():
     '''
@@ -387,6 +427,7 @@ def render_cars():
     '''
     for bil in car_list:
         dpg.add_button(label=bil.nickname(), callback=car, user_data=bil)
+
 
 def rent_new_car(sender, app_data, user_data):
     '''
@@ -406,6 +447,7 @@ def rent_new_car(sender, app_data, user_data):
             dpg.add_button(label="Log Out", callback=log_out, user_data=renter_list)
         render_cars()
         dpg.add_text("Rent new car")
+
 
 def car(sender, app_data, user_data):
     '''
@@ -453,9 +495,11 @@ def car(sender, app_data, user_data):
                         f"{date_from_day}.{date_from_month}.{date_from_year} - {date_to_day}.{date_to_month}.{date_to_year}")
         dpg.add_listbox(tag="dates", items=avail_list)
 
+
 def rent_car_redirect(sender, app_data, user_data):
     create_booking_file.booking_func(sender=None, app_data=None, user_data=user_data)
     renter_main_menu(sender=None, app_data=None, user_data=None)
+
 
 def see_rented_cars(sender, app_data, user_data):
     '''
@@ -485,6 +529,7 @@ def see_rented_cars(sender, app_data, user_data):
         dpg.add_listbox(tag="rented", items=rented_cars)
         dpg.add_text("See rented cars")
 
+
 def renter_options():
     '''
     Denne funksjonen skal ta for seg det som er Leiers alternativer på kontosiden.
@@ -499,6 +544,7 @@ def renter_options():
             dpg.add_button(label="Home", callback=renter_main_menu, user_data=logged_in_user)
             dpg.add_button(label="Log Out", callback=log_out, user_data=renter_list)
         dpg.add_text("Options")
+
 
 def owner_options():
     '''
@@ -515,6 +561,7 @@ def owner_options():
             dpg.add_button(label="Home", callback=owner_main_menu, user_data=logged_in_user)
             dpg.add_button(label="Log Out", callback=log_out, user_data=owner_list)
         dpg.add_text("Options")
+
 
 # def admin_options():
 #    delete_windows.delete_windows_func()

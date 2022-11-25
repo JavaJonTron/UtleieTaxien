@@ -38,12 +38,17 @@ def dates_from():
 
 def check_if_renter_can_afford(car, renter_logged):
     rental_price = car.price_calculation(2, hours=None)
+    print(f'før betaling{renter_logged.money}')
     if renter_logged.money >= rental_price:
-        renter_logged.wallet()
+
+        renter_logged.wallet(-rental_price)
+        print(f'etter betaling{renter_logged.money}')
         print("JA DETTE HAR VI RÅD TIL")
         return True
     else:
         print("TAPER DETTE HADDE DU IKKE RÅD TIL")
+        return False
+
 
 
 def create_book(from_date, to_date, renter_logged, car, no_day_crash):
