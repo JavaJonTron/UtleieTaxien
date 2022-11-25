@@ -207,8 +207,8 @@ def renter_main_menu(sender, app_data, user_data):
     :param user_data: Innlogget bruker
     :return:
     '''
+    logged_in_user = logged_in_status_file.logged_in_status(renter_list)
     delete_windows.delete_windows_func()
-    logged_in_user = user_data
     with dpg.window(label="Renter Control Panel", tag="Renter Main", width=400, height=400):
         dpg.set_primary_window("Renter Main", True)
         with dpg.menu_bar(label="Menu Bar"):
@@ -438,7 +438,7 @@ def car(sender, app_data, user_data):
         dpg.add_text("TO DATE:")
         dpg.add_date_picker(tag="to_date", default_value={'month_day': date.day + 1, 'year': date.year, 'month': date.
                             month}, callback=create_booking_file.dates_to)
-        dpg.add_button(label="Book", callback=create_booking_file.booking_func, user_data=user_data)
+        dpg.add_button(label="Book", callback=rent_car_redirect, user_data=user_data)
         dpg.add_text("Car is not available between:")
         for booking in bookings_list:
             if booking.car.license_plate == user_data.license_plate:
@@ -452,6 +452,10 @@ def car(sender, app_data, user_data):
                     avail_list.append(
                         f"{date_from_day}.{date_from_month}.{date_from_year} - {date_to_day}.{date_to_month}.{date_to_year}")
         dpg.add_listbox(tag="dates", items=avail_list)
+
+def rent_car_redirect(sender, app_data, user_data):
+    create_booking_file.booking_func(sender=None, app_data=None, user_data=user_data)
+    renter_main_menu(sender=None, app_data=None, user_data=None)
 
 def see_rented_cars(sender, app_data, user_data):
     '''
