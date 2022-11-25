@@ -1,19 +1,17 @@
 from FileHandling import file_handler_pickle
-from dummyObjects import dummyOwner1, dummyOwner2, dummyCar2, dummyCar3, dummyCar1, dummyRenter1, dummyRenter2
+from dummyObjects import dummyOwner1, dummyOwner2, dummyCar2, dummyCar3, dummyCar1, dummyRenter1, dummyRenter2, dummyAdmin1
 
 owner_list = []
 car_list = []
 renter_list = []
 bookings_list = []
+admin_list = []
 
 def save_system(file, current_list):
     filskriving = file_handler_pickle.File_handler_pickle(file, current_list)
     filskriving.write_method()
     del filskriving
-save_system('owner_file', owner_list)
-save_system('renter_file', renter_list)
-save_system('car_file', car_list)
-save_system('booking_file', bookings_list)
+
 def load_system(file, li):
     filskriving = file_handler_pickle.File_handler_pickle(file, None)
     listen = filskriving.read_method()
@@ -31,6 +29,11 @@ def dummy_car_creation(owners):
     car_list.append(car)
     car = dummyCar3.create_car(owners[1])
     car_list.append(car)
+    #del filskriving
+
+def dummy_admin_creation():
+    admin = dummyAdmin1.create_admin()
+    admin_list.append(admin)
     #del filskriving
 
 def dummy_owner_creation():
@@ -60,6 +63,7 @@ def dummy_renter_creation():
 dummy_owner_creation()
 dummy_renter_creation()
 dummy_car_creation(owner_list)
+dummy_admin_creation()
 
 
 
@@ -67,6 +71,7 @@ load_system('owner_file', owner_list)
 load_system('renter_file', renter_list)
 load_system('car_file', car_list)
 load_system('booking_file', bookings_list)
+load_system('admin_file', admin_list)
 
 
 def loop_list(curr_list):

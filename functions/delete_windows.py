@@ -5,7 +5,8 @@ renter_window_list = ["Renter Login Accepted", "Renter Login", "Renter Main", "R
                       "Renter See Cars", "Renter Options"]
 owner_window_list = ["Owner Login Accepted", "Owner Login", "Owner Main", "Owner See Cars", "Owner Options",
                      "Owner New Car", "Approve Or Deny", "Approve Car", "Owner See Detailed Cars"]
-admin_window_list = []
+admin_window_list = ["Admin Login Accepted", "Admin Login", "Admin Main", "All Cars", "Admin See Detailed Cars",
+                     "Admin See Detailed Users", "All Users"]
 
 
 def delete_windows_func():
