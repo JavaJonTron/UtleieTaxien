@@ -6,6 +6,10 @@ from main import save_system
 import dearpygui.dearpygui as dpg
 
 def create_car():
+    '''
+    Creat car
+    :return:
+    '''
     make = (dpg.get_value("make")).upper()
     model = (dpg.get_value("model")).upper()
     year = int(dpg.get_value("year"))

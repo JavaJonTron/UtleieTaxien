@@ -6,7 +6,7 @@ from main import renter_list
 from main import bookings_list
 from functions import logged_in_status_file
 
-#Not testable
+# Not testable
 def dates_to():
     dict_dates_to = {}
     to_date = (dpg.get_value("to_date"))
@@ -21,7 +21,7 @@ def dates_to():
     dict_dates_to["Year_Day"] = to_yearday
     return dict_dates_to
 
-#Not testable
+# Not testable
 def dates_from():
     dict_dates_from = {}
     from_date = (dpg.get_value("from_date"))
