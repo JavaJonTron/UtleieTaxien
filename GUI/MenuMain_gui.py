@@ -318,21 +318,20 @@ def new_car(sender, app_data, user_data):
         with dpg.menu_bar(label="Menu Bar"):
             dpg.add_button(label="Home", callback=owner_main_menu, user_data=logged_in_user)
             dpg.add_button(label="Log Out", callback=log_out, user_data=owner_list)
-        dpg.add_text("TEST")
-        dpg.add_input_text(hint="Make:", tag="make", no_spaces=True, uppercase=True)
-        dpg.add_input_text(hint="Model:", tag="model", uppercase=True)
-        dpg.add_input_text(hint="Year:", tag="year", no_spaces=True, uppercase=True)
-        dpg.add_input_text(hint="License Plate", tag="license_plate", no_spaces=True, uppercase=True)
-        dpg.add_input_text(hint="Fuel Source:", tag="fuel_source", no_spaces=True, uppercase=True)
-        dpg.add_input_text(hint="Odometer:", tag="odometer", no_spaces=True, uppercase=True)
-        dpg.add_input_text(hint="Hourly Rate:", tag="hourly", no_spaces=True, uppercase=True)
-        dpg.add_input_text(hint="Daily Rate:", tag="daily", no_spaces=True, uppercase=True)
-        dpg.add_button(label="Publish", callback=create_car)
+        dpg.add_text("Fill out all fields to add a new car")
+        dpg.add_input_text(hint="Make:", tag="make", no_spaces=True, uppercase=True, label="Make")
+        dpg.add_input_text(hint="Model:", tag="model", uppercase=True, label="Model")
+        dpg.add_input_int(min_value=2000, max_value=date.year, default_value=2016, tag="year", label="Year")
+        dpg.add_input_text(hint="License Plate", tag="license_plate", no_spaces=True, uppercase=True, label="License Plate")
+        dpg.add_input_text(hint="Fuel Source:", tag="fuel_source", no_spaces=True, uppercase=True, label="Fuel Source")
+        dpg.add_input_int(min_value=0, label="Odometer", tag="odometer")
+        dpg.add_input_int(min_value=0, label="Hourly Rate", tag="hourly")
+        dpg.add_input_int(min_value=0, label="Daily rate", tag="daily")
+        dpg.add_button(label="Publish", callback=create_car_redirect)
 
-def create_car(sender, app_data, user_data):
-    logged_in_user = logged_in_status_file.logged_in_status(owner_list)
+def create_car_redirect(sender, app_data, user_data):
     Car.create_car_file.create_car()
-    owner_main_menu(sender=None, app_data=None, user_data=logged_in_user)
+    owner_main_menu(sender=None, app_data=None, user_data=None)
 
 
 def see_cars(sender, app_data, user_data):

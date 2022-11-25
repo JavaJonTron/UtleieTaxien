@@ -7,42 +7,13 @@ import dearpygui.dearpygui as dpg
 
 def create_car():
     make = (dpg.get_value("make")).upper()
-    print(make)
     model = (dpg.get_value("model")).upper()
-    print(model)
-    while True:
-        try:
-            year = int(dpg.get_value("year"))
-            print(year)
-            break
-        except ValueError:
-            print("Please enter the year the cars was manufactured!")
-            continue
+    year = int(dpg.get_value("year"))
     license_plate = (dpg.get_value("license_plate")).upper()
-    print(license_plate)
     fuel_source = (dpg.get_value("fuel_source")).upper()
-    print(fuel_source)
-    while True:
-        try:
-            km = int(dpg.get_value("odometer"))
-            break
-        except ValueError:
-            print("Please enter how far the car has driven!")
-            continue
-    while True:
-        try:
-            hourly_rate = int(dpg.get_value("hourly"))
-            break
-        except ValueError:
-            print("Please enter hourly rate!")
-            continue
-    while True:
-        try:
-            daily_rate = int(dpg.get_value("daily"))
-            break
-        except ValueError:
-            print("Please enter daily rate!")
-            continue
+    km = int(dpg.get_value("odometer"))
+    hourly_rate = int(dpg.get_value("hourly"))
+    daily_rate = int(dpg.get_value("daily"))
     is_take = False
     owner = functions.logged_in_status_file.logged_in_status(owner_list)
     earned_total = 0
