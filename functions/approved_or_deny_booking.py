@@ -1,12 +1,12 @@
 from main import bookings_list
 
-def approved_or_deny_booking(booking, decision):
-    for bookings in bookings_list:
+def approved_or_deny_booking(booking, decision, list_of_bookings):
+    for bookings in list_of_bookings:
         if booking == bookings:
             if not decision:
                 print("YES NÅ BLIR DENNE FUNKSJONEN KALT PÅ FALSE")
                 booking.approved = decision
-                print(f"{bookings_list.remove(booking)}")
+                print(f"{list_of_bookings.remove(booking)}")
                 return decision
             elif decision:
                 print("YES NÅ BLIR DENNE FUNKSJONEN KALT PÅ TRUE")

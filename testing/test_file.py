@@ -166,3 +166,14 @@ def test_renter_can_not_afford(car, renters2):
     can_not_afford = check_if_renter_can_afford(car, renters2)
     assert can_not_afford == False
 
+def test_booking_approved(booking, car, renters):
+    decision = True
+    booking_list = [booking]
+    approved_or_deny_booking(booking, decision, booking_list)
+    assert booking.approved == decision
+
+def test_booking_not_approved(booking, car, renters):
+    decision = False
+    booking_list = [booking]
+    approved_or_deny_booking(booking, decision, booking_list)
+    assert booking.approved == decision
