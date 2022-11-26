@@ -1,6 +1,5 @@
 class Human:
-    def __init__(self, age, sex, name, score, is_logged_in,
-                 wallet):  # id Forslag til at hver enkelt person kan ha en ID
+    def __init__(self, age, sex, name, score, is_logged_in, wallet):  # id Forslag til at hver enkelt person kan ha en ID
         self.age = age
         self.sex = sex
         self.name = name

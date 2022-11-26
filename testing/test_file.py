@@ -1,6 +1,6 @@
 import pytest
 
-
+import payment.paymentorder
 import renter.renter
 from functions import log_off_func
 import functions.get_average_of_list
@@ -73,14 +73,15 @@ def test_car_nickname():
     assert car_object.nickname() == f'{year} {make} {model}'
 
 
+
 @pytest.fixture
-def dates_from():
+def dates_from1():
     dict_dates_from = {"Day": 1, "Month": 1, "Year": 2022, "Year_Day": 0}
     return dict_dates_from
 
 
 @pytest.fixture
-def dates_to():
+def dates_to1():
     dict_dates_to = {"Day": 2, "Month": 1, "Year": 2022, "Year_Day": 1}
     return dict_dates_to
 
@@ -99,7 +100,7 @@ def renters2():
 
 @pytest.fixture
 def owners():
-    owner1 = Owner(30, "Female", "Nora Norasen", 10, True, 200, )
+    owner1 = Owner(30, "Female", "Nora Norasen", 10, True, 200)
     return owner1
 
 
@@ -110,24 +111,24 @@ def car(owners):
 
 
 @pytest.fixture
-def booking(renters, dates_from, dates_to, car):
+def booking(renters, dates_from1, dates_to1, car):
     approved = False
-    booking1 = Booking(renters, dates_from, dates_to, car, approved)
+    booking1 = Booking(renters, dates_from1, dates_to1, car, approved, order=None)
     return booking1
 
 
-def test_booking_created_with_correct_information(dates_from, dates_to, renters, car):
+def test_booking_created_with_correct_information(dates_from1, dates_to1, renters, car):
     no_day_crash = False
-    booking_object = create_booking_file.create_book(dates_from, dates_to, renters, car, no_day_crash)
+    booking_object = create_booking_file.create_book(dates_from1, dates_to1, renters, car, no_day_crash)
     assert booking_object.car.license_plate == "EE12345"
     assert booking_object.car.owner.age == 30
     assert booking_object.renter.name == "Nils Nilselsen"
     assert booking_object.date_from["Day"] == 1
 
 
-def test_booking_created_not_with_correct_information(dates_from, dates_to, renters, car):
+def test_booking_created_not_with_correct_information(dates_from1, dates_to1, renters, car):
     no_day_crash = False
-    booking_object = create_booking_file.create_book(dates_from, dates_to, renters, car, no_day_crash)
+    booking_object = create_booking_file.create_book(dates_from1, dates_to1, renters, car, no_day_crash)
     assert booking_object.car.license_plate != "EE12346"
     assert booking_object.car.owner.age == 30
     assert booking_object.renter.name != "Nil Nilselsen"
@@ -166,13 +167,13 @@ def test_object_is_not_correct_instance(renters):
     assert checking_object_instance(owners, renter.renter.Renter) is False
 
 
-def test_renter_can_afford(car, renters):
-    can_afford = check_if_renter_can_afford(car, renters)
+def test_renter_can_afford(car, renters, dates_to1, dates_from1):
+    can_afford = check_if_renter_can_afford(car, renters, dates_to1["Year_Day"], dates_from1["Year_Day"])
     assert can_afford is True
 
 
-def test_renter_can_not_afford(car, renters2):
-    can_not_afford = check_if_renter_can_afford(car, renters2)
+def test_renter_can_not_afford(car, renters2, dates_to1, dates_from1):
+    can_not_afford = check_if_renter_can_afford(car, renters2, dates_to1["Year_Day"], dates_from1["Year_Day"])
     assert can_not_afford is False
 
 

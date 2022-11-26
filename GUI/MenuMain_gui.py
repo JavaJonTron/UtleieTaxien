@@ -414,6 +414,7 @@ def gui_approved_booking(sender, app_data, user_data):
     booking = user_data
 
     if approved_or_deny_booking(booking, True, bookings_list):
+        booking.order.payment_processing()
         delete_windows.delete_windows_func()
         approve_deny_bookings(user_data=logged_in_user)
 

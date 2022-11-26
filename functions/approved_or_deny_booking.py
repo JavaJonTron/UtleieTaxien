@@ -10,5 +10,4 @@ def approved_or_deny_booking(booking, decision, list_of_bookings):
             elif decision:
                 print("YES NÅ BLIR DENNE FUNKSJONEN KALT PÅ TRUE")
                 booking.approved = decision
-                booking.order.payment_processing()
                 return decision
