@@ -40,27 +40,27 @@ def dates_from():
     return dict_dates_from
 
 
-def check_if_renter_can_afford(car, renter_logged):
+def creating_payment_order(amount):
+    order = payment.paymentorder.PaymentOrder(amount)
+    return order
 
-    rental_price = car.price_calculation(2, hours=None)
-    print(f'før betaling{renter_logged.money}')
-    if renter_logged.money >= rental_price:
 
-        renter_logged.wallet(-rental_price)
-        print(f'etter betaling{renter_logged.money}')
-        print("JA DETTE HAR VI RÅD TIL")
+def check_if_renter_can_afford(car, renter_logged, year_day_to, year_day_from):
+    rental_price = car.price_calculation(year_day_to - year_day_from + 1, hours=None)
+    if renter_logged.wallet >= rental_price:
+        #creating_payment_order(rental_price)
         return True
     else:
-        print("TAPER DETTE HADDE DU IKKE RÅD TIL")
         return False
 
 
 def create_book(from_date, to_date, renter_logged, car, no_day_crash):
+    rental_price = car.price_calculation(to_date["Year_Day"] - from_date["Year_Day"] + 1, hours=None)
     if check_if_from_day_is_lesser_than_to_day(from_date, to_date):
         if no_day_crash == 0:
-            if check_if_renter_can_afford(car, renter_logged):
-                booking_object = booking.Booking(renter_logged, from_date, to_date, car, False)
-
+            if check_if_renter_can_afford(car, renter_logged, to_date["Year_Day"], from_date["Year_Day"]):
+                booking_object = booking.Booking(renter_logged, from_date, to_date, car, False, creating_payment_order(rental_price))
+                booking_object.order.booking = booking_object
                 bookings_list.append(booking_object)
                 save_system('booking_file', bookings_list)
                 return booking_object
@@ -80,44 +80,50 @@ def check_if_booking_date_crashes_with_previous_booking_date(new_to_date, new_fr
         return False
 
 
+def compare_car_license_plate(new_car_booking_license_plate, previous_car_booking_license_plate):
+    if new_car_booking_license_plate == previous_car_booking_license_plate:
+        return True
+    else:
+        return False
+
+
+def list_have_reached_end(end_list, obj):
+    if end_list.index(obj) + 1 == len(end_list):
+        return True
+    else:
+        return False
+
+
+def list_bigger_then_0(list_to_check):
+    if len(list_to_check) > 0:
+        return True
+    else:
+        return False
+
+
 def booking_func(sender, app_data, user_data):
+    chosen_car = user_data
     dict_new_dates_from = dates_from()
     dict_new_dates_to = dates_to()
-    #dagen_fra = dict_new_dates_from["Year_Day"]
-    #dagen_til =
-    booked_days = dict_new_dates_to["Year_Day"] - dict_new_dates_from["Year_Day"]
-    booked_days += 1
-    print(f'DETTE ER FRA DAGEN {dict_new_dates_from["Year_Day"]}')
-    print(f'DETTE ER TYPE {type(dict_new_dates_from["Year_Day"])}')
-    print(f'DETTE ER ANTALL DAGER DET ER BOOKET {booked_days}')
-    #booked_days = int(dict_new_dates_from["Year_Day"]) - int(dict_new_dates_to[["Year_Day"]])
-    #print(f'Dette er antall dager bilen er booket {booked_days}')
-    chosen_car = user_data
-    renter_logged_in = logged_in_status_file.logged_in_status(renter_list)
-    booking_list_number = 0
-    if len(bookings_list) > 0:
+    renter_logged_in = logged_in_status_file.get_user_logged_in_status(renter_list)
+    if list_bigger_then_0(bookings_list):
         times_dates_crash = 0
         for old_booked in bookings_list:
-            booking_list_number += 1
-            if chosen_car.license_plate == old_booked.car.license_plate:
+            if compare_car_license_plate(chosen_car.license_plate, old_booked.car.license_plate):
                 if check_if_booking_date_crashes_with_previous_booking_date(dict_new_dates_to["Year_Day"],
                                                                             dict_new_dates_from["Year_Day"],
                                                                             old_booked.date_to["Year_Day"],
                                                                             old_booked.date_from["Year_Day"]):
-                    if booking_list_number == len(bookings_list):
+                    if list_have_reached_end(bookings_list, old_booked):
                         create_book(dict_new_dates_from, dict_new_dates_to, renter_logged_in, chosen_car,
                                     times_dates_crash)
                         return
                 else:
                     times_dates_crash += 1
-                    if booking_list_number == len(bookings_list):
-                        create_book(dict_new_dates_from, dict_new_dates_to, renter_logged_in, chosen_car,
-                                    times_dates_crash)
-                        return
-            else:
-                if booking_list_number == len(bookings_list):
+            elif not compare_car_license_plate(chosen_car.license_plate, old_booked.car.license_plate):
+                if list_have_reached_end(bookings_list, old_booked):
                     create_book(dict_new_dates_from, dict_new_dates_to, renter_logged_in, chosen_car, times_dates_crash)
                     return
-    elif len(bookings_list) == 0:
+    elif not list_bigger_then_0(bookings_list):
         print(len(bookings_list))
         create_book(dict_new_dates_from, dict_new_dates_to, renter_logged_in, chosen_car, 0)

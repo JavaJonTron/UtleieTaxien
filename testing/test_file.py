@@ -155,7 +155,7 @@ def test_logging_off_all_humans_successfully(owners, renters):
 
 def test_correct_person_logged_in(owners):
     list_of_owners = [owners]
-    assert logged_in_status_file.logged_in_status(list_of_owners) == owners
+    assert logged_in_status_file.get_user_logged_in_status(list_of_owners) == owners
 
 
 def test_object_is_correct_instance(renters):

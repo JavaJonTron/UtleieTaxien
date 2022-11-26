@@ -20,7 +20,7 @@ def create_car():
     hourly_rate = int(dpg.get_value("hourly"))
     daily_rate = int(dpg.get_value("daily"))
     is_take = False
-    owner = functions.logged_in_status_file.logged_in_status(owner_list)
+    owner = functions.logged_in_status_file.get_user_logged_in_status(owner_list)
     earned_total = 0
     car_object = car.Car(make, model, year, license_plate, fuel_source, km, is_take, hourly_rate, daily_rate, owner,
                          earned_total)

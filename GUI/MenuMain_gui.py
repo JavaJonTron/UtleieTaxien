@@ -193,7 +193,7 @@ def admin_main_menu(sender, app_data, user_data):
     :param user_data: Innlogget bruker
     :return:
     """
-    logged_in_user = logged_in_status_file.logged_in_status(admin_list)
+    logged_in_user = logged_in_status_file.get_user_logged_in_status(admin_list)
     delete_windows.delete_windows_func()
     with dpg.window(label="Admin Control Panel", tag="Admin Main", width=400, height=400):
         dpg.set_primary_window("Admin Main", True)
@@ -213,7 +213,7 @@ def owner_main_menu(sender, app_data, user_data):
     :param user_data: Innlogget bruker
     :return:
     """
-    logged_in_user = logged_in_status_file.logged_in_status(owner_list)
+    logged_in_user = logged_in_status_file.get_user_logged_in_status(owner_list)
     delete_windows.delete_windows_func()
     with dpg.window(label="Owner Control Panel", tag="Owner Main", width=400, height=400):
         dpg.set_primary_window("Owner Main", True)
@@ -235,7 +235,7 @@ def renter_main_menu(sender, app_data, user_data):
     :param user_data: Innlogget bruker
     :return:
     """
-    logged_in_user = logged_in_status_file.logged_in_status(renter_list)
+    logged_in_user = logged_in_status_file.get_user_logged_in_status(renter_list)
     delete_windows.delete_windows_func()
     with dpg.window(label="Renter Control Panel", tag="Renter Main", width=400, height=400):
         dpg.set_primary_window("Renter Main", True)
@@ -257,7 +257,7 @@ def approve_deny_bookings(sender=None, app_data=None, user_data=None):
     :param user_data: Innlogget bruker
     :return:
     """
-    logged_in_user = logged_in_status_file.logged_in_status(owner_list)
+    logged_in_user = logged_in_status_file.get_user_logged_in_status(owner_list)
     delete_windows.delete_windows_func()
     with dpg.window(label="Owner Control Panel", tag="Approve Or Deny", width=400, height=400):
         dpg.set_primary_window("Approve Or Deny", True)
@@ -275,7 +275,7 @@ def approve_deny_bookings(sender=None, app_data=None, user_data=None):
 
 
 def all_users():
-    logged_in_user = logged_in_status_file.logged_in_status(admin_list)
+    logged_in_user = logged_in_status_file.get_user_logged_in_status(admin_list)
     delete_windows.delete_windows_func()
     with dpg.window(label="Admin Control Panel", tag="All Users", width=400, height=400):
         dpg.set_primary_window("All Users", True)
@@ -286,7 +286,7 @@ def all_users():
 
 
 def admin_see_detailed_user_info(sender, app_data, user_data):
-    logged_in_user = logged_in_status_file.logged_in_status(admin_list)
+    logged_in_user = logged_in_status_file.get_user_logged_in_status(admin_list)
     delete_windows.delete_windows_func()
     with dpg.window(label="Admin Control Panel", tag="Admin See Detailed Users", width=400, height=400):
         dpg.set_primary_window("Admin See Detailed Users", True)
@@ -299,7 +299,7 @@ def admin_see_detailed_user_info(sender, app_data, user_data):
             dpg.add_text(f"Sex: {user_data.sex}")
             dpg.add_text(f"Score: {user_data.score}")
             dpg.add_text(f"Is active now: {user_data.is_logged_in}")
-            dpg.add_text(f"Wallet: {user_data.money}kr")
+            dpg.add_text(f"Wallet: {user_data.wallet}kr")
             dpg.add_button(label="Delete user", callback=admin_delete_users, user_data=user_data)
         else:
             dpg.add_text(f"{user_data.name} is a owner")
@@ -307,7 +307,7 @@ def admin_see_detailed_user_info(sender, app_data, user_data):
             dpg.add_text(f"Sex: {user_data.sex}")
             dpg.add_text(f"Score: {user_data.score}")
             dpg.add_text(f"Is active now: {user_data.is_logged_in}")
-            dpg.add_text(f"Wallet: {user_data.money}kr")
+            dpg.add_text(f"Wallet: {user_data.wallet}kr")
             dpg.add_button(label="Delete user", callback=admin_delete_users, user_data=user_data)
 
 
@@ -330,7 +330,7 @@ def admin_delete_users(sender, app_data, user_data):
 
 
 def all_cars():
-    logged_in_user = logged_in_status_file.logged_in_status(admin_list)
+    logged_in_user = logged_in_status_file.get_user_logged_in_status(admin_list)
     delete_windows.delete_windows_func()
     with dpg.window(label="Admin Control Panel", tag="All Cars", width=400, height=400):
         dpg.set_primary_window("All Cars", True)
@@ -341,7 +341,7 @@ def all_cars():
 
 
 def admin_see_detailed_car_info(sender, app_data, user_data):
-    logged_in_user = logged_in_status_file.logged_in_status(admin_list)
+    logged_in_user = logged_in_status_file.get_user_logged_in_status(admin_list)
     delete_windows.delete_windows_func()
     with dpg.window(label="Admin Control Panel", tag="Admin See Detailed Cars", width=400, height=400):
         dpg.set_primary_window("Admin See Detailed Cars", True)
@@ -363,7 +363,7 @@ def admin_see_detailed_car_info(sender, app_data, user_data):
 
 
 def admin_delete_car(sender, app_data, user_data):
-    logged_in_user = logged_in_status_file.logged_in_status(admin_list)
+    logged_in_user = logged_in_status_file.get_user_logged_in_status(admin_list)
     car_list.remove(user_data)
     main.save_system('car_file', car_list)
     all_cars()
@@ -379,7 +379,7 @@ def approve_car(sender, app_data, user_data=None):
     """
     booking = user_data
     delete_windows.delete_windows_func()
-    logged_in_user = logged_in_status_file.logged_in_status(owner_list)
+    logged_in_user = logged_in_status_file.get_user_logged_in_status(owner_list)
     with dpg.window(label="Owner Control Panel", tag="Approve Car", width=400, height=400):
         dpg.set_primary_window("Approve Car", True)
         with dpg.menu_bar(label="Menu Bar"):
@@ -410,10 +410,10 @@ def gui_approved_booking(sender, app_data, user_data):
     :param user_data: Booking objekt
     :return:
     """
-    logged_in_user = logged_in_status_file.logged_in_status(owner_list)
+    logged_in_user = logged_in_status_file.get_user_logged_in_status(owner_list)
     booking = user_data
 
-    if approved_or_deny_booking(booking, False, bookings_list):
+    if approved_or_deny_booking(booking, True, bookings_list):
         delete_windows.delete_windows_func()
         approve_deny_bookings(user_data=logged_in_user)
 
@@ -426,12 +426,12 @@ def gui_denied_booking(sender, app_data, user_data):
     :param user_data: Booking
     :return:
     """
-    logged_in_user = logged_in_status_file.logged_in_status(owner_list)
+    logged_in_user = logged_in_status_file.get_user_logged_in_status(owner_list)
     booking = user_data
 
     if not approved_or_deny_booking(booking, False, bookings_list):
-        approve_deny_bookings(user_data=logged_in_user)
         delete_windows.delete_windows_func()
+        approve_deny_bookings(user_data=logged_in_user)
 
 
 def new_car(sender, app_data, user_data):
@@ -442,7 +442,7 @@ def new_car(sender, app_data, user_data):
     :param user_data: Ikke i bruk
     :return:
     """
-    logged_in_user = logged_in_status_file.logged_in_status(owner_list)
+    logged_in_user = logged_in_status_file.get_user_logged_in_status(owner_list)
     delete_windows.delete_windows_func()
     with dpg.window(label="Owner Control Panel", tag="Owner New Car", width=400, height=400):
         dpg.set_primary_window("Owner New Car", True)
@@ -475,7 +475,7 @@ def see_cars(sender, app_data, user_data):
     :param user_data: Logged in user
     :return:
     """
-    logged_in_user = logged_in_status_file.logged_in_status(owner_list)
+    logged_in_user = logged_in_status_file.get_user_logged_in_status(owner_list)
     delete_windows.delete_windows_func()
     with dpg.window(label="Owner Control Panel", tag="Owner See Cars", width=400, height=400):
         dpg.set_primary_window("Owner See Cars", True)
@@ -489,7 +489,7 @@ def see_cars(sender, app_data, user_data):
 
 
 def see_detailed_car_info(sender, app_data, user_data):
-    logged_in_user = logged_in_status_file.logged_in_status(owner_list)
+    logged_in_user = logged_in_status_file.get_user_logged_in_status(owner_list)
     delete_windows.delete_windows_func()
     with dpg.window(label="Owner Control Panel", tag="Owner See Detailed Cars", width=400, height=400):
         dpg.set_primary_window("Owner See Detailed Cars", True)
@@ -510,7 +510,7 @@ def see_detailed_car_info(sender, app_data, user_data):
 
 
 def delete_car(sender, app_data, user_data):
-    logged_in_user = logged_in_status_file.logged_in_status(owner_list)
+    logged_in_user = logged_in_status_file.get_user_logged_in_status(owner_list)
     car_list.remove(user_data)
     main.save_system('car_file', car_list)
     owner_main_menu(sender=None, app_data=None, user_data=logged_in_user)
@@ -533,7 +533,7 @@ def rent_new_car(sender, app_data, user_data):
     :param user_data:
     :return:
     """
-    logged_in_user = logged_in_status_file.logged_in_status(renter_list)
+    logged_in_user = logged_in_status_file.get_user_logged_in_status(renter_list)
     delete_windows.delete_windows_func()
     with dpg.window(label="Renter Control Panel", tag="Renter New Car", width=400, height=400):
         dpg.set_primary_window("Renter New Car", True)
@@ -557,7 +557,7 @@ def car(sender, app_data, user_data):
     :param user_data:
     :return:
     """
-    logged_in_user = logged_in_status_file.logged_in_status(renter_list)
+    logged_in_user = logged_in_status_file.get_user_logged_in_status(renter_list)
     avail_list = []
     delete_windows.delete_windows_func()
     with dpg.window(label="Renter Control Panel", tag="Renter Car", width=400, height=400):
@@ -607,7 +607,7 @@ def see_rented_cars(sender, app_data, user_data):
     :param user_data:
     :return:
     """
-    logged_in_user = logged_in_status_file.logged_in_status(owner_list)
+    logged_in_user = logged_in_status_file.get_user_logged_in_status(owner_list)
     rented_cars = []
     delete_windows.delete_windows_func()
     with dpg.window(label="Renter Control Panel", tag="Renter See Cars", width=400, height=400):
@@ -632,7 +632,7 @@ def renter_options():
     Denne funksjonen kan bli kalt fra renter_main_menu
     :return:
     """
-    logged_in_user = logged_in_status_file.logged_in_status(renter_list)
+    logged_in_user = logged_in_status_file.get_user_logged_in_status(renter_list)
     delete_windows.delete_windows_func()
     with dpg.window(label="Renter Control Panel", tag="Renter Options", width=400, height=400):
         dpg.set_primary_window("Renter Options", True)
@@ -648,7 +648,7 @@ def owner_options():
     Denne kan bli kalt fra [owner_main_menu]
     :return:
     """
-    logged_in_user = logged_in_status_file.logged_in_status(owner_list)
+    logged_in_user = logged_in_status_file.get_user_logged_in_status(owner_list)
     delete_windows.delete_windows_func()
     with dpg.window(label="Owner Control Panel", tag="Owner Options", width=400, height=400):
         dpg.set_primary_window("Owner Options", True)
