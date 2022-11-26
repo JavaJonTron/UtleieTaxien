@@ -1,5 +1,6 @@
 from main import bookings_list
 
+
 def approved_or_deny_booking(booking, decision, list_of_bookings):
     for bookings in list_of_bookings:
         if booking == bookings:

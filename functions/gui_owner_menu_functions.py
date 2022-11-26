@@ -5,6 +5,7 @@ from main import renter_list
 from main import car_list
 from main import bookings_list
 
+
 def avslutt():
     save_system("owner_file", owner_list)
     save_system("renter_file", renter_list)
