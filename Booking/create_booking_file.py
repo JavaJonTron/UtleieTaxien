@@ -11,10 +11,10 @@ from functions import logged_in_status_file
 # Not testable
 def dates_to():
     dict_dates_to = {}
-    to_date = (dpg.get_value("to_date"))
+    to_date = dpg.get_value("to_date")
     to_day = int(to_date["month_day"])
-    to_month = (int(to_date["month"])) + 1
-    to_year = (int(to_date["year"])) + 1900
+    to_month = int(to_date["month"]) + 1
+    to_year = int(to_date["year"]) + 1900
     to_yearday = int(to_date["year_day"])
 
     dict_dates_to["Day"] = to_day
@@ -27,10 +27,10 @@ def dates_to():
 # Not testable
 def dates_from():
     dict_dates_from = {}
-    from_date = (dpg.get_value("from_date"))
+    from_date = dpg.get_value("from_date")
     from_day = int(from_date["month_day"])
-    from_month = (int(from_date["month"])) + 1
-    from_year = (int(from_date["year"])) + 1900
+    from_month = int(from_date["month"]) + 1
+    from_year = int(from_date["year"]) + 1900
     from_yearday = int(from_date["year_day"])
 
     dict_dates_from["Day"] = from_day
