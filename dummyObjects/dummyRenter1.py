@@ -1,5 +1,6 @@
 from renter.renter import Renter
 
+
 def create_renter():
     name = "Ola Nordmann"
     sex = "Male"

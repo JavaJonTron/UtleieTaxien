@@ -47,8 +47,7 @@ def creating_payment_order(amount):
 
 def check_if_renter_can_afford(car, renter_logged, year_day_to, year_day_from):
     rental_price = car.price_calculation(year_day_to - year_day_from + 1, hours=None)
-    if renter_logged.wallet >= rental_price:
-        #creating_payment_order(rental_price)
+    if renter_logged.wallet.money >= rental_price:
         return True
     else:
         return False
