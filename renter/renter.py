@@ -1,5 +1,6 @@
 from classes import human
 
+
 class Renter(human.Human):
     def __init__(self, age, sex, name, score, is_logged_in, starting_money):  # , score_list, , booked_car
         super().__init__(age, sex, name, score, is_logged_in, starting_money)

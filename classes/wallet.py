@@ -3,9 +3,9 @@ class Wallet:
         self.money = money
 
     def remove_from_wallet(self, amount):
-        self.wallet -= amount
+        self.money -= amount
 
     def add_to_wallet(self, income):
-        self.wallet += income
+        self.money += income
 
 

@@ -396,12 +396,7 @@ def approve_car(sender, app_data, user_data=None):
         dpg.add_button(label="Deny", callback=gui_denied_booking, user_data=booking)
 
 
-# def denied_booking(booking):
-#    for bookings in bookings_list:
-#        if booking == bookings:
-#            print(f"{bookings_list.remove(booking)}")
-#            booking.approved = False
-# approve_deny_bookings
+
 def gui_approved_booking(sender, app_data, user_data):
     """
     FUnkjsonen setter bookingen til godkjent når eieren klikker på approve i tidligere funksjon
@@ -431,6 +426,7 @@ def gui_denied_booking(sender, app_data, user_data):
     booking = user_data
 
     if not approved_or_deny_booking(booking, False, bookings_list):
+        booking.order.payment_refund()
         delete_windows.delete_windows_func()
         approve_deny_bookings(user_data=logged_in_user)
 

@@ -60,6 +60,7 @@ def create_book(from_date, to_date, renter_logged, car, no_day_crash):
             if check_if_renter_can_afford(car, renter_logged, to_date["Year_Day"], from_date["Year_Day"]):
                 booking_object = booking.Booking(renter_logged, from_date, to_date, car, False, creating_payment_order(rental_price))
                 booking_object.order.booking = booking_object
+                booking_object.order.payment_reservation()
                 bookings_list.append(booking_object)
                 save_system('booking_file', bookings_list)
                 return booking_object
