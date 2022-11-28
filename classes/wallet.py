@@ -7,5 +7,3 @@ class Wallet:
 
     def add_to_wallet(self, income):
         self.money += income
-
-

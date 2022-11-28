@@ -7,4 +7,5 @@ def create_owner():
     age = 26
     score = 50
     is_logged_in = False
-    return Owner(age, sex, name, score, is_logged_in)
+    money = 45000
+    return Owner(age, sex, name, score, is_logged_in, money)
