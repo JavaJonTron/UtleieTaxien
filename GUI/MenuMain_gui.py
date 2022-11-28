@@ -1,6 +1,5 @@
 from dearpygui import dearpygui as dpg
 
-import Booking.create_booking_file
 import Car.create_car_file
 import main
 import owner.owner
@@ -18,6 +17,8 @@ from main import renter_list
 from main import car_list
 from main import owner_list
 from main import admin_list
+
+locale.setlocale(locale.LC_ALL, 'no_NO.ISO8859-1')
 
 dpg.create_context()
 dpg.create_viewport(title='Utleie_app', width=600, height=600)
@@ -300,7 +301,8 @@ def admin_see_detailed_user_info(sender, app_data, user_data):
             dpg.add_text(f"Sex: {user_data.sex}")
             dpg.add_text(f"Score: {user_data.score}")
             dpg.add_text(f"Is active now: {user_data.is_logged_in}")
-            dpg.add_text(f"Wallet: {user_data.wallet.money}kr")
+            money_renter = user_data.wallet.money
+            dpg.add_text(f"Wallet: {locale.currency(money_renter, grouping=True)}")
             dpg.add_button(label="Delete user", callback=admin_delete_users, user_data=user_data)
         else:
             dpg.add_text(f"{user_data.name} is a owner")
@@ -312,8 +314,10 @@ def admin_see_detailed_user_info(sender, app_data, user_data):
             money = str(money)
             for range in (money, len(money), 3):
                 print("SSS")
-            dpg.add_text(f"Wallet: {user_data.wallet.money}kr")
-            dpg.add_button(label="Delete user", callback=admin_delete_users, user_data=user_data)
+            money_owner = user_data.wallet.money
+            print(money_owner)
+            dpg.add_text(f"Wallet: {locale.currency(money_owner, grouping=True)}")
+            dpg.add_button(label="Delete user (currently not in use)")
 
 
 def render_users():
@@ -582,7 +586,6 @@ def car(sender, app_data, user_data):
         dpg.add_text("Car is not available between:")
         for booking in bookings_list:
             if Booking.create_booking_file.compare_car_license_plate(user_data.license_plate, booking.car.license_plate):
-            #if booking.car.license_plate == user_data.license_plate:
                 if booking.approved:
                     date_from_day = booking.date_from["Day"]
                     date_from_month = booking.date_from["Month"]
