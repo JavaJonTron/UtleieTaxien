@@ -14,12 +14,8 @@ class PaymentOrder:
 
     def payment_refund(self):
         self.booking.renter.wallet.add_to_wallet(self.reserved_amount)
-        print(f'Just refunded for the total amount of {self.reserved_amount}')
         self.reserved_amount -= self.reserved_amount
 
 
     def payment_processing(self):
         self.reserved_amount -= self.reserved_amount
-        #self.booking.renter.wallet.remove_from_wallet(amount=self.paid_amount)
-        print(f'THIS MUCH WAS PAID {self.paid_amount}')
-        print(f'THIS MUCH IS LEFT{self.booking.renter.wallet.money}')

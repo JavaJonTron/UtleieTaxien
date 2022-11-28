@@ -307,6 +307,10 @@ def admin_see_detailed_user_info(sender, app_data, user_data):
             dpg.add_text(f"Sex: {user_data.sex}")
             dpg.add_text(f"Score: {user_data.score}")
             dpg.add_text(f"Is active now: {user_data.is_logged_in}")
+            money = user_data.wallet.money
+            money = str(money)
+            for range in (money, len(money), 3):
+                print("SSS")
             dpg.add_text(f"Wallet: {user_data.wallet.money}kr")
             dpg.add_button(label="Delete user", callback=admin_delete_users, user_data=user_data)
 
