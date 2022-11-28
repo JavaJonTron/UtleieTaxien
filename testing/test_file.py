@@ -117,10 +117,14 @@ def booking(renters, dates_from1, dates_to1, car):
     return booking1
 
 @pytest.fixture
-def list_creation():
-    big_bad_list = [9, 4, 5, 2, 1]
+def big_list_creation():
+    big_bad_list = [0, 1, 2, 3, 4]
     return big_bad_list
 
+@pytest.fixture
+def small_list_creation():
+    small_bad_list = []
+    return small_bad_list
 
 
 def test_booking_created_with_correct_information(dates_from1, dates_to1, renters, car):
@@ -201,14 +205,18 @@ def test_booking_not_approved(booking, car, renters):
 def test_compare_license_plate():
     pass
 
-def test_if_list_bigger_then_0(list_creation):
-    assert create_booking_file.list_bigger_then_0(list_creation) is True
+def test_if_list_bigger_then_0(big_list_creation):
+    assert create_booking_file.list_bigger_then_0(big_list_creation) is True
 
-def test_if_list_not_bigger_then_0():
-    pass
+def test_if_list_not_bigger_then_0(small_list_creation):
+    assert create_booking_file.list_bigger_then_0(small_list_creation) is False
 
-def test_if_list_have_reached_end():
-    pass
+def test_if_list_have_reached_end(big_list_creation):
+    assert create_booking_file.list_have_reached_end(big_list_creation, 4) is True
 
-def test_if_list_have_not_reached_end():
-    pass
+
+def test_if_list_have_not_reached_end(big_list_creation):
+    assert create_booking_file.list_have_reached_end(big_list_creation, 2) is False
+
+
+
