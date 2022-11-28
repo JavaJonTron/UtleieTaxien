@@ -18,8 +18,18 @@ from main import renter_list
 from main import car_list
 from main import owner_list
 from main import admin_list
+from sys import platform
 
-locale.setlocale(locale.LC_ALL, 'no_NO.ISO8859-1')
+
+if platform == "linux" or platform == "linux2":
+    print("linux")
+    locale.setlocale(locale.LC_ALL, 'no_NO.ISO8859-1')
+elif platform == "darwin":
+    print("Mac")
+    locale.setlocale(locale.LC_ALL, 'no_NO.ISO8859-1')
+elif platform == "win32":
+    print("Windows")
+    locale.setlocale(locale.LC_ALL, 'nb_NO')
 
 dpg.create_context()
 dpg.create_viewport(title='Utleie_app', width=600, height=600)
