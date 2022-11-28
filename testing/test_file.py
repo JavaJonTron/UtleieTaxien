@@ -116,6 +116,12 @@ def booking(renters, dates_from1, dates_to1, car):
     booking1 = Booking(renters, dates_from1, dates_to1, car, approved, order=None)
     return booking1
 
+@pytest.fixture
+def list_creation():
+    big_bad_list = [9, 4, 5, 2, 1]
+    return big_bad_list
+
+
 
 def test_booking_created_with_correct_information(dates_from1, dates_to1, renters, car):
     no_day_crash = False
@@ -189,3 +195,20 @@ def test_booking_not_approved(booking, car, renters):
     booking_list = [booking]
     approved_or_deny_booking(booking, decision, booking_list)
     assert booking.approved == decision
+
+
+
+def test_compare_license_plate():
+    pass
+
+def test_if_list_bigger_then_0(list_creation):
+    assert create_booking_file.list_bigger_then_0(list_creation) is True
+
+def test_if_list_not_bigger_then_0():
+    pass
+
+def test_if_list_have_reached_end():
+    pass
+
+def test_if_list_have_not_reached_end():
+    pass
