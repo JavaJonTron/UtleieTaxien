@@ -278,9 +278,9 @@ def approve_deny_bookings(sender=None, app_data=None, user_data=None):
             dpg.add_button(label="Home", callback=owner_main_menu, user_data=logged_in_user)
             dpg.add_button(label="Log Out", callback=log_out, user_data=owner_list)
         for bookings in bookings_list:
-            if bookings.car.owner.name == user_data.name:
+            if bookings.car1.owner.name == user_data.name:
                 if not bookings.approved:
-                    label_text = "Car: " + bookings.car.nickname() + " From: " + str(bookings.date_from['Day']) + "." + \
+                    label_text = "Car: " + bookings.car1.nickname() + " From: " + str(bookings.date_from['Day']) + "." + \
                                  str(bookings.date_from['Month']) + "." + str(bookings.date_from['Year']) + " To: " + \
                                  str(bookings.date_to['Day']) + "." + str(bookings.date_to['Month']) + "." + \
                                  str(bookings.date_to['Year'])
@@ -405,8 +405,8 @@ def approve_car(sender, app_data, user_data=None):
         with dpg.menu_bar(label="Menu Bar"):
             dpg.add_button(label="Home", callback=owner_main_menu, user_data=logged_in_user)
             dpg.add_button(label="Log Out", callback=log_out, user_data=owner_list)
-        dpg.add_text(booking.renter.name + " wants to rent your " + booking.car.nickname() + " with license plate " +
-                     booking.car.license_plate)
+        dpg.add_text(booking.renter.name + " wants to rent your " + booking.car1.nickname() + " with license plate " +
+                     booking.car1.license_plate)
         dpg.add_text(booking.renter.name + " wants to rent it from " + str(booking.date_from['Day']) + "." + \
                      str(booking.date_from['Month']) + "." + str(booking.date_from['Year']) + " to: " + \
                      str(booking.date_to['Day']) + "." + str(booking.date_to['Month']) + "." + \
@@ -596,7 +596,7 @@ def car(sender, app_data, user_data):
         dpg.add_button(label="Book", callback=rent_car_redirect, user_data=user_data)
         dpg.add_text("Car is not available between:")
         for booking in bookings_list:
-            if compare_car_license_plate(user_data.license_plate, booking.car.license_plate):
+            if compare_car_license_plate(user_data.license_plate, booking.car1.license_plate):
                 if booking.approved:
                     date_from_day = booking.date_from["Day"]
                     date_from_month = booking.date_from["Month"]
@@ -636,7 +636,7 @@ def see_rented_cars(sender, app_data, user_data):
             if booking.approved:
                 if booking.renter.name == user_data.name:
                     rented_cars.append(
-                        f"{booking.car.nickname()}, {booking.date_from['Day']}.{booking.date_from['Month']}."
+                        f"{booking.car1.nickname()}, {booking.date_from['Day']}.{booking.date_from['Month']}."
                         f"{booking.date_from['Year']}-{booking.date_to['Day']}.{booking.date_to['Month']}."
                         f"{booking.date_to['Year']}")
         dpg.add_listbox(tag="rented", items=rented_cars)

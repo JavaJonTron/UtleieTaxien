@@ -109,7 +109,7 @@ def booking_func(sender, app_data, user_data):
     if list_bigger_then_0(bookings_list):
         times_dates_crash = 0
         for old_booked in bookings_list:
-            if compare_car_license_plate(chosen_car.license_plate, old_booked.car.license_plate):
+            if compare_car_license_plate(chosen_car.license_plate, old_booked.car1.license_plate):
                 if check_if_booking_date_crashes_with_previous_booking_date(dict_new_dates_to["Year_Day"],
                                                                             dict_new_dates_from["Year_Day"],
                                                                             old_booked.date_to["Year_Day"],
@@ -120,7 +120,7 @@ def booking_func(sender, app_data, user_data):
                         return
                 else:
                     times_dates_crash += 1
-            elif not compare_car_license_plate(chosen_car.license_plate, old_booked.car.license_plate):
+            elif not compare_car_license_plate(chosen_car.license_plate, old_booked.car1.license_plate):
                 if list_have_reached_end(bookings_list, old_booked):
                     create_book(dict_new_dates_from, dict_new_dates_to, renter_logged_in, chosen_car, times_dates_crash)
                     return

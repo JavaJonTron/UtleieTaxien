@@ -105,15 +105,19 @@ def owners():
 
 
 @pytest.fixture
-def car(owners):
+def car1(owners):
     car1 = Car("Tesla", "Model X", 2022, "EE12345", "Electric", 150, False, 300, 6000, owners, 0)
     return car1
 
+@pytest.fixture
+def car2(owners):
+    car1 = Car("Tesla", "Model y", 2021, "EE67239", "Electric", 1502, False, 30, 600, owners, 0)
+    return car1
 
 @pytest.fixture
-def booking(renters, dates_from1, dates_to1, car):
+def booking(renters, dates_from1, dates_to1, car1):
     approved = False
-    booking1 = Booking(renters, dates_from1, dates_to1, car, approved, order=None)
+    booking1 = Booking(renters, dates_from1, dates_to1, car1, approved, order=None)
     return booking1
 
 @pytest.fixture
@@ -127,18 +131,18 @@ def small_list_creation():
     return small_bad_list
 
 
-def test_booking_created_with_correct_information(dates_from1, dates_to1, renters, car):
+def test_booking_created_with_correct_information(dates_from1, dates_to1, renters, car1):
     no_day_crash = False
-    booking_object = create_booking_file.create_book(dates_from1, dates_to1, renters, car, no_day_crash)
+    booking_object = create_booking_file.create_book(dates_from1, dates_to1, renters, car1, no_day_crash)
     assert booking_object.car.license_plate == "EE12345"
     assert booking_object.car.owner.age == 30
     assert booking_object.renter.name == "Nils Nilselsen"
     assert booking_object.date_from["Day"] == 1
 
 
-def test_booking_created_not_with_correct_information(dates_from1, dates_to1, renters, car):
+def test_booking_created_not_with_correct_information(dates_from1, dates_to1, renters, car1):
     no_day_crash = False
-    booking_object = create_booking_file.create_book(dates_from1, dates_to1, renters, car, no_day_crash)
+    booking_object = create_booking_file.create_book(dates_from1, dates_to1, renters, car1, no_day_crash)
     assert booking_object.car.license_plate != "EE12346"
     assert booking_object.car.owner.age == 30
     assert booking_object.renter.name != "Nil Nilselsen"
@@ -177,24 +181,24 @@ def test_object_is_not_correct_instance(renters):
     assert checking_object_instance(owners, renter.renter.Renter) is False
 
 
-def test_renter_can_afford(car, renters, dates_to1, dates_from1):
-    can_afford = check_if_renter_can_afford(car, renters, dates_to1["Year_Day"], dates_from1["Year_Day"])
+def test_renter_can_afford(car1, renters, dates_to1, dates_from1):
+    can_afford = check_if_renter_can_afford(car1, renters, dates_to1["Year_Day"], dates_from1["Year_Day"])
     assert can_afford is True
 
 
-def test_renter_can_not_afford(car, renters2, dates_to1, dates_from1):
-    can_not_afford = check_if_renter_can_afford(car, renters2, dates_to1["Year_Day"], dates_from1["Year_Day"])
+def test_renter_can_not_afford(car1, renters2, dates_to1, dates_from1):
+    can_not_afford = check_if_renter_can_afford(car1, renters2, dates_to1["Year_Day"], dates_from1["Year_Day"])
     assert can_not_afford is False
 
 
-def test_booking_approved(booking, car, renters):
+def test_booking_approved(booking, car1, renters):
     decision = True
     booking_list = [booking]
     approved_or_deny_booking(booking, decision, booking_list)
     assert booking.approved == decision
 
 
-def test_booking_not_approved(booking, car, renters):
+def test_booking_not_approved(booking, car1, renters):
     decision = False
     booking_list = [booking]
     approved_or_deny_booking(booking, decision, booking_list)
@@ -202,8 +206,12 @@ def test_booking_not_approved(booking, car, renters):
 
 
 
-def test_compare_license_plate():
-    pass
+def test_compare_license_plate(car1, car2):
+    assert create_booking_file.compare_car_license_plate(car1.license_plate, car1.license_plate) is True
+    assert create_booking_file.compare_car_license_plate(car1.license_plate, car2.license_plate) is False
+
+
+
 
 def test_if_list_bigger_then_0(big_list_creation):
     assert create_booking_file.list_bigger_then_0(big_list_creation) is True
