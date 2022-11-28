@@ -78,16 +78,12 @@ load_system('car_file', car_list)
 load_system('booking_file', bookings_list)
 load_system('admin_file', admin_list)
 
+save_system('admin_file', admin_list)
+save_system('owner_file', owner_list)
+save_system('renter_file', renter_list)
+save_system('car_file', car_list)
+save_system('booking_file', bookings_list)
 
-def loop_list(curr_list):
-    for obj in curr_list:
-        print(obj)
-
-
-loop_list(owner_list)
-loop_list(renter_list)
-loop_list(car_list)
-loop_list(bookings_list)
 
 # load_system(r'Storage\owner_file', owner_list)
 # load_system(r'Storage\renter_file', renter_list)
