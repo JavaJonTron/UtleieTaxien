@@ -1,5 +1,6 @@
 from dearpygui import dearpygui as dpg
 
+import Booking.create_booking_file
 import Car.create_car_file
 import main
 import owner.owner
@@ -580,7 +581,8 @@ def car(sender, app_data, user_data):
         dpg.add_button(label="Book", callback=rent_car_redirect, user_data=user_data)
         dpg.add_text("Car is not available between:")
         for booking in bookings_list:
-            if booking.car.license_plate == user_data.license_plate:
+            if Booking.create_booking_file.compare_car_license_plate(user_data.license_plate, booking.car.license_plate):
+            #if booking.car.license_plate == user_data.license_plate:
                 if booking.approved:
                     date_from_day = booking.date_from["Day"]
                     date_from_month = booking.date_from["Month"]
