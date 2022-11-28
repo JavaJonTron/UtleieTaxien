@@ -73,7 +73,6 @@ def test_car_nickname():
     assert car_object.nickname() == f'{year} {make} {model}'
 
 
-
 @pytest.fixture
 def dates_from1():
     dict_dates_from = {"Day": 1, "Month": 1, "Year": 2022, "Year_Day": 0}
@@ -109,10 +108,12 @@ def car1(owners):
     car1 = Car("Tesla", "Model X", 2022, "EE12345", "Electric", 150, False, 300, 6000, owners, 0)
     return car1
 
+
 @pytest.fixture
 def car2(owners):
     car1 = Car("Tesla", "Model y", 2021, "EE67239", "Electric", 1502, False, 30, 600, owners, 0)
     return car1
+
 
 @pytest.fixture
 def booking(renters, dates_from1, dates_to1, car1):
@@ -120,10 +121,12 @@ def booking(renters, dates_from1, dates_to1, car1):
     booking1 = Booking(renters, dates_from1, dates_to1, car1, approved, order=None)
     return booking1
 
+
 @pytest.fixture
 def big_list_creation():
     big_bad_list = [0, 1, 2, 3, 4]
     return big_bad_list
+
 
 @pytest.fixture
 def small_list_creation():
@@ -205,19 +208,18 @@ def test_booking_not_approved(booking, car1, renters):
     assert booking.approved == decision
 
 
-
 def test_compare_license_plate(car1, car2):
     assert create_booking_file.compare_car_license_plate(car1.license_plate, car1.license_plate) is True
     assert create_booking_file.compare_car_license_plate(car1.license_plate, car2.license_plate) is False
 
 
-
-
 def test_if_list_bigger_then_0(big_list_creation):
     assert create_booking_file.list_bigger_then_0(big_list_creation) is True
 
+
 def test_if_list_not_bigger_then_0(small_list_creation):
     assert create_booking_file.list_bigger_then_0(small_list_creation) is False
+
 
 def test_if_list_have_reached_end(big_list_creation):
     assert create_booking_file.list_have_reached_end(big_list_creation, 4) is True
@@ -225,6 +227,3 @@ def test_if_list_have_reached_end(big_list_creation):
 
 def test_if_list_have_not_reached_end(big_list_creation):
     assert create_booking_file.list_have_reached_end(big_list_creation, 2) is False
-
-
-
