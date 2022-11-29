@@ -20,19 +20,24 @@ from main import owner_list
 from main import admin_list
 from sys import platform
 
-
-if platform == "linux" or platform == "linux2":
-    print("linux")
-    locale.setlocale(locale.LC_ALL, 'no_NO.ISO8859-1')
-elif platform == "darwin":
-    print("Mac")
-    locale.setlocale(locale.LC_ALL, 'no_NO.ISO8859-1')
-elif platform == "win32":
-    print("Windows")
-    locale.setlocale(locale.LC_ALL, 'nb_NO')
-
 dpg.create_context()
 dpg.create_viewport(title='Utleie_app', width=600, height=600)
+
+def setup_locale():
+    """
+    Sjekker hva slags operativsystem brukeren bruker og setter locale (formatering) informasjon til operativsystemet
+    sitt.
+    :return:
+    """
+    if platform == "linux" or platform == "linux2":
+        locale.setlocale(locale.LC_ALL, 'no_NO.ISO8859-1')
+    elif platform == "darwin":
+        locale.setlocale(locale.LC_ALL, 'no_NO.ISO8859-1')
+    elif platform == "win32":
+        locale.setlocale(locale.LC_ALL, 'nb_NO')
+
+
+setup_locale()
 
 
 def admin_login():
@@ -142,15 +147,12 @@ def log_in_accepted(sender, app_data, user_data):
 
     if checking_object_instance(logged_in_user, renter.renter.Renter):
         welcome_screen_renter(user_data=logged_in_user)
-        print("YOU ARE LOGGED IN AS A RENTER")
 
     if checking_object_instance(logged_in_user, owner.owner.Owner):
         welcome_screen_owner(user_data=logged_in_user)
-        print("YOU ARE LOGGED IN AS AN OWNER")
 
     if checking_object_instance(logged_in_user, admin.admin.Admin):
         welcome_screen_admin(user_data=logged_in_user)
-        print("YOU ARE LOGGED IN AS AN ADMIN")
 
 
 def welcome_screen_renter(sender=None, app_data=None, user_data=None):
@@ -211,6 +213,7 @@ def admin_main_menu(sender, app_data, user_data):
             dpg.add_button(label="Home", callback=admin_main_menu, user_data=logged_in_user)
             dpg.add_button(label="See all cars", callback=all_cars, user_data=logged_in_user)
             dpg.add_button(label="See all users", callback=all_users, user_data=logged_in_user)
+            dpg.add_menu_item(label="Options", callback=admin_options, user_data=logged_in_user)
             dpg.add_button(label="Log Out", callback=log_out, user_data=admin_list)
         dpg.add_text("Main menu", tag="renterMainMenuText")
 
@@ -285,6 +288,10 @@ def approve_deny_bookings(sender=None, app_data=None, user_data=None):
 
 
 def all_users():
+    """
+    Oppretter et nytt vindu som viser admin alle brukere, kaller på render_users()
+    :return:
+    """
     logged_in_user = logged_in_status_file.get_user_logged_in_status(admin_list)
     delete_windows.delete_windows_func()
     with dpg.window(label="Admin Control Panel", tag="All Users", width=400, height=400):
@@ -296,6 +303,13 @@ def all_users():
 
 
 def admin_see_detailed_user_info(sender, app_data, user_data):
+    """
+    Oppretter et nytt vindu som viser admin detaljert informasjon om valgt bruker
+    :param sender: Ikke i bruk
+    :param app_data: Ikke i bruk
+    :param user_data: human objekt
+    :return:
+    """
     logged_in_user = logged_in_status_file.get_user_logged_in_status(admin_list)
     delete_windows.delete_windows_func()
     with dpg.window(label="Admin Control Panel", tag="Admin See Detailed Users", width=400, height=400):
@@ -318,22 +332,30 @@ def admin_see_detailed_user_info(sender, app_data, user_data):
             dpg.add_text(f"Sex: {user_data.sex}")
             dpg.add_text(f"Score: {user_data.score}")
             dpg.add_text(f"Is active now: {user_data.is_logged_in}")
-            money = user_data.wallet.money
-            money = str(money)
             money_owner = user_data.wallet.money
-            print(money_owner)
             dpg.add_text(f"Wallet: {locale.currency(money_owner, grouping=True)}")
             dpg.add_button(label="Delete user (currently not in use)")
 
 
 def render_users():
-    for leietaker in renter_list:
-        dpg.add_button(label=f"{leietaker.name} (Renter)", callback=admin_see_detailed_user_info, user_data=leietaker)
+    """
+    Oppretter en knapp for hver leier og eier som eksisterer.
+    :return:
+    """
+    for leier in renter_list:
+        dpg.add_button(label=f"{leier.name} (Renter)", callback=admin_see_detailed_user_info, user_data=leier)
     for eier in owner_list:
         dpg.add_button(label=f"{eier.name} (Owner)", callback=admin_see_detailed_user_info, user_data=eier)
 
 
 def admin_delete_users(sender, app_data, user_data):
+    """
+    Lar admin slette brukere, ikke i bruk per nå
+    :param sender: Ikke i bruk
+    :param app_data: Ikke i bruk
+    :param user_data: Human objekt
+    :return:
+    """
     if checking_object_instance(user_data, renter.renter.Renter):
         renter_list.remove(user_data)
         main.save_system('renter_file', renter_list)
@@ -345,6 +367,10 @@ def admin_delete_users(sender, app_data, user_data):
 
 
 def all_cars():
+    """
+    Oppretter et nytt vindu som viser admin alle biler, kaller på render_cars()
+    :return:
+    """
     logged_in_user = logged_in_status_file.get_user_logged_in_status(admin_list)
     delete_windows.delete_windows_func()
     with dpg.window(label="Admin Control Panel", tag="All Cars", width=400, height=400):
@@ -356,6 +382,13 @@ def all_cars():
 
 
 def admin_see_detailed_car_info(sender, app_data, user_data):
+    """
+    Oppretter et nytt vindu som viser admin detaljert informasjon om valgt bil
+    :param sender: Ikke i bruk
+    :param app_data: Ikke i bruk
+    :param user_data: Bil objekt
+    :return:
+    """
     logged_in_user = logged_in_status_file.get_user_logged_in_status(admin_list)
     delete_windows.delete_windows_func()
     with dpg.window(label="Admin Control Panel", tag="Admin See Detailed Cars", width=400, height=400):
@@ -378,7 +411,13 @@ def admin_see_detailed_car_info(sender, app_data, user_data):
 
 
 def admin_delete_car(sender, app_data, user_data):
-    logged_in_user = logged_in_status_file.get_user_logged_in_status(admin_list)
+    """
+    Lar admin slette biler.
+    :param sender: Ikke i bruk
+    :param app_data: Ikke i bruk
+    :param user_data: Bil objekt
+    :return:
+    """
     car_list.remove(user_data)
     main.save_system('car_file', car_list)
     all_cars()
@@ -409,7 +448,6 @@ def approve_car(sender, app_data, user_data=None):
         dpg.add_text(booking.renter.name + "s score is " + str(booking.renter.score) + " out of X")
         dpg.add_button(label="Approve", callback=gui_approved_booking, user_data=booking)
         dpg.add_button(label="Deny", callback=gui_denied_booking, user_data=booking)
-
 
 
 def gui_approved_booking(sender, app_data, user_data):
@@ -475,6 +513,13 @@ def new_car(sender, app_data, user_data):
 
 
 def create_car_redirect(sender, app_data, user_data):
+    """
+    Funksjon som kaller på bil opprettelse funksjon, for å så sende bruker tilbake til main menu
+    :param sender: Ikke i bruk
+    :param app_data: Ikke i bruk
+    :param user_data: Ikke i bruk
+    :return:
+    """
     Car.create_car_file.create_car()
     owner_main_menu(sender=None, app_data=None, user_data=None)
 
@@ -501,6 +546,13 @@ def see_cars(sender, app_data, user_data):
 
 
 def see_detailed_car_info(sender, app_data, user_data):
+    """
+    Viser detaljsert bil informasjon til eier av bil
+    :param sender: Ikke i bruk
+    :param app_data: Ikke i bruk
+    :param user_data: Bil objekt
+    :return:
+    """
     logged_in_user = logged_in_status_file.get_user_logged_in_status(owner_list)
     delete_windows.delete_windows_func()
     with dpg.window(label="Owner Control Panel", tag="Owner See Detailed Cars", width=400, height=400):
@@ -522,6 +574,13 @@ def see_detailed_car_info(sender, app_data, user_data):
 
 
 def delete_car(sender, app_data, user_data):
+    """
+    Lar eier slette en bil h*n har lagt inn i programmet
+    :param sender: Ikke i bruk
+    :param app_data: Ikke i bruk
+    :param user_data: Bil objekt
+    :return:
+    """
     logged_in_user = logged_in_status_file.get_user_logged_in_status(owner_list)
     car_list.remove(user_data)
     main.save_system('car_file', car_list)
@@ -539,10 +598,10 @@ def render_cars(bilparameter):
 
 def rent_new_car(sender, app_data, user_data):
     """
-    Her
-    :param sender:
-    :param app_data:
-    :param user_data:
+    Oppretter et nytt vindu hvor leier kan velge hvilken bil h*n vil leie
+    :param sender: Ikke i bruk
+    :param app_data: Ikke i bruk
+    :param user_data: Ikke i bruk
     :return:
     """
     logged_in_user = logged_in_status_file.get_user_logged_in_status(renter_list)
@@ -550,11 +609,9 @@ def rent_new_car(sender, app_data, user_data):
     with dpg.window(label="Renter Control Panel", tag="Renter New Car", width=400, height=400):
         dpg.set_primary_window("Renter New Car", True)
         with dpg.menu_bar(label="Menu Bar"):
-            # dpg.add_menu_item(label="Rent a new car")
             dpg.add_button(label="Home", callback=renter_main_menu, user_data=logged_in_user)
             dpg.add_button(label="Log Out", callback=log_out, user_data=renter_list)
         render_cars(car)
-        dpg.add_text("Rent new car")
 
 
 def car(sender, app_data, user_data):
@@ -564,9 +621,9 @@ def car(sender, app_data, user_data):
     Det vil også være et eget view som opprettes her for å kunne
     se biler som ikke er tilgjengelige
     Denne funksjonen kan bli kalt fra funksjonen render_cars
-    :param sender:
-    :param app_data:
-    :param user_data:
+    :param sender: Ikke i bruk
+    :param app_data: Ikke i bruk
+    :param user_data: Bil objekt
     :return:
     """
     logged_in_user = logged_in_status_file.get_user_logged_in_status(renter_list)
@@ -605,6 +662,13 @@ def car(sender, app_data, user_data):
 
 
 def rent_car_redirect(sender, app_data, user_data):
+    """
+    Kaller på fuksjon som oppretter booking object og omdirigerer bruker til main_menu
+    :param sender: Ikke i bruk
+    :param app_data: Ikke i bruk
+    :param user_data: Bil objekt
+    :return:
+    """
     create_booking_file.booking_func(sender=None, app_data=None, user_data=user_data)
     renter_main_menu(sender=None, app_data=None, user_data=None)
 
@@ -614,9 +678,9 @@ def see_rented_cars(sender, app_data, user_data):
     Her så vil user_data tilsvare et renter objekt
     Det funksjonen tar for seg er Leiers mulighet til å se biler han/hun har leid.
     Denne funksjonen kan bli kalt fra renter_main_menu
-    :param sender:
-    :param app_data:
-    :param user_data:
+    :param sender: Ikke i bruk
+    :param app_data: Ikke i bruk
+    :param user_data: Leier objekt
     :return:
     """
     logged_in_user = logged_in_status_file.get_user_logged_in_status(owner_list)
@@ -665,20 +729,26 @@ def owner_options():
     with dpg.window(label="Owner Control Panel", tag="Owner Options", width=400, height=400):
         dpg.set_primary_window("Owner Options", True)
         with dpg.menu_bar(label="Menu Bar"):
-            # dpg.add_menu_item(label="Rent a new car")
             dpg.add_button(label="Home", callback=owner_main_menu, user_data=logged_in_user)
             dpg.add_button(label="Log Out", callback=log_out, user_data=owner_list)
         dpg.add_text("Options")
 
 
-# def admin_options():
-#    delete_windows.delete_windows_func()
-#    with dpg.window(label="Admin Control Panel", tag="Admin Options", width=400, height=400):
-#        dpg.set_primary_window("Admin Options", True)
-#        with dpg.menu_bar(label="Menu Bar"):
-# dpg.add_menu_item(label="Rent a new car")
-# dpg.add_button(label="Home", callback=admin_main_menu)
-#       dpg.add_text("Options")
+def admin_options():
+    """
+    Denne funksjonen skal ta for seg det som er Admins alternativer på kontosiden.
+    Denne kan bli kalt fra [admin_main_menu]
+    :return:
+    """
+    logged_in_user = logged_in_status_file.get_user_logged_in_status(owner_list)
+    delete_windows.delete_windows_func()
+    with dpg.window(label="Admin Control Panel", tag="Admin Options", width=400, height=400):
+        dpg.set_primary_window("Admin Options", True)
+        with dpg.menu_bar(label="Menu Bar"):
+            dpg.add_button(label="Home", callback=admin_main_menu, user_data=logged_in_user)
+            dpg.add_button(label="Log Out", callback=log_out, user_data=admin_list)
+        dpg.add_text("Options")
+
 
 dpg.setup_dearpygui()
 dpg.show_viewport()
