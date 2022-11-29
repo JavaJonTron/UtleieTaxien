@@ -10,13 +10,13 @@ admin_list = []
 
 
 def save_system(file, current_list):
-    filskriving = file_handler_pickle.FileHandlerPickle(file, current_list)
+    filskriving = filehandlerpickle.FileHandlerPickle(file, current_list)
     filskriving.write_method()
     del filskriving
 
 
 def load_system(file, li):
-    filskriving = file_handler_pickle.FileHandlerPickle(file, None)
+    filskriving = filehandlerpickle.FileHandlerPickle(file, None)
     listen = filskriving.read_method()
     if listen is not None:
         for xx in listen:

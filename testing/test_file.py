@@ -53,10 +53,10 @@ def test_from_day_is_bigger_than_to_day():
 
 
 def test_read_and_write_to_and_from_file():
-    write_to_Information = "TEST_INFORMATION"
-    filskriving = file_handler_pickle.FileHandlerPickle("Test_file", write_to_Information)
+    write_to_information = "TEST_INFORMATION"
+    filskriving = filehandlerpickle.FileHandlerPickle("Test_file", write_to_information)
     filskriving.write_method()
-    assert filskriving.read_method() == write_to_Information
+    assert filskriving.read_method() == write_to_information
 
 
 def test_car_nickname():
