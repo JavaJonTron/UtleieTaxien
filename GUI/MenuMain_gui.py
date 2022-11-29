@@ -123,9 +123,6 @@ def log_out(sender=None, app_data=None, user_data=None):
     """
     delete_windows.delete_windows_func()
     log_off_func.log_off_human(user_data)
-    # NÅ LOOPER DEN IGJENNOM LISTA, OG LOGGER AV ALLE.
-    # KANSJE LEGGE INN OBEJKTET SOM SKAL LOGGES UT I PARAMETER FELTET
-    # ISTEDENFOR Å LOGGE AV ALLE I EN BESTEMT LISTE?
     main_menu()
 
 
@@ -323,8 +320,6 @@ def admin_see_detailed_user_info(sender, app_data, user_data):
             dpg.add_text(f"Is active now: {user_data.is_logged_in}")
             money = user_data.wallet.money
             money = str(money)
-            for range in (money, len(money), 3):
-                print("SSS")
             money_owner = user_data.wallet.money
             print(money_owner)
             dpg.add_text(f"Wallet: {locale.currency(money_owner, grouping=True)}")
