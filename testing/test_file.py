@@ -1,5 +1,4 @@
 import pytest
-import payment.paymentorder
 import renter.renter
 from functions import log_off_func
 import functions.get_average_of_list
