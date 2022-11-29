@@ -227,3 +227,13 @@ def test_if_list_have_reached_end(big_list_creation):
 
 def test_if_list_have_not_reached_end(big_list_creation):
     assert create_booking_file.list_have_reached_end(big_list_creation, 2) is False
+
+
+def test_remove_funds_from_wallet(renters2):
+    renters2.wallet.remove_from_wallet(500)
+    assert renters2.wallet.money == 500
+
+
+def test_add_funds_to_waller(renters2):
+    renters2.wallet.add_to_wallet(500)
+    assert renters2.wallet.money == 1500
