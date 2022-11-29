@@ -128,9 +128,6 @@ def log_out(sender=None, app_data=None, user_data=None):
     """
     delete_windows.delete_windows_func()
     log_off_func.log_off_human(user_data)
-    # NÅ LOOPER DEN IGJENNOM LISTA, OG LOGGER AV ALLE.
-    # KANSJE LEGGE INN OBEJKTET SOM SKAL LOGGES UT I PARAMETER FELTET
-    # ISTEDENFOR Å LOGGE AV ALLE I EN BESTEMT LISTE?
     main_menu()
 
 
