@@ -27,7 +27,6 @@ class PaymentOrder:
         self.booking.renter.wallet.add_to_wallet(self.reserved_amount)
         self.reserved_amount -= self.reserved_amount
 
-
     def payment_processing(self):
         """
         Her så sletter man den reserverte pengesummen.

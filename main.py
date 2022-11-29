@@ -2,13 +2,14 @@ from FileHandling import filehandlerpickle
 from dummyObjects import dummyOwner1, dummyOwner2, dummyCar2, dummyCar3, dummyCar1, dummyRenter1, dummyRenter2, \
     dummyAdmin1
 
+"""
+Her har vi lister som skal holde på alle objektene som blir opprettet gjennom programmet.
+"""
 owner_list = []
 car_list = []
 renter_list = []
 bookings_list = []
 admin_list = []
-# Her har vi lister som skal holde på alle objektene som blir opprettet gjennom programmet.
-
 
 
 def dummy_car_creation(owners):
@@ -43,10 +44,8 @@ def dummy_owner_creation():
     dummyOwnerList.append(dummyOwner1)
     dummyOwnerList.append(dummyOwner2)
     for dummy in dummyOwnerList:
-        print(dummy)
         owner = dummy.create_owner()
         owner_list.append(owner)
-
 
 
 def dummy_renter_creation():
@@ -98,21 +97,11 @@ def load_system(file, current_list):
         del filskriving
 
 
-
-
-
-
-
-
 load_system('owner_file', owner_list)
 load_system('renter_file', renter_list)
 load_system('car_file', car_list)
 load_system('booking_file', bookings_list)
 load_system('admin_file', admin_list)
-
-
-
-
 
 save_system('admin_file', admin_list)
 save_system('owner_file', owner_list)
