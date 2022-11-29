@@ -1,5 +1,4 @@
 import pytest
-
 import payment.paymentorder
 import renter.renter
 from functions import log_off_func
@@ -60,12 +59,12 @@ def test_read_and_write_to_and_from_file():
 
 
 def test_car_nickname():
-    make = "Tesla"  # input("Make: ").upper()
-    model = "Model Y"  # input("Model: ").upper()
-    year = 2022  # int(input("Year: "))
-    license_plate = "ED15421"  # input("License plate: ").upper()
-    fuel_source = "Electric"  # input("Fuel source: ").upper()
-    km = 20500  # int(input("Odometer: "))
+    make = "Tesla"
+    model = "Model Y"
+    year = 2022
+    license_plate = "ED15421"
+    fuel_source = "Electric"
+    km = 20500
     is_take = False
     hourly_rate = 150
     daily_rate = 3000
