@@ -69,7 +69,7 @@ def save_system(file, current_list):
     :param current_list: Dette er hvilken liste man skal lagre
     :return:
     """
-    filskriving = filehandlerpickle.File_handler_pickle(file, current_list)
+    filskriving = filehandlerpickle.FileHandlerPickle(file, current_list)
     filskriving.write_method()
     del filskriving
 
@@ -82,7 +82,7 @@ def load_system(file, current_list):
     :return:
     """
 
-    filskriving = filehandlerpickle.File_handler_pickle(file, None)
+    filskriving = filehandlerpickle.FileHandlerPickle(file, None)
     list_from_file = filskriving.read_method()
     if list_from_file is None and filskriving.filename == 'owner_file':
         dummy_owner_creation()
