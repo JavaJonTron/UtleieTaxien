@@ -2,6 +2,10 @@ from owner.owner import Owner
 
 
 def create_owner():
+    """
+    Oppretter et dummy eier objekt
+    :return: Eier objekt
+    """
     name = "Nils Nordmann"
     sex = "Male"
     age = 26

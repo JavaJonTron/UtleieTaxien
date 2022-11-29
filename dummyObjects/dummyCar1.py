@@ -2,6 +2,11 @@ from Car.car import Car
 
 
 def create_car(owner):
+    """
+    Oppretter et dummy bil object
+    :param owner: Eier av bil (objekt)
+    :return: Bil objekt
+    """
     make = "Tesla"
     model = "Model Y"
     year = 2022

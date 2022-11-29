@@ -2,6 +2,11 @@ from renter.renter import Renter
 
 
 def create_renter():
+    """
+    Oppretter objekter av leier utifra input, dette er ikke i bruk i programmet per nå.
+    :return: Leier objekt
+    :return:
+    """
     name = input("Name: ").upper()
     sex = input("Sex: ").upper()
     while True:
@@ -11,8 +16,6 @@ def create_renter():
         except ValueError:
             print("Please enter your age!")
             continue
-    # score_list = [5, 10, 100]
-    # score = round(functions.get_average_of_list.average_list(score_list))
     score = 10
-    return Renter(age, sex, name, score)  #score_list
+    return Renter(age, sex, name, score)
 

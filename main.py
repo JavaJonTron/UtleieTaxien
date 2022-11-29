@@ -1,4 +1,4 @@
-from FileHandling import file_handler_pickle
+from FileHandling import filehandlerpickle
 from dummyObjects import dummyOwner1, dummyOwner2, dummyCar2, dummyCar3, dummyCar1, dummyRenter1, dummyRenter2, \
     dummyAdmin1
 
@@ -7,8 +7,22 @@ car_list = []
 renter_list = []
 bookings_list = []
 admin_list = []
-
 # Her har vi lister som skal holde på alle objektene som blir opprettet gjennom programmet.
+
+def save_system(file, current_list):
+    filskriving = filehandlerpickle.FileHandlerPickle(file, current_list)
+    filskriving.write_method()
+    del filskriving
+
+
+def load_system(file, li):
+    filskriving = filehandlerpickle.FileHandlerPickle(file, None)
+    listen = filskriving.read_method()
+    if listen is not None:
+        for xx in listen:
+            li.append(xx)
+        del filskriving
+
 
 
 def dummy_car_creation(owners):
