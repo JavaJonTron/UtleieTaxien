@@ -1,6 +1,10 @@
 from renter.renter import Renter
 
 def create_renter():
+    """
+    Oppretter et dummy renter objekt
+    :return: Leier objekt
+    """
     name = "Kari Nordmann"
     sex = "Female"
     age = 26

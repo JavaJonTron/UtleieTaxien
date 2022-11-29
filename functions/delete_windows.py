@@ -1,5 +1,4 @@
 import dearpygui.dearpygui as dpg
-# Not testable due to GUI
 
 renter_window_list = ["Renter Login Accepted", "Renter Login", "Renter Main", "Renter New Car", "Renter Car",
                       "Renter See Cars", "Renter Options"]
@@ -10,6 +9,11 @@ admin_window_list = ["Admin Login Accepted", "Admin Login", "Admin Main", "All C
 
 
 def delete_windows_func():
+    """
+    Ikke testbart grunnet GUI
+    Sletter tidligere vinduer når man klikker på en knapp som åpner et nytt vindu
+    :return:
+    """
     for window in admin_window_list:
         dpg.delete_item(window)
 

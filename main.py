@@ -1,4 +1,4 @@
-from FileHandling import file_handler_pickle
+from FileHandling import filehandlerpickle
 from dummyObjects import dummyOwner1, dummyOwner2, dummyCar2, dummyCar3, dummyCar1, dummyRenter1, dummyRenter2, \
     dummyAdmin1
 
@@ -10,13 +10,13 @@ admin_list = []
 
 
 def save_system(file, current_list):
-    filskriving = file_handler_pickle.File_handler_pickle(file, current_list)
+    filskriving = file_handler_pickle.FileHandlerPickle(file, current_list)
     filskriving.write_method()
     del filskriving
 
 
 def load_system(file, li):
-    filskriving = file_handler_pickle.File_handler_pickle(file, None)
+    filskriving = file_handler_pickle.FileHandlerPickle(file, None)
     listen = filskriving.read_method()
     if listen is not None:
         for xx in listen:

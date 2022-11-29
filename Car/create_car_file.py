@@ -8,8 +8,9 @@ import dearpygui.dearpygui as dpg
 
 def create_car():
     """
-    Creat car
-    :return:
+    Oppretter bil objekter, henter inn informasjon fra GUI elementer i menu_main, legger disse inn i et objekt i en
+    liste, og lagrer deretter listen.
+    :return: Et bil objekt
     """
     make = (dpg.get_value("make")).upper()
     model = (dpg.get_value("model")).upper()

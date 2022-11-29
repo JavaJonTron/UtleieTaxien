@@ -7,7 +7,7 @@ import functions.get_average_of_list
 from renter.renter import Renter
 from owner.owner import Owner
 from Booking import create_booking_file
-from FileHandling import file_handler_pickle
+from FileHandling import filehandlerpickle
 from Car.car import Car
 from functions import logged_in_status_file
 from functions.checking_object_instance import checking_object_instance
@@ -54,7 +54,7 @@ def test_from_day_is_bigger_than_to_day():
 
 def test_read_and_write_to_and_from_file():
     write_to_Information = "TEST_INFORMATION"
-    filskriving = file_handler_pickle.File_handler_pickle("Test_file", write_to_Information)
+    filskriving = file_handler_pickle.FileHandlerPickle("Test_file", write_to_Information)
     filskriving.write_method()
     assert filskriving.read_method() == write_to_Information
 

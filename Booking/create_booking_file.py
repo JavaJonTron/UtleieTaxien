@@ -1,5 +1,4 @@
 import dearpygui.dearpygui as dpg
-
 import payment.paymentorder
 from main import save_system
 from Booking import booking
@@ -8,8 +7,12 @@ from main import bookings_list
 from functions import logged_in_status_file
 
 
-# Not testable
 def dates_to():
+    """
+    Ikke testbar
+    Henter til datoene fra date picker i menu_main.
+    :return: En dictionary med til datoer.
+    """
     dict_dates_to = {}
     to_date = dpg.get_value("to_date")
     to_day = int(to_date["month_day"])
@@ -24,8 +27,12 @@ def dates_to():
     return dict_dates_to
 
 
-# Not testable
 def dates_from():
+    """
+    Ikke testbar
+    Henter fra datoene fra date picker i menu_main
+    :return: En dictionary med fra datoer.
+    """
     dict_dates_from = {}
     from_date = dpg.get_value("from_date")
     from_day = int(from_date["month_day"])
@@ -41,11 +48,24 @@ def dates_from():
 
 
 def creating_payment_order(amount):
+    """
+    Legger hvor mye prisen koster i en parameter og returnerer dette.
+    :param amount: Hvor mye bilen koster å leie
+    :return: Kostnad for bilen
+    """
     order = payment.paymentorder.PaymentOrder(amount)
     return order
 
 
 def check_if_renter_can_afford(car, renter_logged, year_day_to, year_day_from):
+    """
+    Sjekker om renter har råd til å leie bilen
+    :param car: Bil objekt
+    :param renter_logged: Leier som er innlogget
+    :param year_day_to: Dagen i året til dato
+    :param year_day_from: Dagen i året fra dato
+    :return: True eller False ut ifra om leier har råd eller ikke
+    """
     rental_price = car.price_calculation(year_day_to - year_day_from + 1, hours=None)
     if renter_logged.wallet.money >= rental_price:
         return True
@@ -54,6 +74,15 @@ def check_if_renter_can_afford(car, renter_logged, year_day_to, year_day_from):
 
 
 def create_book(from_date, to_date, renter_logged, car, no_day_crash):
+    """
+    Oppretter et booking object, legger det til i listen over booking objekter og lagrer booking listen
+    :param from_date: Fra datoer
+    :param to_date: Til datoer
+    :param renter_logged: Innlogget leier
+    :param car: Bil objekt
+    :param no_day_crash: Int som er 0 om ingen andre har booket bilen på disse datoene
+    :return: Booking objektet
+    """
     rental_price = car.price_calculation(to_date["Year_Day"] - from_date["Year_Day"] + 1, hours=None)
     if check_if_from_day_is_lesser_than_to_day(from_date, to_date):
         if no_day_crash == 0:
@@ -67,6 +96,12 @@ def create_book(from_date, to_date, renter_logged, car, no_day_crash):
 
 
 def check_if_from_day_is_lesser_than_to_day(from_date, to_date):
+    """
+    Sjekker om fra dagen er mindre enn til dato
+    :param from_date: Fra datoer i booking request
+    :param to_date: Til datoer i booking request
+    :return: True eller False utifra om fra dagen er mindre eller større enn til dag
+    """
     if from_date["Year_Day"] < to_date["Year_Day"]:
         return True
     else:
@@ -74,13 +109,28 @@ def check_if_from_day_is_lesser_than_to_day(from_date, to_date):
 
 
 def check_if_booking_date_crashes_with_previous_booking_date(new_to_date, new_from_date, old_to_date, old_from_date):
-    if new_from_date < old_from_date and new_to_date < old_from_date or new_from_date > old_to_date and new_to_date > old_to_date:
+    """
+    Sjekker om bookingen krasjer med en tidligere booking på datoer
+    :param new_to_date: Til dag for ny booking
+    :param new_from_date: Fra dag for ny booking
+    :param old_to_date:Fra dag for eksisterende booking
+    :param old_from_date: Til ag for eksisterende booking
+    :return: True eller False utifra om datoene krasjer eller ikke
+    """
+    if new_from_date < old_from_date and new_to_date < old_from_date or new_from_date > old_to_date and new_to_date > \
+            old_to_date:
         return True
     else:
         return False
 
 
 def compare_car_license_plate(new_car_booking_license_plate, previous_car_booking_license_plate):
+    """
+    Sammenlikner om skiltnummer i ny booking er lik som i tidligere bookinger
+    :param new_car_booking_license_plate: Skiltnummer på bil i ny booking
+    :param previous_car_booking_license_plate: SKiltnummer på biler i eldre bookinger
+    :return: True eller False utifra om skiltnummer krasjer eller ikke
+    """
     if new_car_booking_license_plate == previous_car_booking_license_plate:
         return True
     else:
@@ -88,6 +138,12 @@ def compare_car_license_plate(new_car_booking_license_plate, previous_car_bookin
 
 
 def list_have_reached_end(end_list, obj):
+    """
+    Sjekker om vi har nådd bunnen av en liste
+    :param end_list: En liste
+    :param obj: Et objekt i listen
+    :return: True eller Flase utifra om slutten på listen er nådd
+    """
     if end_list.index(obj) + 1 == len(end_list):
         return True
     else:
@@ -95,6 +151,11 @@ def list_have_reached_end(end_list, obj):
 
 
 def list_bigger_then_0(list_to_check):
+    """
+    Sjekker om listen er større enn 0
+    :param list_to_check: Listen som skal sjekke
+    :return: True eller False utifra om listen er større enn 0 eller ikke
+    """
     if len(list_to_check) > 0:
         return True
     else:
@@ -102,6 +163,15 @@ def list_bigger_then_0(list_to_check):
 
 
 def booking_func(sender, app_data, user_data):
+    """
+    Denne funksjonen kalles når man trykker på Book knappen når man skal leie en ny bil.
+    Denne samler inn all data og bruker funksjoner over til å sørge for at ingenting krasjer og om bilen er ledig på
+    datoene leier ber om kaller denne på create_book().
+    :param sender: Ikke i bruk
+    :param app_data: Ikke i bruk
+    :param user_data: Ikke i bruk
+    :return:
+    """
     chosen_car = user_data
     dict_new_dates_from = dates_from()
     dict_new_dates_to = dates_to()
@@ -125,5 +195,4 @@ def booking_func(sender, app_data, user_data):
                     create_book(dict_new_dates_from, dict_new_dates_to, renter_logged_in, chosen_car, times_dates_crash)
                     return
     elif not list_bigger_then_0(bookings_list):
-        print(len(bookings_list))
         create_book(dict_new_dates_from, dict_new_dates_to, renter_logged_in, chosen_car, 0)
